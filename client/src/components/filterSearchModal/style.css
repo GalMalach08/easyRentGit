@@ -7,3 +7,9 @@
 .MuiFormHelperText-root {
   text-align: right;
 }
+.fliter_header {
+  display: inline-block;
+}
+.filter_item {
+  margin:10px 0px 15px 6px;
+}

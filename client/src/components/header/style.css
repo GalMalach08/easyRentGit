@@ -11,8 +11,7 @@
 }
 .header_section {
   background-color: #212529;
-  height: 100%;
-  padding: 70px 30px;
+  padding: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,5 +81,6 @@
 }
 
 .auto_typing_div {
-  margin-top: 30px;
+  margin:0px 30px;
+  width:70%;
 }

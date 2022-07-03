@@ -24,7 +24,7 @@ const sendResetPasswordEmail = async (userEmail, firstname, lastname) => {
       textDirection: "rtl",
       product: {
         name: "EasyRent",
-        link: `http://localhost:3000/5`,
+        link: `https://easyrent2023.herokuapp.com/5`,
         logo: "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
         logoHeight: "100px",
       },
@@ -38,7 +38,7 @@ const sendResetPasswordEmail = async (userEmail, firstname, lastname) => {
           button: {
             color: "#22BC66",
             text: "לחץ על מנת להתחבר לאתר",
-            link: `http://localhost:3000/signin`,
+            link: `https://easyrent2023.herokuapp.com/signin`,
           },
         },
         outro: "צריך עזרה? הגב לאימייל זה ונשמח לעזור",
@@ -71,7 +71,7 @@ const sendRelevantAssetEmail = async (userEmail, asset, name) => {
       textDirection: "rtl",
       product: {
         name: "EasyRent",
-        link: `http://localhost:3000/5`,
+        link: `https://easyrent2023.herokuapp.com/5`,
         logo: "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
         logoHeight: "100px",
       },
@@ -85,7 +85,7 @@ const sendRelevantAssetEmail = async (userEmail, asset, name) => {
           button: {
             color: "#22BC66",
             text: "כנס לקישור על מנת לקבל פרטים נוספים",
-            link: `http://localhost:3000/asset/${asset._id}`,
+            link: `https://easyrent2023.herokuapp.com/asset/${asset._id}`,
           },
         },
         outro: "צריך עזרה? הגב לאימייל זה ונשמח לעזור",
@@ -117,7 +117,7 @@ const sendAssetApprovedEmail = async (userEmail, asset, name) => {
       textDirection: "rtl",
       product: {
         name: "EasyRent",
-        link: `http://localhost:3000/5`,
+        link: `https://easyrent2023.herokuapp.com/5`,
         logo: "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
         logoHeight: "100px",
       },
@@ -133,7 +133,7 @@ const sendAssetApprovedEmail = async (userEmail, asset, name) => {
           button: {
             color: "#22BC66",
             text: "כנס לקישור על מנת לצפות בנכס",
-            link: `http://localhost:3000/asset/${asset._id}`,
+            link: `https://easyrent2023.herokuapp.com/asset/${asset._id}`,
           },
         },
         outro: "צריך עזרה? הגב לאימייל זה ונשמח לעזור",
@@ -166,7 +166,7 @@ const sendVerificationMail = async (userEmail, name, token) => {
       textDirection: "rtl",
       product: {
         name: "EasyRent",
-        link: `http://localhost:3000/5`,
+        link: `https://easyrent2023.herokuapp.com/5`,
         logo: "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
         logoHeight: "100px",
       },
@@ -182,7 +182,7 @@ const sendVerificationMail = async (userEmail, name, token) => {
           button: {
             color: "#22BC66",
             text: "אמת את חשבונך",
-            link: `http://localhost:3000/user/verification?t=${token}`,
+            link: `https://easyrent2023.herokuapp.com/user/verification?t=${token}`,
           },
         },
         outro: "צריך עזרה? הגב לאימייל זה ונשמח לעזור",

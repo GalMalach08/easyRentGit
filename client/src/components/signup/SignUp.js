@@ -101,8 +101,8 @@ const SignUp = () => {
               "ברוכה הבאה! אנא בדוק את המייל שלך על מנת לאמת את המשתמש"
             );
           }
+          setButtonDisabled(false);
         });
-      setButtonDisabled(false);
     } catch (error) {
       console.error(error);
     }

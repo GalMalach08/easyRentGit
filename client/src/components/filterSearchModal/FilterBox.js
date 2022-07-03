@@ -13,48 +13,50 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
     <>
       {filteredSearch.dates ? (
         <div className="filtered_div">
-          <h4>אתה צופה בתוצאות מסוננות:</h4>
-          <h6>
-            מיקום:{" "}
-            <span style={{ fontWeight: "400" }}>{filteredSearch.location}</span>
-          </h6>
-          <h6>
-            מחיר מקסימלי לחודש:{" "}
-            <span style={{ fontWeight: "400" }}>
-              {numberWithCommas(filteredSearch.price)}
-            </span>
-          </h6>
-          <h6>
-            מספר חדרים:{" "}
-            <span style={{ fontWeight: "400" }}>
-              {filteredSearch.numberOfRooms}
-            </span>
-          </h6>
-          <h6>
-            טווח תאריכי כניסה:{" "}
-            <span style={{ fontWeight: "400" }}>
-              {filteredSearch.dates[0]} -{" "}
-              {filteredSearch.dates[filteredSearch.dates.length - 1]}
-            </span>
-          </h6>
-          <h6 style={{ marginTop: "15px" }}>
-            על מנת לשנות את הסינון
-            <span
-              className="click_here_span"
-              onClick={() => setModalOpen(true)}
-            >
-              לחץ כאן
-            </span>
-          </h6>
-          <h6 style={{ marginTop: "15px" }}>
-            על מנת לאפס את החיפוש
-            <span
-              className="click_here_span"
-              onClick={() => dispatch(resetFilter())}
-            >
-              לחץ כאן
-            </span>
-          </h6>
+          <h4 className="fliter_header">אתה צופה בתוצאות מסוננות:</h4>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              flexWrap: "noWrap",
+            }}
+          >
+            <h6 className="filter_item">
+              מיקום:{" "}
+              <span style={{ fontWeight: "400" }}>
+                {filteredSearch.location},
+              </span>
+            </h6>
+            <h6 className="filter_item">
+              מחיר מקסימלי לחודש:{" "}
+              <span style={{ fontWeight: "400" }}>
+                {numberWithCommas(filteredSearch.price)},
+              </span>
+            </h6>
+            <h6 className="filter_item">
+              מספר חדרים:{" "}
+              <span style={{ fontWeight: "400" }}>
+                {filteredSearch.numberOfRooms},
+              </span>
+            </h6>
+            <h6 className="filter_item">
+              טווח תאריכי כניסה: {""}
+              <span style={{ fontWeight: "400" }}>
+                {filteredSearch.dates[0]} -{" "}
+                {filteredSearch.dates[filteredSearch.dates.length - 1]}
+              </span>
+            </h6>
+          </div>
+          <span className="click_here_span" onClick={() => setModalOpen(true)}>
+            שינוי סינון
+          </span>
+
+          <span
+            className="click_here_span"
+            onClick={() => dispatch(resetFilter())}
+          >
+            איפוס סינון
+          </span>
         </div>
       ) : (
         <div className="not_filtered_div">

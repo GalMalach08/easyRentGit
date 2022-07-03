@@ -11,6 +11,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import ListItemText from "@material-ui/core/ListItemText";
+import EmailIcon from "@mui/icons-material/Email";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import "./style.css";
 const useStyles = makeStyles((theme) => ({
   root: { width: "80%", margin: "40px auto" },
@@ -45,11 +47,11 @@ export default function ControlledAccordions() {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography className={classes.heading}>מי אתם ?</Typography>
+          <Typography className={classes.heading}>מי אני ?</Typography>
         </AccordionSummary>
         <AccordionDetails className="typography">
           <Typography>
-            קוראים לי גל מלאך ואני מייסד EasyRent. האתר הוקם בשנת 2021 עקב
+            קוראים לי גל מלאך ואני מייסד EasyRent. האתר הוקם בשנת 2022 עקב
             המצוקה של אנשים רבים למצוא מגורים ראויים בתל אביב.
           </Typography>
         </AccordionDetails>
@@ -68,8 +70,7 @@ export default function ControlledAccordions() {
         </AccordionSummary>
         <AccordionDetails className="typography">
           <Typography className={classes.typography}>
-            ללא משתמש הדבר היחיד שאתם יכולים לעשות הוא להתסכל על הדירות שעלו
-            לאתר. פתיחת משתמש תקנה לכם את היתרונות הבאים:
+            פתיחת משתמש תקנה לכם את היתרונות הבאים:
             <div className={classes.demo}>
               <List dense={dense}>
                 <ListItem>
@@ -82,7 +83,7 @@ export default function ControlledAccordions() {
                   <ListItemIcon>
                     <FiberManualRecordIcon fontSize="small" color="disabled" />
                   </ListItemIcon>
-                  <ListItemText primary="אפשרות לשיחה עם שלומי העוזר הדיגיטלי שלנו. בעזרתו תוכלו לסמן את ההעדפות שלכם למציאת דירה ואנו נדאג לעדכן אותכם ראשונים כאשר עולה דירה רלוונטית" />
+                  <ListItemText primary="אפשרות לשיחה עם העוזר הדיגיטלי שלנו, בעזרתו תוכלו לסמן את ההעדפות שלכם למציאת דירה ואנו נדאג לעדכן אותכם ראשונים כאשר עולה דירה רלוונטית." />
                 </ListItem>
               </List>
             </div>
@@ -133,15 +134,15 @@ export default function ControlledAccordions() {
             <List dense={dense}>
               <ListItem>
                 <ListItemIcon>
-                  <FiberManualRecordIcon fontSize="small" color="disabled" />
+                  <EmailIcon fontSize="small" />
                 </ListItemIcon>
                 <ListItemText primary="דרך האיימיל שלנו: galmalach2@gmail.com" />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
-                  <FiberManualRecordIcon fontSize="small" color="disabled" />
+                  <WhatsAppIcon fontSize="small" />
                 </ListItemIcon>
-                <ListItemText primary="דרך הווצאפ במספר 0505920062" />
+                <ListItemText primary="דרך הווצאפ: 050-592-0062" />
               </ListItem>
             </List>
           </Typography>
