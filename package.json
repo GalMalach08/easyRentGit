@@ -40,8 +40,6 @@
     "passport-jwt": "^4.0.0",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
-  },
-  "devDependencies": {
-    "twilio": "^3.77.3"
   }
+
 }
