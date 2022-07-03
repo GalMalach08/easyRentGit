@@ -3,8 +3,6 @@ const smtpTransport = require("nodemailer-smtp-transport");
 const Mailgen = require("mailgen");
 require("dotenv").config();
 
-console.log(process.env.EMAIL_USER);
-
 const transporter = nodemailer.createTransport(
   smtpTransport({
     service: "Gmail",
