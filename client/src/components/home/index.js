@@ -1,21 +1,7 @@
 import React from "react";
-import { ThemeProvider } from "styled-components";
-import {
-  StyledHeader,
-  Nav,
-  StyledLogo,
-  StyledImage,
-} from "./styles/Header.styled";
-import { StyledButton } from "./styles/Button.styled";
-import { StyledFlex } from "./styles/Flex.styled";
-import { StyledContainer } from "./styles/Container.styled";
 import HomeCard from "./HomeCard";
-import GlobalStyle from "./styles";
-// React-typewriter-effect
-import TypeWriterEffect from "react-typewriter-effect";
+import "./style.css";
 const Home = () => {
-  const myRef = document.querySelector(".scrollable-div");
-
   const content = [
     {
       id: 1,
@@ -44,13 +30,12 @@ const Home = () => {
     mobile: "768px",
   };
   return (
-    <ThemeProvider theme={theme}>
+    <>
       {/* Header */}
-      <GlobalStyle />
-      <StyledHeader>
-        <StyledContainer>
-          <Nav>
-            <StyledFlex>
+      <header className="styled_header">
+        <div className="styled_container">
+          <div className="styled_nav">
+            <div className="styled_flex">
               <div>
                 <h1> ברוכים הבאים לאתר השכרת הדירות הגדול בארץ </h1>
                 <h5>
@@ -75,43 +60,19 @@ const Home = () => {
                 <h2 style={{ textAlign: "center", marginTop: "10px" }}>
                   תהנו😎
                 </h2>
-                <div>
-                  {/* <TypeWriterEffect
-                    textStyle={{
-                      color: "white",
-                      fontSize: "20px",
-                      letterSpacing: "2px",
-                      marginLeft: "50px",
-                      marginTop: "15px",
-                    }}
-                    startDelay={100}
-                    cursorColor="white"
-                    typeSpeed={100}
-                    scrollArea={myRef}
-                    multiText={[
-                      "שלום לכם, ברוכים הבאים לEasyRent - הדרך למצוא את הדירה הבאה שלכם🥳",
-                      "באתר תוכלו למצוא מאות דירות להשכרה ולמטרת סאבלט, השתמשו בחיפוש המסוננן שלנו על מנת לראות רק את הדירות הרלוונטיות אליכם",
-                      "אנו מזמינים אותכם להרשם לאתר על מנת להשאר מעודכנים ולהיות הראשונים שמקבלים את העדכונים לגבי הדירות הכי חמות",
-                      "בעל/ת דירה ? הרשם והעלה את הדירה שלך לאתר וכך תוכל להשכיר את דירתך בקלות וביעילות!",
-                      "תהנו😎",
-                    ]}
-                    multiTextDelay={1000}
-                  /> */}
-                </div>
-                <div></div>
               </div>
-            </StyledFlex>
-          </Nav>
-        </StyledContainer>
-      </StyledHeader>
-      <StyledContainer>
-        <StyledFlex>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div className="styled_container">
+        <div className="styled_flex">
           {content.map((item, i) => (
             <HomeCard item={item} />
           ))}
-        </StyledFlex>
-      </StyledContainer>
-    </ThemeProvider>
+        </div>
+      </div>
+    </>
   );
 };
 

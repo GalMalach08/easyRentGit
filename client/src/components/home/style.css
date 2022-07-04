@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
+
+.styled_card {
+    display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  margin: 40px 20px;
+  padding: 60px;
+  cursor: pointer;
+}
+.styled_card img {
+    width: 80%;
+    height: 200px;
+}
+.styled_card > div {
+    flex: 1;
+}
+.styled_card:hover {
+    box-shadow: 10px 10px rgba(33, 33, 33, 0.2);
+
+}
+
+.styled_container {
+    width: 1100px;
+    max-width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.styled_flex {
+    display: flex;
+    align-items: space-between;
+}
+.styled_flex > div {
+    flex: 1;
+
+}
+
+@media screen and (max-width: 768px) {
+    .styled_card {
+        flex-direction: column;
+    }
+    .styled_flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    .styled_header {
+     
+        height: 515px !important;
+    }
+    
+  }
+
+.styled_header {
+    background-color: #ebfbff;
+    background-image: url("https://cutewallpaper.org/21/tumblr-youtube-backgrounds/Best-49-Vaporwave-Tumblr-Backgrounds-on-HipWallpaper-.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    height: 400px;
+    padding: 40px 0;
+}
