@@ -95,7 +95,7 @@ const SignUp = () => {
         .unwrap()
         .then(({ data }) => {
           if (data) {
-            navigate("/5");
+            navigate("/");
             toastify(
               "SUCCESS",
               "ברוכה הבאה! אנא בדוק את המייל שלך על מנת לאמת את המשתמש"

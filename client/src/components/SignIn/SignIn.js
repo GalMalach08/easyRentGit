@@ -167,7 +167,7 @@ const SignIn = (props) => {
       .unwrap()
       .then(({ auth }) => {
         if (auth) {
-          navigate("/5");
+          navigate("/");
         } else {
           const newUserObj = {
             email,
@@ -188,7 +188,7 @@ const SignIn = (props) => {
   };
 
   useEffect(() => {
-    setPrevUrl(props.location ? props.location.state.path : "/5");
+    setPrevUrl(props.location ? props.location.state.path : "/");
   }, [props.location]);
 
   return (

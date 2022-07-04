@@ -25,21 +25,21 @@ const PopUp = () => {
           {user.firstname[0]}
         </Avatar>
       }
-      style={{ backgroundColor: " #202124" }}
+      style={{ backgroundColor: "" }}
       position="bottom right"
     >
       <Card
         sx={{ minWidth: 193, minHeight: 176 }}
         className="popup_flexbox"
         style={{
-          backgroundColor: "#202124",
+          backgroundColor: "#fafaf8",
         }}
       >
         <CardContent className="popup_flexbox">
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             <Avatar sx={{ bgcolor: "#D9952C" }}>{user.firstname[0]}</Avatar>
           </Typography>
-          <Typography variant="h5" component="div"></Typography>
+          <Typography></Typography>
           <Typography sx={{ mb: 1.5 }}>
             {user.firstname} {user.lastname}
           </Typography>
@@ -48,7 +48,7 @@ const PopUp = () => {
 
         <CardActions>
           <Link to={`/logout`} className="nav_link" activeclassname="selected">
-            <Button style={{ color: "white" }} variant="outline-secondary">
+            <Button style={{ color: "black" }} variant="outline-secondary">
               התנתק
             </Button>
           </Link>

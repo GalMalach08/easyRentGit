@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 div.contain {
   max-width: 550px;
@@ -9,8 +8,9 @@ div.contain {
   margin: 55px auto 10px;
   border: 0px 1px solid lightgrey;
   border-radius:10px;
-  color: white;
-  background-color: #6d6d6d;
+  color: #202020;
+  background-color: #ebfbff;
+  font-family: "Arimo", sans-serif !important;
 }
 a {
   text-decoration: none !important;
@@ -31,7 +31,7 @@ div.contain h3 {
   font-size: 20px;
   letter-spacing: 3px;
   margin-top: 15px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Arimo", sans-serif;
 }
 .chip {
   margin-right: 12px;

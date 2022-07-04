@@ -6,8 +6,6 @@ import { useSelector } from "react-redux";
 import PopUp from "./popup/PopUp";
 // Bootstrap
 import { Nav, Navbar } from "react-bootstrap";
-// React-typewriter-effect
-import TypeWriterEffect from "react-typewriter-effect";
 
 // Css
 import "./style.css";
@@ -17,15 +15,13 @@ const TopNavBar = () => {
   const isAdmin = useSelector((state) => state.users.data.isAdmin);
   const user = useSelector((state) => state.users.data);
 
-  const myRef = document.querySelector(".scrollable-div");
-
   return (
     <>
       {/* Top navbar */}
 
       <div className="header_section">
-        <Navbar expand="lg" className="navbar" variant="dark">
-          <NavLink to="/5">
+        <Navbar expand="lg" className="navbar">
+          <NavLink to="/">
             <Navbar.Brand className="nav_brand">
               {" "}
               <span style={{ color: "#F1A32B" }}>Easy</span>
@@ -99,28 +95,6 @@ const TopNavBar = () => {
               </Navbar.Collapse>
             </>
           ) : null}
-          {/* <div className="auto_typing_div">
-              <TypeWriterEffect
-                textStyle={{
-                  fontFamily: "Poppins, sans-serif",
-                  color: "white",
-                  fontSize: "20px",
-                  letterSpacing: "2px",
-                }}
-                startDelay={100}
-                cursorColor="white"
-                typeSpeed={100}
-                scrollArea={myRef}
-                multiText={[
-                  "שלום לכם, ברוכים הבאים לEasyRent - הדרך למצוא את הדירה הבאה שלכם בתל אביב🥳",
-                  "באתר תוכלו למצוא מאות דירות להשכרה ולמטרת סאבלט, השתמשו בחיפוש המסוננן שלנו על מנת לראות רק את הדירות הרלוונטיות אליכם",
-                  "אנו מזמינים אותכם להרשם לאתר על מנת להשאר מעודכנים ולהיות הראשונים שמקבלים את העדכונים לגבי הדירות הכי חמות",
-                  "בעל/ת דירה ? הרשם והעלה את הדירה שלך לאתר וכך תוכל להשכיר את דירתך בקלות וביעילות!",
-                  "תהנו😎",
-                ]}
-                multiTextDelay={1000}
-              />
-            </div> */}
         </Navbar>
       </div>
     </>

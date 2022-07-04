@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@300;400&display=swap");
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Arimo", sans-serif;
 
-  background-color: #353535 !important;
+  background-color: #fafaf8!important;
 }
 
 h1 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Arimo", sans-serif;
+
 }
 .header {
   text-align: center;
@@ -14,21 +14,24 @@ h1 {
 }
 .header h1 {
   font: 40px;
-  color: white;
+   color:black;
 }
 .filtered_div {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width:60%;
   padding: 15px;
-  color: white;
+  color: black;
   margin: 20px;
+  background-color:#ECFBFF;
 }
 .not_filtered_div {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display:inline-block;
   padding: 10px 10px 5px;
   margin: 20px 10px;
-  color: white;
+  color: black;
+  background-color:#ECFBFF;
+
 }
 
 @media screen and (max-width: 700px) {
@@ -61,10 +64,10 @@ h1 {
   width: 52%;
 }
 .page_button {
-  margin: 10px 0px 64px;
+  margin: 10px 45px 64px;
 }
 .seen_all_header {
-  color: white;
+  color: black;
   margin: 20px 0px 56px;
     text-align: center;
 }

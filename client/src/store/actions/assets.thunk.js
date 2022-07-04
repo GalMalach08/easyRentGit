@@ -46,6 +46,7 @@ export const getAssetsByCategory = createAsyncThunk(
       getAuthHeader()
     );
     const { assets, assetsTotalLength } = await response.json();
+    console.log(assets);
     return { assets, assetsTotalLength };
   }
 );
@@ -84,7 +85,6 @@ export const filterAssets = createAsyncThunk(
 export const getAssetsOfUser = createAsyncThunk(
   "assets/getAssetsOfUser",
   async (id) => {
-    console.log(id);
     const response = await fetch(`/asset/byuser/${id}`);
     const { assets } = await response.json();
     return { assets };
@@ -114,7 +114,6 @@ export const approveAssetById = createAsyncThunk(
       body: JSON.stringify({ id }),
     });
     const { success } = await response.json();
-    console.log(success);
     return { success };
   }
 );

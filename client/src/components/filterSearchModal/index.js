@@ -29,51 +29,7 @@ import {
 // Css
 import "./style.css";
 
-const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   textAlign: "right",
-  // },
-  // form: {
-  //   width: "100%",
-  //   marginTop: theme.spacing(1),
-  //   display: "flex",
-  //   flexDirection: "column",
-  // },
-  // textField: {
-  //   margin: "15px 10px",
-  //   textAlign: "right !important",
-  // },
-  // submit: {
-  //   margin: theme.spacing(3, 0, 2),
-  // },
-  // header: {
-  //   textAlign: "center",
-  //   margin: theme.spacing(2),
-  //   fontFamily: "Chilanka",
-  // },
-  // roomsTab: {
-  //   width: "100%",
-  //   marginBottom: "15px",
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   flexWrap: "nowrap",
-  // },
-  // areaTab: {
-  //   marginBottom: "15px",
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   flexWrap: "wrap",
-  // },
-  // areaTabChild: {
-  //   width: "30%",
-  // },
-  // areaTabChildSmall: {
-  //   width: "20%",
-  // },
-  // fullWidth: {
-  //   width: "100%",
-  // },
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 const ShareModal = ({
   modalOpen,
@@ -252,13 +208,16 @@ const ShareModal = ({
       };
       setFilterObj(filterObj);
       dispatch(resetSkip());
+
       getFilteredAssets(filterObj, 0);
 
       setModalOpen(false);
     }
   };
 
-  const handleEnterDateChange = (date) => setEnterDate(date);
+  const handleEnterDateChange = (date) => {
+    setEnterDate(date);
+  };
 
   const getDaysArray = (start, end) => {
     for (

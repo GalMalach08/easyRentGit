@@ -7,6 +7,7 @@ import { isAuth } from "./store/actions/user.thunk";
 import { Loader } from "./utils/tools";
 import Header from "./components/header";
 import Home from "./components/home";
+import AssetsMain from "./components/assetMain";
 import Asset from "./components/asset";
 import UploadAsset from "./components/uploadAsset";
 import NotApprovedAssets from "./components/notApprovedAssets";
@@ -113,11 +114,19 @@ const Router = () => {
                   path="/:id"
                   element={
                     <AuthGuard>
-                      <Home />
+                      <AssetsMain />
                     </AuthGuard>
                   }
                 />{" "}
-                <Route path="*" element={<Navigate to="/5" />} />
+                <Route
+                  path="/"
+                  element={
+                    <AuthGuard>
+                      <Home />
+                    </AuthGuard>
+                  }
+                />
+                {/* <Route path="*" element={<Navigate to="/5" />} /> */}
               </Routes>
               <ToastContainer />
             </BrowserRouter>

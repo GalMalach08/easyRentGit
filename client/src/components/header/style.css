@@ -3,21 +3,21 @@
   margin: 0px auto;
 }
 .bg-light {
-  background-color: black !;
+  background-color: 'black' !;
 }
 .navbar-collapse {
   justify-content: center;
   width: 100%;
 }
 .header_section {
-  background-color: #212529;
+  background-color: #ebfbff;
   padding: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   opacity: 0.95;
-  box-shadow: 1px 1px 1px 1px #888888;
+  box-shadow: 1px 1px 1px 1px lightgrey;
 }
 .admin_panel_header {
   margin-top: 5px;
@@ -26,7 +26,7 @@
 }
 
 .nav_link {
-  color: white;
+  color: black;
   cursor: pointer;
   font-size: 20px;
   letter-spacing: 2px;

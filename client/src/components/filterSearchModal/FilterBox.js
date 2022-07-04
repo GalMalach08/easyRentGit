@@ -52,14 +52,14 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
 
           <Button
             variant="outline-secondary"
-            style={{ color: "white" }}
+            style={{ color: "black" }}
             onClick={() => setModalOpen(true)}
           >
             שינוי סינון
           </Button>
           <Button
             variant="outline-secondary"
-            style={{ color: "white", margin: "10px 20px" }}
+            style={{ color: "black", margin: "10px 20px" }}
             onClick={() => dispatch(resetFilter())}
           >
             איפוס סינון
@@ -72,7 +72,7 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
             על מנת לצפות בתוצאות מסוננות
             <Button
               size="sm"
-              style={{ color: "white", margin: "-5px 10px" }}
+              style={{ color: "black", margin: "-5px 10px" }}
               variant="outline-secondary"
               onClick={() => setModalOpen(true)}
             >

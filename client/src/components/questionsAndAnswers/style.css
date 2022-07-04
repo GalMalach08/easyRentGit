@@ -30,7 +30,7 @@
   width: var(--maxWidthMobile);
   padding: 6rem 2rem 2rem 2rem;
   border-radius: 1rem;
-  background-color: #22262A;
+  background-color: #ECFBFF;
   display: flex;
   justify-content: flex-start;
 }
@@ -57,7 +57,7 @@
   margin-top: 2rem;
   font-size: 1.25rem;
   text-align: center;
-  color:white;
+  color:black;
   font-size:2.5rem;
 }
 
@@ -65,7 +65,7 @@
   margin: 0 auto;
   padding: 1rem 0;
   border-bottom: 0.1px solid var(--lightGrayish);
-  color: white;
+  color: black;
   cursor: pointer;
 }
 
@@ -86,7 +86,7 @@
 
 .accordion-title-active {
   font-weight: 700;
-  color: white;
+  color: black;
 }
 
 .accordion-title-active::after {

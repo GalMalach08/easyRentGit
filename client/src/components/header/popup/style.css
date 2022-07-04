@@ -1,14 +1,16 @@
 .popup-content {
-    background-color: #202124 ;
+    background-color: #fafaf8 ;
 }
 .MuiAvatar-colorDefault {
     margin: 0px !important;
 }
 .popup_flexbox {
-    background-color: #202124;
-    color: white;
+    background-color: #fafaf8;
+    color: black;
+    font-weight: bold;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    font-family: "Arimo";
 }
