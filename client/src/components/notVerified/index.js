@@ -27,7 +27,6 @@ const NotVerified = () => {
       {user && !user.data.isVerified && user.auth ? (
         <>
           <div className="not_verified">
-            המשתמש לא מאומת
             <Button
               className="m-2"
               size="sm"
@@ -35,7 +34,7 @@ const NotVerified = () => {
               variant="outline-light"
               onClick={() => sendEmail()}
             >
-              לשליחת מייל חדש לחץ כאן
+              המשתמש לא מאומת לשליחת מייל חדש לחץ כאן
             </Button>{" "}
           </div>
         </>

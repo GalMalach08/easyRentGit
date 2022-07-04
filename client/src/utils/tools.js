@@ -66,3 +66,8 @@ export const getLocation = async (address) => {
 export const CustomTheme = createTheme({
   direction: "rtl",
 });
+
+// Making avatar name
+export const userAvatarName = (fName, lName) => {
+  return `${fName.substring(0, 1)}${lName.substring(0, 1)}`;
+};

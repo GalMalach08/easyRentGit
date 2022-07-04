@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { resetFilter } from "../../store/reducers/assets_reducer";
 // Utils
 import { numberWithCommas } from "../../utils/tools";
+// Bootstrap
+import { Button } from "react-bootstrap";
 
 // The filter box on the right corner in the main page
 const FilterBox = ({ filteredSearch, setModalOpen }) => {
@@ -18,7 +20,7 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
             style={{
               display: "flex",
               justifyContent: "flex-start",
-              flexWrap: "noWrap",
+              flexWrap: "wrap",
             }}
           >
             <h6 className="filter_item">
@@ -47,28 +49,35 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
               </span>
             </h6>
           </div>
-          <span className="click_here_span" onClick={() => setModalOpen(true)}>
-            שינוי סינון
-          </span>
 
-          <span
-            className="click_here_span"
+          <Button
+            variant="outline-secondary"
+            style={{ color: "white" }}
+            onClick={() => setModalOpen(true)}
+          >
+            שינוי סינון
+          </Button>
+          <Button
+            variant="outline-secondary"
+            style={{ color: "white", margin: "10px 20px" }}
             onClick={() => dispatch(resetFilter())}
           >
             איפוס סינון
-          </span>
+          </Button>
         </div>
       ) : (
         <div className="not_filtered_div">
           <h6>
             {user.firstname && <span> שלום {user.firstname}, </span>}
             על מנת לצפות בתוצאות מסוננות
-            <span
-              className="click_here_span"
+            <Button
+              size="sm"
+              style={{ color: "white", margin: "-5px 10px" }}
+              variant="outline-secondary"
               onClick={() => setModalOpen(true)}
             >
               לחץ כאן
-            </span>
+            </Button>
           </h6>
         </div>
       )}

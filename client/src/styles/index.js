@@ -19,7 +19,7 @@ export const updateAssetForm = (theme) => ({
     width: "100%",
   },
   select: {
-    margin: "35px 10px 3px",
+    margin: "5px 10px 3px",
   },
   helperText: {
     margin: "0px 10px 20px",

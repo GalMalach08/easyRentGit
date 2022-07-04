@@ -9,7 +9,7 @@
   border-radius: 25px;
   cursor: pointer;
   transition: background 0.3s ease-in;
-  width: 400px;
+  width: 333px;
   margin: 10px;
   font-family: arial;
   font-size:15px;
@@ -55,14 +55,22 @@
   .ip-add-cart {
     max-width: 100%;
   }
+  .more_details {
+    width: 90vw !important;
+
+  }
   
 }
-
+.contact_btn_div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .more_details {
   margin: 25px 10px;
-  max-width: 500px;
+  width: 500px;
   border: 2px solid lightgrey;
-  padding: 25px 45px;
+  padding: 10px;
   text-align: right;
   background-color: white;
   border-radius: 10px;

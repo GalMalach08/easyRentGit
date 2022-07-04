@@ -279,25 +279,6 @@ const SignIn = (props) => {
                 textButton="התחבר באמצעות פייסבוק"
                 cssClass="loginBtn loginBtn--facebook"
               /> */}
-              <GoogleLogin
-                render={(renderProps) => (
-                  <>
-                    <button
-                      onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
-                      type="button"
-                      className="loginBtn loginBtn--google"
-                    >
-                      התחבר באמצעות גוגל
-                    </button>
-                  </>
-                )}
-                clientId="521974913551-b851j9ui32ie4juj8b7u7gf42f4th7fj.apps.googleusercontent.com"
-                buttonText="התחבר דרך גוגל"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={"single_host_origin"}
-              />
 
               <Button
                 disabled={
@@ -317,6 +298,26 @@ const SignIn = (props) => {
                 {" "}
                 התחבר{" "}
               </Button>
+              <GoogleLogin
+                render={(renderProps) => (
+                  <>
+                    <button
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      type="button"
+                      className="loginBtn loginBtn--google mb-3"
+                    >
+                      התחבר באמצעות גוגל
+                    </button>
+                  </>
+                )}
+                clientId="521974913551-b851j9ui32ie4juj8b7u7gf42f4th7fj.apps.googleusercontent.com"
+                buttonText="התחבר דרך גוגל"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
+
               <Grid container>
                 <Grid item>
                   <Link to="/signup" variant="body2">

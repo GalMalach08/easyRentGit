@@ -3,10 +3,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 // Redux
 import { useSelector } from "react-redux";
+import PopUp from "./popup/PopUp";
 // Bootstrap
 import { Nav, Navbar } from "react-bootstrap";
 // React-typewriter-effect
 import TypeWriterEffect from "react-typewriter-effect";
+
 // Css
 import "./style.css";
 
@@ -22,7 +24,7 @@ const TopNavBar = () => {
       {/* Top navbar */}
 
       <div className="header_section">
-        <Navbar expand="lg" className="navbar">
+        <Navbar expand="lg" className="navbar" variant="dark">
           <NavLink to="/5">
             <Navbar.Brand className="nav_brand">
               {" "}
@@ -43,6 +45,10 @@ const TopNavBar = () => {
                     width: "80%",
                   }}
                 >
+                  <span className="nav_link popup" activeclassname="selected">
+                    <PopUp />
+                  </span>
+
                   <NavLink
                     to="/5"
                     className="nav_link"
@@ -88,13 +94,6 @@ const TopNavBar = () => {
                     activeclassname="selected"
                   >
                     שאלות ותשובות
-                  </NavLink>
-                  <NavLink
-                    to={`${auth ? "/logout" : "/signin"}`}
-                    className="nav_link"
-                    activeclassname="selected"
-                  >
-                    {`${auth ? "התנתק" : "התחבר"}`}
                   </NavLink>
                 </Nav>
               </Navbar.Collapse>

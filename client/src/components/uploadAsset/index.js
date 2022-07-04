@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+// React-router-dom
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import {
   addAsset,
   updateAsset,
   deleteApprovedAsset,
+  getAssetById,
 } from "../../store/actions/assets.thunk";
 // Component
 import AssetUploadedModal from "./AssetUploadedModal";
@@ -87,6 +89,8 @@ const UploadAsset = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.data);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const menuItem = [
     { value: "הצפון הישן" },
@@ -319,44 +323,57 @@ const UploadAsset = (props) => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     if (location.pathname.includes("/update")) {
       // Check if we are updating or uploading
-      const asset = location.state.asset;
-      setIsUpdate(true);
-      const newImagesArr = [];
-      const newGalleryArr = [];
-      setUpdatedAsset(asset);
-      setEnterDate(new Date(setReadableDate(asset.enterDate, true)));
-      setExitDate(new Date(setReadableDate(asset.exitDate, true)));
-      asset.pricePer === "לכל התקופה"
-        ? setTimeValue(3)
-        : asset.pricePer === "לחודש"
-        ? setTimeValue(2)
-        : asset.pricePer === "לשבוע"
-        ? setTimeValue(1)
-        : asset.pricePer === "ליום"
-        ? setTimeValue(0)
-        : setTimeValue(0);
-      asset.isSublet ? setIsSublet("1") : setIsSublet("0");
-      setRoomsValue(asset.roomsNumber);
-      setArea(asset.area);
-      asset.images.forEach((image) => {
-        newImagesArr.push({
-          image: image.image,
-          name: image.imageName,
+      dispatch(getAssetById(id))
+        .unwrap()
+        .then(({ asset }) => {
+          if (asset.userId._id === user._id) {
+            // make sure that the user that update is the owner
+            setIsUpdate(true);
+            const newImagesArr = [];
+            const newGalleryArr = [];
+            setUpdatedAsset(asset);
+            setEnterDate(new Date(setReadableDate(asset.enterDate, true)));
+            setExitDate(new Date(setReadableDate(asset.exitDate, true)));
+            asset.pricePer === "לכל התקופה"
+              ? setTimeValue(3)
+              : asset.pricePer === "לחודש"
+              ? setTimeValue(2)
+              : asset.pricePer === "לשבוע"
+              ? setTimeValue(1)
+              : asset.pricePer === "ליום"
+              ? setTimeValue(0)
+              : setTimeValue(0);
+            asset.isSublet ? setIsSublet("1") : setIsSublet("0");
+            setRoomsValue(asset.roomsNumber);
+            setArea(asset.area);
+            asset.images.forEach((image) => {
+              newImagesArr.push({
+                image: image.image,
+                name: image.imageName,
+              });
+              newGalleryArr.push({
+                original: image.image,
+                thumbnail: image.image,
+                originalHeight: "300px",
+                originalWidth: "200px",
+                thumbnailHeight: "100px",
+                thumbnailWidth: "100px",
+              });
+            });
+            setGalleryImages([...newGalleryArr]);
+            setImagesArr([...newImagesArr]);
+          } else {
+            navigate("/upload");
+          }
+          setIsLoading(false);
         });
-        newGalleryArr.push({
-          original: image.image,
-          thumbnail: image.image,
-          originalHeight: "300px",
-          originalWidth: "200px",
-          thumbnailHeight: "100px",
-          thumbnailWidth: "100px",
-        });
-      });
-      setGalleryImages([...newGalleryArr]);
-      setImagesArr([...newImagesArr]);
-    } else setIsUpdate(false);
+    } else {
+      setIsUpdate(false);
+      setIsLoading(false);
+    }
   }, []);
 
   return (
@@ -434,7 +451,7 @@ const UploadAsset = (props) => {
                   ref={addressRef}
                 />
 
-                <label className="time_label">הדירה היא למטרת:</label>
+                <label className="time_label">* הדירה היא למטרת:</label>
                 <RadioGroup
                   value={isSublet}
                   onChange={(e) => {
@@ -494,12 +511,12 @@ const UploadAsset = (props) => {
                   variant="outlined"
                   margin="normal"
                   fullWidth
-                  label="מחיר"
+                  label="* מחיר"
                   name="price"
                   {...props.getFieldProps("price")}
                   {...errorHelper(props, "price")}
                 />
-                <label className="time_label">המחיר המצוין הוא מחיר:</label>
+                <label className="time_label">* מספר החדרים בנכס:</label>
                 <Tabs
                   value={timeValue}
                   onChange={handleTimeChange}
@@ -512,6 +529,8 @@ const UploadAsset = (props) => {
                 </Tabs>
 
                 {/* Area */}
+                <label className="time_label">* איזור:</label>
+
                 <Select
                   value={area}
                   onChange={(e) => setArea(e.target.value)}
@@ -534,7 +553,7 @@ const UploadAsset = (props) => {
                 </FormHelperText>
 
                 {/* Number of rooms */}
-                <label className="time_label">מספר החדרים בנכס:</label>
+                <label className="time_label">* מספר החדרים בנכס:</label>
                 <RadioGroup
                   value={roomsValue}
                   onChange={(e) => setRoomsValue(e.target.value)}
@@ -567,7 +586,7 @@ const UploadAsset = (props) => {
                   variant="outlined"
                   margin="normal"
                   fullWidth
-                  label="הערות"
+                  label="* הערות"
                   name="notes"
                   {...props.getFieldProps("notes")}
                   {...errorHelper(props, "notes")}
@@ -579,7 +598,7 @@ const UploadAsset = (props) => {
 
                 {/* Description */}
                 <FormLabel className={classes.formLabel}>
-                  תיאור מפורט של הנכס:
+                  * תיאור מפורט של הנכס:
                 </FormLabel>
                 <TextareaAutosize
                   className={classes.textArea}
@@ -590,6 +609,8 @@ const UploadAsset = (props) => {
                 />
 
                 {/* Image */}
+                <label className="time_label">* העלה תמונות של הנכס:</label>
+
                 <Input
                   multiple
                   id="file"

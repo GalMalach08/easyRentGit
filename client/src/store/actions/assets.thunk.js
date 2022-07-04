@@ -55,7 +55,6 @@ export const getAssetById = createAsyncThunk(
   "assets/getAssetById",
   async (id) => {
     try {
-      console.log(id);
       const response = await fetch(`/asset/${id}`, getAuthHeader());
       const { asset } = await response.json();
       return { asset };

@@ -84,3 +84,12 @@
   margin:0px 30px;
   width:70%;
 }
+
+.popup {
+  margin-top: 5px;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}

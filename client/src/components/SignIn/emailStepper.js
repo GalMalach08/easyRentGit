@@ -5,6 +5,8 @@ import {
   checkIfUserExcistByEmail,
   sendResetPasswordMail,
 } from "../../store/actions/user.thunk";
+// Utils
+import { userAvatarName } from "../../utils/tools";
 // Formik
 import { useFormik } from "formik";
 import { errorHelper } from "../../utils/formik";
@@ -112,10 +114,6 @@ const EmailStepper = ({ setEmailModal }) => {
       sendEmail(values);
     },
   });
-
-  const userAvatarName = (fName, lName) => {
-    return `${fName.substring(0, 1)}${lName.substring(0, 1)}`;
-  };
 
   return (
     <>

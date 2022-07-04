@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Accordion from "@material-ui/core/Accordion";
@@ -15,7 +15,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import "./style.css";
 const useStyles = makeStyles((theme) => ({
-  root: { width: "80%", margin: "40px auto" },
+  root: {},
   accordion: {
     backgroundColor: "rgb(34,38,42)",
     color: "white",
@@ -24,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ControlledAccordions() {
   const classes = useStyles();
+  const [accordionOpen, setAccordionOpen] = useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+  });
   const [expanded, setExpanded] = React.useState(false);
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
@@ -31,123 +37,77 @@ export default function ControlledAccordions() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  return (
-    <div className={classes.root}>
-      <div className="header">
-        <h1 className="qa_header">שאלות ותשובות</h1>
-      </div>
+  const accordionItems = [
+    {
+      title: "מי אני ?",
+      description: [
+        "קוראים לי גל מלאך ואני מייסד EasyRent. האתר הוקם בשנת 2022 עקב המצוקה של אנשים רבים למצוא מגורים ראויים בתל אביב.",
+      ],
+    },
+    {
+      title: "מה היתרונות בלפתוח משתמש באתר ?",
+      description: [
+        "אפשרות להעלות נכסים לאתר בעצמכם",
+        "אפשרות לשיחה עם העוזר הדיגיטלי שלנו, בעזרתו תוכלו לסמן את ההעדפות שלכם למציאת דירה ואנו נדאג לעדכן אותכם ראשונים כאשר עולה דירה רלוונטית.",
+      ],
+    },
+    {
+      title: "איך מעלים נכס חדש לאתר ?",
+      description: [
+        "כאשר תפתחו משתמש תתווסף לכם לשונית בתפריט הניווט שנקראת העלאת נכס. לאחר מכן תצטרכו למלא טופס קצר המציג את הדירה שלכם והיא תשלח לאישור מערכת. במידה והדירה תואשר היא תעלה לאתר ותקבלו על כך הודעה במייל איתו נרשמתם.משם הדרך להשכרת הנכס קצרה מתמיד!",
+      ],
+    },
+    {
+      title: "איך יוצרים איתכם קשר ?",
+      description: [
+        "דרך האיימיל שלנו: galmalach2@gmail.com",
+        "דרך הווצאפ: 050-592-0062",
+      ],
+    },
+  ];
 
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-        className={classes.accordion}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography className={classes.heading}>מי אני ?</Typography>
-        </AccordionSummary>
-        <AccordionDetails className="typography">
-          <Typography>
-            קוראים לי גל מלאך ואני מייסד EasyRent. האתר הוקם בשנת 2022 עקב
-            המצוקה של אנשים רבים למצוא מגורים ראויים בתל אביב.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel2"}
-        onChange={handleChange("panel2")}
-        className={classes.accordion}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography>מה היתרונות בלפתוח משתמש באתר ?</Typography>
-        </AccordionSummary>
-        <AccordionDetails className="typography">
-          <Typography className={classes.typography}>
-            פתיחת משתמש תקנה לכם את היתרונות הבאים:
-            <div className={classes.demo}>
-              <List dense={dense}>
-                <ListItem>
-                  <ListItemIcon>
-                    <FiberManualRecordIcon fontSize="small" color="disabled" />
-                  </ListItemIcon>
-                  <ListItemText primary="אפשרות להעלות נכסים לאתר בעצמכם" />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <FiberManualRecordIcon fontSize="small" color="disabled" />
-                  </ListItemIcon>
-                  <ListItemText primary="אפשרות לשיחה עם העוזר הדיגיטלי שלנו, בעזרתו תוכלו לסמן את ההעדפות שלכם למציאת דירה ואנו נדאג לעדכן אותכם ראשונים כאשר עולה דירה רלוונטית." />
-                </ListItem>
-              </List>
-            </div>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel3"}
-        onChange={handleChange("panel3")}
-        className={classes.accordion}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography className={classes.typography}>
-            איך מעלים נכס חדש לאתר ?{" "}
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails className="typography">
-          <Typography>
-            כאשר תפתחו משתמש תתווסף לכם לשונית בתפריט הניווט שנקראת "העלאת נכס".
-            לאחר מכן תצטרכו למלא טופס קצר המציג את הדירה שלכם והיא תשלח לאישור
-            מערכת. במידה והדירה תואשר היא תעלה לאתר ותקבלו על כך הודעה במייל
-            איתו נרשמתם.
-            <span>משם הדרך להשכרת הנכס קצרה מתמיד! </span>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded === "panel4"}
-        onChange={handleChange("panel4")}
-        className={classes.accordion}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel4bh-content"
-          id="panel4bh-header"
-        >
-          <Typography className={classes.typography}>
-            איך יוצרים איתכם קשר ?{" "}
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails className="typography">
-          <Typography className={classes.heading}>
-            ניתן ליצור איתנו קשר באמצעים הבאים:
-            <List dense={dense}>
-              <ListItem>
-                <ListItemIcon>
-                  <EmailIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primary="דרך האיימיל שלנו: galmalach2@gmail.com" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <WhatsAppIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText primary="דרך הווצאפ: 050-592-0062" />
-              </ListItem>
-            </List>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+  const openAccordion = (value) => {
+    console.log(accordionOpen[value]);
+    if (!accordionOpen[value]) {
+      Object.keys(accordionOpen).forEach((v) => (accordionOpen[v] = false));
+      setAccordionOpen({ ...accordionOpen, [value]: true });
+    } else {
+      Object.keys(accordionOpen).forEach((v) => (accordionOpen[v] = false));
+      setAccordionOpen({ ...accordionOpen });
+    }
+  };
+
+  return (
+    <div className="q_a_root">
+      <section class="accordion">
+        <div class="accordion-text-wrapper">
+          <h1>שאלות ותשובות</h1>
+
+          <ul class="accordion-list">
+            {accordionItems.map((item, i) => (
+              <li class="accordion__item" key={i}>
+                <p
+                  class={`accordion-title  ${
+                    accordionOpen[i] === true ? "accordion-title-active" : ""
+                  }`}
+                  onClick={() => openAccordion(i)}
+                >
+                  {item.title}
+                </p>
+                {item.description.map((desc) => (
+                  <p
+                    class={`accordion-text ${
+                      accordionOpen[i] === true ? "accordion-text-show" : ""
+                    }`}
+                  >
+                    • {desc}
+                  </p>
+                ))}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </div>
   );
 }

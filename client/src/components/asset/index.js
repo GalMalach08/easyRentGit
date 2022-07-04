@@ -46,6 +46,7 @@ const Asset = () => {
   const params = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { id } = params;
 
   // Open modal that checks if the user sure about the action
   const checkIfSure = (whatType) => {
@@ -63,7 +64,6 @@ const Asset = () => {
   // Get the asset from the database
   const getAsset = async () => {
     setLoading(true);
-    const { id } = params;
     dispatch(getAssetById(id))
       .unwrap()
       .then(({ asset }) => {
@@ -126,32 +126,32 @@ const Asset = () => {
             <Grow in={true} timeout={700} key={asset.id}>
               <Grid item xs={12} className={classes.root}>
                 <AssetCard asset={asset} assetPage={true} />
-                {/* Whatsapp */}
-                <div className="whatapp_div">
-                  <ReactWhatsapp
-                    number={`+972-${asset.userId.phoneNumber}`}
-                    message={`היי ${asset.userId.firstname}, אני מעוניין בדירה שפרסמת ברחוב ${asset.address},האם עוד רלוונטי  ?`}
-                    dangerouslySetInnerHTML={createMarkup()}
-                    className="ip-add-cart whatsapps"
-                  />
-                </div>
-
-                {/* Facebook */}
-                <button className="ip-add-cart facebook">
-                  <FacebookMessengerShareButton
-                    url="https://www.youtube.com/channel/UCfAP5CpNwfgMKG-m4UXVpSQ"
-                    to="10209538685461605"
-                    appId="111391301676"
-                  >
-                    <FacebookIcon className={classes.icon} />
-                    צור קשר עם {asset.owner} בפייסבוק
-                  </FacebookMessengerShareButton>
-                </button>
-
                 {/* More details  */}
                 <div className="more_details">
                   <h4>פרטים נוספים</h4>
                   <p>{asset.description}</p>
+                </div>
+                {/* Whatsapp */}
+                <div className="contact_btn_div">
+                  <div className="whatapp_div">
+                    <ReactWhatsapp
+                      number={`+972-${asset.userId.phoneNumber}`}
+                      message={`היי ${asset.userId.firstname}, אני מעוניין בדירה שפרסמת ברחוב ${asset.address},האם עוד רלוונטי  ?`}
+                      dangerouslySetInnerHTML={createMarkup()}
+                      className="ip-add-cart whatsapps"
+                    />
+                  </div>
+                  {/* Facebook */}
+                  <button className="ip-add-cart facebook">
+                    <FacebookMessengerShareButton
+                      url={`https://easyrent2023.herokuapp.com/asset/${id}`}
+                      to="10209538685461605"
+                      appId="111391301676"
+                    >
+                      <FacebookIcon className={classes.icon} />
+                      צור קשר עם {asset.owner} בפייסבוק
+                    </FacebookMessengerShareButton>
+                  </button>
                 </div>
 
                 {/* Map */}
