@@ -49,7 +49,7 @@ export const updateAssetForm = (theme) => ({
     marginBottom: "15px",
     display: "flex",
     flexDirection: "row",
-    flexWrap: "nowrap",
+    flexWrap: "wrap",
     margin: "0px 10px",
   },
   fullWidth: {

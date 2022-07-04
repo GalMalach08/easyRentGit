@@ -516,7 +516,7 @@ const UploadAsset = (props) => {
                   {...props.getFieldProps("price")}
                   {...errorHelper(props, "price")}
                 />
-                <label className="time_label">* מספר החדרים בנכס:</label>
+                <label className="time_label">* המחיר המצוין הוא:</label>
                 <Tabs
                   value={timeValue}
                   onChange={handleTimeChange}
