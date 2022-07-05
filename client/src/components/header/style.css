@@ -40,6 +40,7 @@
 }
 .nav_brand {
   color: white !important;
+  margin-bottom: 10px;
 }
 .nav_brand:hover {
   color: #707070 !important;

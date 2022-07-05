@@ -55,7 +55,7 @@ const Router = () => {
       ) : (
         <ThemeProvider theme={CustomTheme}>
           <StylesProvider jss={jss}>
-            <BrowserRouter>
+            <BrowserRouter dir="rtl">
               <Header />
               <Routes>
                 <Route

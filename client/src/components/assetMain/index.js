@@ -12,14 +12,14 @@ import {
 import { setUserPrefrences } from "../../store/actions/user.thunk";
 // Utils
 import { Loader } from "../../utils/tools";
+// Translator
+import { useTranslation } from "react-i18next";
 // Components
 import AssetCard from "../assetCard";
 import FilterSearchModal from "../filterSearchModal";
-import ChangePasswordModal from "./changePasswordModal";
 // import ChatBot from "../chatbot";
 import ChatBot from "../Chat";
 import FilterBox from "../filterSearchModal/FilterBox";
-import ChatBotBox from "./ChatBotBox";
 // Material ui
 import { Grid, Grow } from "@material-ui/core";
 import { StylesProvider } from "@material-ui/core/styles";
@@ -41,15 +41,16 @@ const Home = () => {
   const user = useSelector((state) => state.users.data);
   const auth = useSelector((state) => state.users.auth);
   const isVerified = useSelector((state) => state.users.data.isVerified);
-
+  const dir = useSelector((state) => state.users.language.dir);
   // Component state
   const [modalOpen, setModalOpen] = useState(false);
   const [isSublet, setIsSublet] = useState(false);
-
   const [filObj, setFilterObj] = useState({});
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(4);
   const [isBot, setIsBot] = useState(false);
+  const { t } = useTranslation();
+
   // Params
   const { id } = useParams();
   const navigate = useNavigate();
@@ -129,13 +130,12 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div dir={dir}>
       {/* Filter Box */}
       <FilterBox filteredSearch={filteredSearch} setModalOpen={setModalOpen} />
 
       <div className="not_filtered_divs">
         {/* Chat Bot Box */}
-        {/* <ChatBotBox setIsBot={setIsBot} /> */}
         {isVerified && (
           <div className="chatbot">
             <Grow in={true} timeout={3000}>
@@ -146,7 +146,7 @@ const Home = () => {
         {/* Header */}
       </div>
       <div className="header">
-        {isSublet ? <h1>סאבלט.</h1> : <h1>השכרה.</h1>}
+        {isSublet ? <h1> {t("Sublet.1")}.</h1> : <h1> {t("Rent.1")}.</h1>}
       </div>
 
       {/* Apartments Grid */}
@@ -211,7 +211,7 @@ const Home = () => {
           setFilterObj={setFilterObj}
         />
       </StylesProvider>
-    </>
+    </div>
   );
 };
 

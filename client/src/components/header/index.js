@@ -1,9 +1,14 @@
 import React from "react";
 // React router dom
 import { NavLink } from "react-router-dom";
+// Translator
+import { useTranslation } from "react-i18next";
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setLanguage } from "../../store/reducers/users_reducer";
 import PopUp from "./popup/PopUp";
+// Components
+import LanguageAvatar from "./LanguageAvatar";
 // Bootstrap
 import { Nav, Navbar } from "react-bootstrap";
 
@@ -14,12 +19,23 @@ const TopNavBar = () => {
   const auth = useSelector((state) => state.users.auth);
   const isAdmin = useSelector((state) => state.users.data.isAdmin);
   const user = useSelector((state) => state.users.data);
+  const dir = useSelector((state) => state.users.language.dir);
+
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+
+  const changeSiteLanguage = (lang) => {
+    dispatch(
+      setLanguage({ type: lang, dir: `${lang === "he" ? "rtl" : "ltr"}` })
+    );
+    i18n.changeLanguage(lang);
+  };
 
   return (
     <>
       {/* Top navbar */}
 
-      <div className="header_section">
+      <div className="header_section" dir={dir}>
         <Navbar expand="lg" className="navbar">
           <NavLink to="/">
             <Navbar.Brand className="nav_brand">
@@ -50,21 +66,21 @@ const TopNavBar = () => {
                     className="nav_link"
                     activeclassname="selected"
                   >
-                    סאבלט
+                    {t("Sublet.1")}
                   </NavLink>
                   <NavLink
                     to="/15"
                     className="nav_link"
                     activeclassname="selected"
                   >
-                    השכרה
+                    {t("Rent.1")}
                   </NavLink>
                   <NavLink
                     to="/upload"
                     className="nav_link"
                     activeclassname="selected"
                   >
-                    העלאת נכס
+                    {t("Uploadasset.1")}
                   </NavLink>
                   {auth && (
                     <NavLink
@@ -72,7 +88,7 @@ const TopNavBar = () => {
                       className="nav_link"
                       activeclassname="selected"
                     >
-                      הנכסים שלי
+                      {t("Myassets.1")}
                     </NavLink>
                   )}
                   {isAdmin && (
@@ -81,7 +97,7 @@ const TopNavBar = () => {
                       className="nav_link"
                       activeclassname="selected"
                     >
-                      נכסים שלא אושרו
+                      {t("NotAprrovedAssets.1")}
                     </NavLink>
                   )}
                   <NavLink
@@ -89,9 +105,10 @@ const TopNavBar = () => {
                     className="nav_link"
                     activeclassname="selected"
                   >
-                    שאלות ותשובות
+                    {t("QandA.1")}
                   </NavLink>
                 </Nav>
+                <LanguageAvatar changeSiteLanguage={changeSiteLanguage} />
               </Navbar.Collapse>
             </>
           ) : null}

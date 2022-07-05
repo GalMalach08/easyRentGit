@@ -25,6 +25,7 @@
     "i": "^0.3.7",
     "i18next": "^21.8.12",
     "i18next-browser-languagedetector": "^6.1.4",
+    "i18next-http-backend": "^1.4.1",
     "i18next-xhr-backend": "^3.2.2",
     "jss": "^10.7.1",
     "jss-rtl": "^0.3.0",

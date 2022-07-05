@@ -24,6 +24,7 @@ let DEFAULT_USER_STATE = {
     justEntered: null,
   },
   auth: null,
+  language: { dir: "rtl" },
 };
 
 export const usersSlice = createSlice({
@@ -39,7 +40,12 @@ export const usersSlice = createSlice({
     setJustEntered: (state, action) => {
       state.data.justEntered = null;
     },
+    setLanguage: (state, action) => {
+      console.log(action);
+      state.language = action.payload;
+    },
   },
+
   extraReducers: (builder) => {
     builder
       // sign in
@@ -151,5 +157,5 @@ export const usersSlice = createSlice({
       });
   },
 });
-export const { signOut, setJustEntered } = usersSlice.actions;
+export const { signOut, setJustEntered, setLanguage } = usersSlice.actions;
 export default usersSlice.reducer;
