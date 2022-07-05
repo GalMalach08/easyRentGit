@@ -51,10 +51,12 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
                 {filteredSearch.dates[filteredSearch.dates.length - 1]}
               </span>
             </h6>
-            <h6 className="filter_item">
-              נמצאו {totalAssetsLength} דירות התואמות לחיפוש שלך
-            </h6>
           </div>
+          <h6 className="filter_item">
+            {totalAssetsLength === 1
+              ? "נמצאה דירה אחת התואמת לחיפוש שלך"
+              : `נמצאו ${totalAssetsLength} דירות התואמות לחיפוש שלך`}
+          </h6>
 
           <Button
             variant="outline-secondary"

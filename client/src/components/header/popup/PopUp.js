@@ -18,8 +18,7 @@ const PopUp = () => {
       trigger={
         <Avatar
           alt="Remy Sharp"
-          sx={{ bgcolor: "#D9952C" }}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", backgroundColor: "#D9952C" }}
         >
           {" "}
           {user.firstname[0]}
@@ -37,7 +36,9 @@ const PopUp = () => {
       >
         <CardContent className="popup_flexbox">
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            <Avatar sx={{ bgcolor: "#D9952C" }}>{user.firstname[0]}</Avatar>
+            <Avatar style={{ cursor: "pointer", backgroundColor: "#D9952C" }}>
+              {user.firstname[0]}
+            </Avatar>
           </Typography>
           <Typography></Typography>
           <Typography sx={{ mb: 1.5 }}>

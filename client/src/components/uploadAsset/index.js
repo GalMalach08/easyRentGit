@@ -82,7 +82,6 @@ const UploadAsset = (props) => {
   const [areYouSureModal, setAreYouSureModal] = useState(false);
   const [functionToExcute, setFunctionToExcute] = useState("");
   const [modalMessage, setModalMessage] = useState("");
-  const [buttonDisDate, setbuttonDisDate] = useState(false);
   const galleryRef = useRef();
   const addressRef = useRef();
   const classes = useStyles();
@@ -491,8 +490,6 @@ const UploadAsset = (props) => {
                     format="dd/MM/yyyy"
                     onChange={handleEnterDateChange}
                     minDateMessage="תאריך הכניסה עבר"
-                    onError={() => setbuttonDisDate(true)}
-                    onAccept={() => setbuttonDisDate(false)}
                   />
                   <KeyboardDatePicker
                     className={classes.textField}
@@ -586,7 +583,7 @@ const UploadAsset = (props) => {
                   variant="outlined"
                   margin="normal"
                   fullWidth
-                  label="* הערות"
+                  label="הערות"
                   name="notes"
                   {...props.getFieldProps("notes")}
                   {...errorHelper(props, "notes")}
@@ -598,7 +595,7 @@ const UploadAsset = (props) => {
 
                 {/* Description */}
                 <FormLabel className={classes.formLabel}>
-                  * תיאור מפורט של הנכס:
+                  תיאור מפורט של הנכס:
                 </FormLabel>
                 <TextareaAutosize
                   className={classes.textArea}
@@ -634,7 +631,7 @@ const UploadAsset = (props) => {
                   </label>
                 </Button>
                 <FormHelperText style={{ margin: "5px 9px 5px" }}>
-                  התמונות יוצגו באתר ברוחב של 600px ובגובה של 300px ,לכן אנו
+                  התמונות יוצגו באתר ברוחב של 600px ובגובה של 400px ,לכן אנו
                   ממליצים לכם להעלות את התמונה בגודל זה. ניתן לבצע את שינוי גודל
                   התמונה בקלות :{" "}
                   <a
@@ -673,7 +670,6 @@ const UploadAsset = (props) => {
                     </button>
                   </div>
                 )}
-
                 {props.errors.image && props.touched.image ? (
                   <div className="error">{props.errors.image}</div>
                 ) : null}
@@ -704,7 +700,7 @@ const UploadAsset = (props) => {
                     props.values.address &&
                     !props.errors.address &&
                     props.values.phoneNumber &&
-                    props.values.images.length !== 0 &&
+                    imagesArr.length !== 0 &&
                     !buttonDisabled
                       ? false
                       : true

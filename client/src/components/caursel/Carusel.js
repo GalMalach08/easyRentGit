@@ -21,7 +21,7 @@ const Carusel = ({ images, assetPage }) => {
           <Carousel.Item key={i}>
             <img
               src={image.image}
-              height={`${assetPage ? "300px" : "300px"}`}
+              height={`${assetPage ? "400px" : "400px"}`}
               width={`${assetPage ? "100%" : "600px"}`}
               crop="scale"
               alt="slider1"
