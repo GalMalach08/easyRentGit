@@ -5,8 +5,6 @@ import {
   checkIfUserExcistByEmail,
   sendResetPasswordMail,
 } from "../../store/actions/user.thunk";
-// Utils
-import { userAvatarName } from "../../utils/tools";
 // Formik
 import { useFormik } from "formik";
 import { errorHelper } from "../../utils/formik";
@@ -156,8 +154,13 @@ const EmailStepper = ({ setEmailModal }) => {
                     {user.firstname} {user.lastname}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="h2">
-                    <Avatar sx={{ bgcolor: "red" }}>
-                      {userAvatarName(user.firstname, user.lastname)}
+                    <Avatar
+                      style={{
+                        backgroundColor: "#D9952C",
+                        margin: "auto",
+                      }}
+                    >
+                      {user.firstname[0]}
                     </Avatar>
                   </Typography>
                   <Typography color="textSecondary" component="p">

@@ -79,6 +79,7 @@ const SignIn = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [emailModal, setEmailModal] = useState(false);
+  const [googleButtonDisabled, setGoogleButtonDisabled] = useState(false);
   const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -162,6 +163,7 @@ const SignIn = (props) => {
 
   // Google login
   const responseGoogle = async (googleRes) => {
+    setGoogleButtonDisabled(true);
     const { googleId, email, givenName, familyName } = googleRes.profileObj;
     dispatch(signinUserByGoogle(googleId))
       .unwrap()
@@ -183,8 +185,8 @@ const SignIn = (props) => {
               }
             });
         }
+        setGoogleButtonDisabled(false);
       });
-    setButtonDisabled(false);
   };
 
   useEffect(() => {
@@ -298,12 +300,12 @@ const SignIn = (props) => {
                 {" "}
                 התחבר{" "}
               </Button>
-              <GoogleLogin
+              {/* <GoogleLogin
                 render={(renderProps) => (
                   <>
                     <button
                       onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
+                      disabled={googleButtonDisabled}
                       type="button"
                       className="loginBtn loginBtn--google mb-3"
                     >
@@ -316,7 +318,7 @@ const SignIn = (props) => {
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
-              />
+              /> */}
 
               <Grid container>
                 <Grid item>

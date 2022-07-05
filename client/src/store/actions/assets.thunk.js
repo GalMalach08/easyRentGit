@@ -174,3 +174,18 @@ export const getNotApprovedAssets = createAsyncThunk(
     }
   }
 );
+
+// Get not aprroved assets
+export const getNumberOfAssets = createAsyncThunk(
+  "assets/getNumberOfAssets",
+  async () => {
+    try {
+      const response = await fetch(`/asset/assets/all`, getAuthHeader());
+      const { rentCount, subletCount } = await response.json();
+
+      return { rentCount, subletCount };
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);

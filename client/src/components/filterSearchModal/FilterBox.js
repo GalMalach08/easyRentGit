@@ -10,6 +10,9 @@ import { Button } from "react-bootstrap";
 // The filter box on the right corner in the main page
 const FilterBox = ({ filteredSearch, setModalOpen }) => {
   const user = useSelector((state) => state.users.data);
+  const totalAssetsLength = useSelector(
+    (state) => state.assets.assetsTotalLength
+  );
   const dispatch = useDispatch();
   return (
     <>
@@ -47,6 +50,9 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
                 {filteredSearch.dates[0]} -{" "}
                 {filteredSearch.dates[filteredSearch.dates.length - 1]}
               </span>
+            </h6>
+            <h6 className="filter_item">
+              נמצאו {totalAssetsLength} דירות התואמות לחיפוש שלך
             </h6>
           </div>
 

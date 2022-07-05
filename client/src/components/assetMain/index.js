@@ -45,7 +45,7 @@ const Home = () => {
   // Component state
   const [modalOpen, setModalOpen] = useState(false);
   const [isSublet, setIsSublet] = useState(false);
-  const [changedPasswordModal, setChangedPasswordModal] = useState(false);
+
   const [filObj, setFilterObj] = useState({});
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(2);
@@ -121,9 +121,6 @@ const Home = () => {
   }, [id]);
 
   useEffect(() => {
-    if (user.isJustChangedPassword) {
-      setChangedPasswordModal(true);
-    }
     if (!user.preferences && user.firstname) {
       // the user is excist and has no prefrences
       setIsBot(true);
@@ -202,10 +199,7 @@ const Home = () => {
         </div>
 
         {/* Modals */}
-        <ChangePasswordModal
-          changePasswordModal={changedPasswordModal}
-          setChangedPasswordModal={setChangedPasswordModal}
-        />
+
         <FilterSearchModal
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}

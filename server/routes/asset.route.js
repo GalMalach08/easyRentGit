@@ -294,4 +294,10 @@ router.post("/filter", async (req, res) => {
   }
 });
 
+router.get("/assets/all", auth(), async (req, res) => {
+  const subletCount = await Asset.find({ isSublet: true }).countDocuments();
+  const rentCount = await Asset.find({ isSublet: false }).countDocuments();
+  res.send({ rentCount, subletCount });
+});
+
 module.exports = router;

@@ -87,6 +87,7 @@ export const emailStepperStyle = makeStyles((theme) => ({
     padding: "10px",
     backgroundColor: "azure",
     borderRadius: "10px",
+    boxShadow: "4px 4px 4px lightgrey",
   },
   large: {
     width: theme.spacing(12),
