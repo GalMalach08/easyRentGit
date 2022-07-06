@@ -372,6 +372,9 @@
     },
     "summary":{
         "1":"Summary"
+    },
+    "ownerNPhoneError2":{
+        "1":"Please enter valid phone number"
     }
 
 

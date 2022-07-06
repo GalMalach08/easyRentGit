@@ -31,6 +31,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Alert from "@material-ui/lab/Alert";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import { Loader, phoneRegex } from "../../utils/tools";
+
 // formik
 import { Formik } from "formik";
 import zxcvbn from "zxcvbn";
@@ -122,10 +124,7 @@ const SignUp = () => {
     phoneNumber: Yup.string()
       .required(`${t("ownerNPhoneError.1")}`)
       .min(6, `${t("notValidPhone.1")}`)
-      .matches(
-        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-        `${t("notValidPhone.1")}`
-      ),
+      .matches(phoneRegex, `${t("notValidPhone.1")}`),
   });
 
   // Handle password visiblity

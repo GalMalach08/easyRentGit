@@ -148,8 +148,8 @@ const Asset = () => {
                 <div className="contact_btn_div">
                   <div className="whatapp_div">
                     <ReactWhatsapp
-                      number={`+972-${asset.userId.phoneNumber}`}
-                      message={`היי ${asset.userId.firstname}, אני מעוניין בדירה שפרסמת ברחוב ${asset.address},האם עוד רלוונטי  ?`}
+                      number={`+972-${asset.phoneNumber}`}
+                      message={`היי ${asset.owner}, אני מעוניין בדירה שפרסמת ברחוב ${asset.address},האם עוד רלוונטי  ?`}
                       dangerouslySetInnerHTML={createMarkup}
                       className="ip-add-cart whatsapps"
                     />

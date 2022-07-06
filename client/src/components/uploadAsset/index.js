@@ -15,7 +15,7 @@ import AssetDeletedModal from "./AssetDeltedModal";
 import AreYouSureModal from "../areYouSureModal";
 import AlertBox from "./AlertBox";
 // Utils
-import { Loader } from "../../utils/tools";
+import { Loader, phoneRegex } from "../../utils/tools";
 // Translator
 import { useTranslation } from "react-i18next";
 // Material ui components
@@ -162,7 +162,9 @@ const UploadAsset = (props) => {
   const validationSchema = Yup.object({
     owner: Yup.string().required(`${t("ownerNameError.1")}`),
     email: Yup.string().required(`${t("ownerEmailError.1")}`),
-    phoneNumber: Yup.string().required(`${t("ownerNPhoneError.1")}`),
+    phoneNumber: Yup.string()
+      .required(`${t("ownerNPhoneError.1")}`)
+      .matches(phoneRegex, `${t("ownerNPhoneError2.1")}`),
     address: Yup.string()
       .required(`${t("assetHebrewError.1")}`)
       .test("isValid", "נא הכנס כתובת מלאה ותקינה", function(value) {

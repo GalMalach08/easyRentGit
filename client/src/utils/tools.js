@@ -66,3 +66,5 @@ export const getLocation = async (address) => {
 export const userAvatarName = (fName, lName) => {
   return `${fName.substring(0, 1)}${lName.substring(0, 1)}`;
 };
+
+export const phoneRegex = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
