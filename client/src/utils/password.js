@@ -18,16 +18,16 @@ export const passwordColor = (score) => {
   }
 };
 
-export const createPasswordLabel = (score) => {
+export const createPasswordLabel = (score, dir) => {
   switch (score) {
     case 25:
-      return "חלשה מאוד";
+      return dir === "rtl" ? "חלשה מאוד" : "Very weak";
     case 50:
-      return "חלשה";
+      return dir === "rtl" ? "חלשה" : "Weak";
     case 75:
-      return "טובה";
+      return dir === "rtl" ? "טובה" : "Good";
     case 100:
-      return "חזקה";
+      return dir === "rtl" ? "חזקה" : "Strong";
     default:
       return "";
   }

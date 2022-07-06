@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { resetFilter } from "../../store/reducers/assets_reducer";
 // Utils
 import { numberWithCommas } from "../../utils/tools";
+// Translator
+import { useTranslation } from "react-i18next";
 // Bootstrap
 import { Button } from "react-bootstrap";
 
@@ -13,12 +15,30 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
   const totalAssetsLength = useSelector(
     (state) => state.assets.assetsTotalLength
   );
+  const dir = useSelector((state) => state.users.language.dir);
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
+
+  const makeEnglishLocation = (arr) => {
+    const newArr = [];
+    arr.includes("הצפון הישן") && newArr.push("The old north");
+    arr.includes("הצפון החדש") && newArr.push("The new north");
+    arr.includes("לב העיר") && newArr.push("center");
+    arr.includes("שוק הכרמל") && newArr.push("The carmel market");
+    arr.includes("יפו") && newArr.push("Jaffa");
+    arr.includes("רוטשילד") && newArr.push("Rotchild");
+    arr.includes("כרם התימנים") && newArr.push("The cerem");
+    arr.includes("פלורנטין") && newArr.push("Florentin");
+    arr.includes("אחר") && newArr.push("Other");
+    arr.includes("הכל") && newArr.push("all");
+    return newArr.join(",");
+  };
   return (
-    <>
+    <div dir={dir}>
       {filteredSearch.dates ? (
         <div className="filtered_div">
-          <h4 className="fliter_header">אתה צופה בתוצאות מסוננות:</h4>
+          <h4 className="fliter_header"> {t("fliterboxTitle.1")}:</h4>
           <div
             style={{
               display: "flex",
@@ -27,25 +47,29 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
             }}
           >
             <h6 className="filter_item">
-              מיקום:{" "}
+              {t("location.1")}:
               <span style={{ fontWeight: "400" }}>
-                {filteredSearch.location},
+                {dir === "rtl"
+                  ? filteredSearch.location
+                  : makeEnglishLocation(filteredSearch.location)}
               </span>
             </h6>
             <h6 className="filter_item">
-              מחיר מקסימלי לחודש:{" "}
+              {t("maxPrice.1")}:
               <span style={{ fontWeight: "400" }}>
                 {numberWithCommas(filteredSearch.price)},
               </span>
             </h6>
             <h6 className="filter_item">
-              מספר חדרים:{" "}
+              {t("maxRooms.1")}:
               <span style={{ fontWeight: "400" }}>
-                {filteredSearch.numberOfRooms},
+                {dir === "rtl" || filteredSearch.numberOfRooms !== "הכל"
+                  ? filteredSearch.numberOfRooms
+                  : "all"}
               </span>
             </h6>
             <h6 className="filter_item">
-              טווח תאריכי כניסה: {""}
+              {t("dates.1")}:
               <span style={{ fontWeight: "400" }}>
                 {filteredSearch.dates[0]} -{" "}
                 {filteredSearch.dates[filteredSearch.dates.length - 1]}
@@ -54,8 +78,10 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
           </div>
           <h6 className="filter_item">
             {totalAssetsLength === 1
-              ? "נמצאה דירה אחת התואמת לחיפוש שלך"
-              : `נמצאו ${totalAssetsLength} דירות התואמות לחיפוש שלך`}
+              ? `${t("oneAptFound.1")}`
+              : dir === "rtl"
+              ? `נמצאו ${totalAssetsLength} דירות התואמות לחיפוש שלך`
+              : `We found ${totalAssetsLength} apartments that match your search`}
           </h6>
 
           <Button
@@ -63,33 +89,36 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
             style={{ color: "black" }}
             onClick={() => setModalOpen(true)}
           >
-            שינוי סינון
+            {t("changeFilter.1")}
           </Button>
           <Button
             variant="outline-secondary"
             style={{ color: "black", margin: "10px 20px" }}
             onClick={() => dispatch(resetFilter())}
           >
-            איפוס סינון
+            {t("resetFilter.1")}
           </Button>
         </div>
       ) : (
         <div className="not_filtered_div">
           <h6>
-            {user.firstname && <span> שלום {user.firstname}, </span>}
-            על מנת לצפות בתוצאות מסוננות
+            {dir === "rtl" ? (
+              <span> שלום {user.firstname}, על מנת לצפות בתוצאות מסוננות</span>
+            ) : (
+              <span>hello {user.firstname}, to watch filtered results</span>
+            )}
             <Button
               size="sm"
               style={{ color: "black", margin: "-5px 10px" }}
               variant="outline-secondary"
               onClick={() => setModalOpen(true)}
             >
-              לחץ כאן
+              {dir === "rtl" ? "לחץ כאן" : "click here"}
             </Button>
           </h6>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

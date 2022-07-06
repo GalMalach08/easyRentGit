@@ -49,8 +49,8 @@
   color: white !important;
 }
 
-.selected {
-  font-weight: 700;
+.active {
+  font-weight: 600;
   font-size: 22px;
 }
 .selected:hover {

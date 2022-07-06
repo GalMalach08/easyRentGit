@@ -121,6 +121,10 @@
       background-repeat: no-repeat, no-repeat;
       background-position: -35rem -20rem, -75px center;
   }
+  .accordion_english {
+    background-position: -35rem -20rem,700px center;
+
+  }
 
   .accordion::before {
       position: absolute;

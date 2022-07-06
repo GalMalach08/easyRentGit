@@ -16,6 +16,8 @@ import AreYouSureModal from "../areYouSureModal";
 import AlertBox from "./AlertBox";
 // Utils
 import { Loader } from "../../utils/tools";
+// Translator
+import { useTranslation } from "react-i18next";
 // Material ui components
 import {
   Grid,
@@ -41,7 +43,7 @@ import ImageIcon from "@material-ui/icons/Image";
 import CloseIcon from "@material-ui/icons/Close";
 // Formik
 import { Formik } from "formik";
-import { errorHelper, assetValidationSchema } from "../../utils/formik";
+import { errorHelper } from "../../utils/formik";
 // Dates
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
@@ -57,6 +59,8 @@ import moment from "moment";
 import "./style.css";
 import { updateAssetForm } from "../../styles";
 import { makeStyles } from "@material-ui/core/styles";
+import * as Yup from "yup";
+import { getLocation } from "../../utils/tools";
 
 const useStyles = makeStyles((theme) => updateAssetForm(theme));
 
@@ -88,33 +92,36 @@ const UploadAsset = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.data);
+  const dir = useSelector((state) => state.users.language.dir);
+  const { t } = useTranslation();
+
   const { id } = useParams();
   const navigate = useNavigate();
 
   const menuItem = [
-    { value: "הצפון הישן" },
-    { value: "הצפון החדש" },
-    { value: "לב העיר" },
-    { value: "פלורנטין" },
-    { value: "שוק הכרמל" },
-    { value: "רוטשילד" },
-    { value: "כרם התימנים" },
-    { value: "יפו" },
-    { value: "אחר" },
+    { value: "הצפון הישן", label: `${t("oldNorth.1")}` },
+    { value: "הצפון החדש", label: `${t("newNorth.1")}` },
+    { value: "לב העיר", label: `${t("center.1")}` },
+    { value: "פלורנטין", label: `${t("florentin.1")}` },
+    { value: "שוק הכרמל", label: `${t("cramelMarket.1")}` },
+    { value: "רוטשילד", label: `${t("rotchild.1")}` },
+    { value: "כרם התימנים", label: `${t("cerem.1")}` },
+    { value: "יפו", label: `${t("jaffa.1")}` },
+    { value: "אחר", label: `${t("other.1")}` },
   ];
   const rooms1 = [
-    { value: "1", label: "חדר אחד" },
-    { value: "1.5", label: "חדר וחצי" },
-    { value: "2", label: "2 חדרים" },
-    { value: "2.5", label: "2.5 חדרים" },
-    { value: "3", label: "3 חדרים" },
+    { value: "1", label: `${t("oneRoom.1")}` },
+    { value: "1.5", label: `1.5 ${t("rooms.1")}` },
+    { value: "2", label: `2 ${t("rooms.1")} ` },
+    { value: "2.5", label: `2.5 ${t("rooms.1")}` },
+    { value: "3", label: `3 ${t("rooms.1")}` },
   ];
   const rooms2 = [
-    { value: "3.5", label: "3.5 חדרים" },
-    { value: "4", label: "4 חדרים" },
-    { value: "4.5", label: "4.5 חדרים" },
-    { value: "5", label: "5 ומעלה" },
-    { value: "6", label: "חדר בדירת שותפים" },
+    { value: "3.5", label: `3.5 ${t("rooms.1")}` },
+    { value: "4", label: `4 ${t("rooms.1")}` },
+    { value: "4.5", label: `4.5 ${t("rooms.1")}` },
+    { value: "5", label: `5 ${t("rooms.1")}` },
+    { value: "6", label: `${t("roomate.1")}` },
   ];
 
   // Formik
@@ -129,13 +136,44 @@ const UploadAsset = (props) => {
     }`,
     email: `${updatedAsset ? `${updatedAsset.email}` : `${user.email}`}`,
     address: `${updatedAsset && `${updatedAsset.address}`}`,
+    englishAddress: `${updatedAsset && `${updatedAsset.englishAddress}`}`,
     price: `${updatedAsset && `${updatedAsset.price}`}`,
     images: `${updatedAsset && `${JSON.stringify(imagesArr)}`}`,
-    notes: `${updatedAsset && `${updatedAsset.notes}`}`,
-    description: `${updatedAsset && `${updatedAsset.description}`}`,
+    notes: `${
+      updatedAsset && updatedAsset.notes ? `${updatedAsset.notes}` : ""
+    }`,
+    englishNotes: `${
+      updatedAsset && updatedAsset.englishNotes
+        ? `${updatedAsset.englishNotes}`
+        : ""
+    }`,
+    description: `${
+      updatedAsset && updatedAsset.description
+        ? `${updatedAsset.description}`
+        : ""
+    }`,
+    englishDescription: `${
+      updatedAsset && updatedAsset.englishDescription
+        ? `${updatedAsset.englishDescription}`
+        : ""
+    }`,
   };
 
-  const validationSchema = assetValidationSchema;
+  const validationSchema = Yup.object({
+    owner: Yup.string().required(`${t("ownerNameError.1")}`),
+    email: Yup.string().required(`${t("ownerEmailError.1")}`),
+    phoneNumber: Yup.string().required(`${t("ownerNPhoneError.1")}`),
+    address: Yup.string()
+      .required(`${t("assetHebrewError.1")}`)
+      .test("isValid", "נא הכנס כתובת מלאה ותקינה", function(value) {
+        return getLocation(value);
+      }),
+    englishAddress: Yup.string().required(`${t("assetEnglishError.1")}`),
+
+    price: Yup.number().required(`${t("priceError.1")}`),
+    notes: Yup.string().max(40, `${t("notesError.1")}`),
+    notesEnglish: Yup.string().max(40, `${t("notesError.1")}`),
+  });
 
   // Handle the date state
   const handleEnterDateChange = (date) => setEnterDate(date);
@@ -309,13 +347,13 @@ const UploadAsset = (props) => {
   const checkIfSure = (whatType, values) => {
     setType(whatType);
     if (whatType === "upload") {
-      setModalMessage("האם אתה בטוח שברצונך להעלות את הנכס ?");
+      setModalMessage(`${t("areUsureUpload.1")}`);
       setFunctionToExcute(() => () => handeSubmit(values));
     } else if (whatType === "update") {
-      setModalMessage("האם אתה בטוח שברצונך לעדכן את הנכס ?");
+      setModalMessage(`${t("areUsureUpdate.1")}`);
       setFunctionToExcute(() => () => handeSubmit(values));
     } else if (whatType === "delete") {
-      setModalMessage("האם אתה בטוח שברצונך למחוק את הנכס ?");
+      setModalMessage(`${t("areUsureDelete.1")}`);
       setFunctionToExcute(() => () => deleteAsset());
     }
     setAreYouSureModal(true);
@@ -377,6 +415,7 @@ const UploadAsset = (props) => {
 
   return (
     <Grid
+      dir={dir}
       item
       xs={10}
       md={6}
@@ -385,7 +424,7 @@ const UploadAsset = (props) => {
       className={classes.formGrid}
     >
       {user.isVerified ? (
-        <div className={classes.paper}>
+        <div className={classes.paper} dir={dir}>
           <img
             src="https://static.crozdesk.com/web_app_library/providers/logos/000/005/518/original/easyrent-1559230516-logo.png?1559230516"
             width="100"
@@ -393,11 +432,19 @@ const UploadAsset = (props) => {
             crop="scale"
             alt="cart"
           />
-          <h5 className="signup_header">
-            שלום {user.firstname}, על מנת{" "}
-            {updatedAsset ? " לעדכן את הנכס הנבחר" : " להעלות נכס חדש לאתר"},
-            אנא מלא את הפרטים הבאים:
-          </h5>
+          {dir === "rtl" ? (
+            <h5 className="signup_header">
+              שלום {user.firstname}, על מנת{" "}
+              {updatedAsset ? " לעדכן את הנכס הנבחר" : " להעלות נכס חדש לאתר"},
+              אנא מלא את הפרטים הבאים:
+            </h5>
+          ) : (
+            <h5 className="signup_header">
+              Hello {user.firstname}, in order to{" "}
+              {updatedAsset ? " update the asset" : " upload new asset"} please
+              fill the details:
+            </h5>
+          )}
 
           <Formik
             initialValues={initialValues}
@@ -405,13 +452,13 @@ const UploadAsset = (props) => {
             enableReinitialize={true}
           >
             {(props) => (
-              <form className={classes.form} autoComplete="off">
+              <form className={classes.form} autoComplete="off" dir={dir}>
                 <TextField
                   className={classes.textField}
                   variant="outlined"
                   margin="normal"
                   fullWidth
-                  label=" * שם בעל הנכס "
+                  label={`*${t("ownerName.1")}`}
                   name="owner"
                   {...props.getFieldProps("owner")}
                   {...errorHelper(props, "owner")}
@@ -421,7 +468,7 @@ const UploadAsset = (props) => {
                   variant="outlined"
                   margin="normal"
                   fullWidth
-                  label="* מספר הטלפון של בעל הנכס "
+                  label={`*${t("phoneNumber.1")}`}
                   name="phoneNumber"
                   {...props.getFieldProps("phoneNumber")}
                   {...errorHelper(props, "phoneNumber")}
@@ -432,25 +479,38 @@ const UploadAsset = (props) => {
                   variant="outlined"
                   margin="normal"
                   fullWidth
-                  label="* כתובת אימייל ליצירת קשר "
+                  label={`*${t("email.1")}`}
                   name="email"
                   {...props.getFieldProps("email")}
                   {...errorHelper(props, "email")}
                 />
 
+                {/* Hebrew address */}
                 <TextField
                   className={classes.textField}
                   variant="outlined"
                   margin="normal"
                   fullWidth
-                  label="*כתובת הנכס "
+                  label={`*${t("hebrewAddress.1")}`}
                   name="address"
                   {...props.getFieldProps("address")}
                   {...errorHelper(props, "address")}
                   ref={addressRef}
                 />
+                {/* English address */}
+                <TextField
+                  className={classes.textField}
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  label={`*${t("englishAddress.1")}`}
+                  name="addressEnglish"
+                  {...props.getFieldProps("englishAddress")}
+                  {...errorHelper(props, "englishAddress")}
+                  ref={addressRef}
+                />
 
-                <label className="time_label">* הדירה היא למטרת:</label>
+                <label className="time_label">*{t("target.1")}:</label>
                 <RadioGroup
                   value={isSublet}
                   onChange={(e) => {
@@ -472,12 +532,12 @@ const UploadAsset = (props) => {
                   <FormControlLabel
                     value="1"
                     control={<Radio />}
-                    label="סאבלט"
+                    label={`${t("Sublet.1")}`}
                   />
                   <FormControlLabel
                     value="0"
                     control={<Radio />}
-                    label="השכרה"
+                    label={`${t("Rent.1")}`}
                   />
                 </RadioGroup>
 
@@ -485,20 +545,20 @@ const UploadAsset = (props) => {
                   <KeyboardDatePicker
                     className={classes.textField}
                     disablePast
-                    label="תאריך כניסה"
+                    label={`${t("enterdate.1")}`}
                     value={enterDate ? enterDate : null}
                     format="dd/MM/yyyy"
                     onChange={handleEnterDateChange}
-                    minDateMessage="תאריך הכניסה עבר"
+                    minDateMessage={`${t("enterdateError.1")}`}
                   />
                   <KeyboardDatePicker
                     className={classes.textField}
                     disablePast
-                    label="תאריך יציאה"
+                    label={`${t("exitdate.1")}`}
                     format="dd/MM/yyyy"
                     value={exitDate ? exitDate : null}
                     onChange={handleExitDateChange}
-                    minDateMessage="תאריך היציאה עבר"
+                    minDateMessage={`${t("exitdateError.1")}`}
                   />
                 </MuiPickersUtilsProvider>
 
@@ -508,25 +568,25 @@ const UploadAsset = (props) => {
                   variant="outlined"
                   margin="normal"
                   fullWidth
-                  label="* מחיר"
+                  label={`*${t("price.1")}`}
                   name="price"
                   {...props.getFieldProps("price")}
                   {...errorHelper(props, "price")}
                 />
-                <label className="time_label">* המחיר המצוין הוא:</label>
+                <label className="time_label">* {t("priceFor.1")}:</label>
                 <Tabs
                   value={timeValue}
                   onChange={handleTimeChange}
                   style={{ margin: "0px 10px" }}
                 >
-                  <Tab label="יומי" {...a11yProps(3)} />
-                  <Tab label="שבועי" {...a11yProps(2)} />
-                  <Tab label="חודשי" {...a11yProps(1)} />
-                  <Tab label="לכל התקופה" {...a11yProps(0)} />
+                  <Tab label={`${t("dayPrice.1")}`} {...a11yProps(3)} />
+                  <Tab label={`${t("weekPrice.1")}`} {...a11yProps(2)} />
+                  <Tab label={`${t("monthPrice.1")}`} {...a11yProps(1)} />
+                  <Tab label={`${t("allPeriodPrice.1")}`} {...a11yProps(0)} />
                 </Tabs>
 
                 {/* Area */}
-                <label className="time_label">* איזור:</label>
+                <label className="time_label">*{t("location.1")}:</label>
 
                 <Select
                   value={area}
@@ -537,20 +597,20 @@ const UploadAsset = (props) => {
                   fullWidth
                 >
                   <MenuItem value="0" disabled>
-                    אנא בחר איזור
+                    {t("enterArea.1")}
                   </MenuItem>
-                  {menuItem.map(({ value }, i) => (
+                  {menuItem.map(({ value, label }, i) => (
                     <MenuItem key={i} value={value}>
-                      {value}
+                      {label}
                     </MenuItem>
                   ))}
                 </Select>
                 <FormHelperText className={classes.helperText}>
-                  בחירת איזור תעלה את פופולריות הדירה שלך
+                  {t("enterAreahelperText.1")}
                 </FormHelperText>
 
                 {/* Number of rooms */}
-                <label className="time_label">* מספר החדרים בנכס:</label>
+                <label className="time_label">*{t("maxRooms.1")}:</label>
                 <RadioGroup
                   value={roomsValue}
                   onChange={(e) => setRoomsValue(e.target.value)}
@@ -577,36 +637,79 @@ const UploadAsset = (props) => {
                   </div>
                 </RadioGroup>
 
-                {/* Notes */}
-                <TextField
-                  className={classes.textField}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  label="הערות"
-                  name="notes"
-                  {...props.getFieldProps("notes")}
-                  {...errorHelper(props, "notes")}
-                />
-                <FormHelperText className={classes.helperText}>
-                  מומלץ לציין פרטים שחשוב לשים אליו לב אליהם, לדוגמה: גמישות
-                  בתאריכים
-                </FormHelperText>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: dir === "rtl" ? "column" : "column-reverse",
+                  }}
+                >
+                  {/*Hebrew Notes */}
+                  <TextField
+                    className={classes.textField}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    label={`${t("hebrewNotes.1")} :`}
+                    name="notes"
+                    {...props.getFieldProps("notes")}
+                    {...errorHelper(props, "notes")}
+                  />
+                  <FormHelperText className={classes.helperText}>
+                    {t("notesHelperText.1")}
+                  </FormHelperText>
 
-                {/* Description */}
-                <FormLabel className={classes.formLabel}>
-                  תיאור מפורט של הנכס:
-                </FormLabel>
-                <TextareaAutosize
-                  className={classes.textArea}
-                  rowsMin={3}
-                  placeholder="תיאור מפורט של הנכס(על השותפים בדירה, לאן הדירה קרובה, פרטים על החוזה,אופציות נוספות ליצירת קשר)"
-                  {...props.getFieldProps("description")}
-                  {...errorHelper(props, "description")}
-                />
+                  {/*English Notes */}
+                  <TextField
+                    className={classes.textField}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    label={`${t("englishNotes.1")} :`}
+                    name="englishNotes"
+                    {...props.getFieldProps("englishNotes")}
+                    {...errorHelper(props, "englishNotes")}
+                  />
+                  <FormHelperText className={classes.helperText}>
+                    {t("notesHelperText.1")}
+                  </FormHelperText>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: dir === "rtl" ? "column" : "column-reverse",
+                  }}
+                >
+                  {/* hebrew Description */}
+                  <div>
+                    <FormLabel className={classes.formLabel}>
+                      {t("hebrewDescription.1")}:
+                    </FormLabel>
+                    <TextareaAutosize
+                      className={classes.textArea}
+                      rowsMin={3}
+                      placeholder={`${t("descriptionHelperText.1")}`}
+                      {...props.getFieldProps("description")}
+                      {...errorHelper(props, "description")}
+                    />
+                  </div>
+                  <div>
+                    {/* english Description */}
+                    <FormLabel className={classes.formLabel}>
+                      {t("englishdescription.1")}:
+                    </FormLabel>
+                    <TextareaAutosize
+                      className={classes.textArea}
+                      rowsMin={3}
+                      placeholder={`${t("descriptionHelperText.1")}`}
+                      {...props.getFieldProps("englishDescription")}
+                      {...errorHelper(props, "englishDescription")}
+                    />
+                  </div>
+                </div>
 
                 {/* Image */}
-                <label className="time_label">* העלה תמונות של הנכס:</label>
+                <label className="time_label">* {t("images.1")}:</label>
 
                 <Input
                   multiple
@@ -627,20 +730,21 @@ const UploadAsset = (props) => {
                 >
                   <ImageIcon className="" />
                   <label htmlFor="file">
-                    {imageName ? `${imageName}  עלתה` : " העלה תמונה חדשה"}{" "}
+                    {imageName
+                      ? `${imageName} ${dir === "rtl" ? "עלתה" : "uploaded"}`
+                      : `${t("uploadNewImage.1")}`}{" "}
                   </label>
                 </Button>
                 <FormHelperText style={{ margin: "5px 9px 5px" }}>
-                  התמונות יוצגו באתר ברוחב של 600px ובגובה של 400px ,לכן אנו
-                  ממליצים לכם להעלות את התמונה בגודל זה. ניתן לבצע את שינוי גודל
-                  התמונה בקלות :{" "}
+                  {t("imagesHelperText.1")}
                   <a
                     style={{ color: "black" }}
                     href="https://www.iloveimg.com/resize-image"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    בקישור הבא
+                    {" "}
+                    {t("nextLink.1")}
                   </a>
                 </FormHelperText>
 
@@ -666,7 +770,7 @@ const UploadAsset = (props) => {
                         )
                       }
                     >
-                      לחץ למחיקה
+                      {dir === "rtl" ? "לחץ למחיקה" : "Delete"}
                     </button>
                   </div>
                 )}
@@ -699,6 +803,8 @@ const UploadAsset = (props) => {
                     props.values.owner &&
                     props.values.address &&
                     !props.errors.address &&
+                    props.values.englishAddress &&
+                    !props.errors.englishAddress &&
                     props.values.phoneNumber &&
                     imagesArr.length !== 0 &&
                     !buttonDisabled
@@ -716,7 +822,9 @@ const UploadAsset = (props) => {
                     )
                   }
                 >
-                  {updatedAsset ? "עדכן נכס" : "העלה נכס"}
+                  {updatedAsset
+                    ? `${t("updateProperty.1")}`
+                    : `${t("uploadProperty.1")}`}
                 </Button>
                 {updatedAsset && (
                   <Button
@@ -726,7 +834,7 @@ const UploadAsset = (props) => {
                     color="secondary"
                     onClick={() => checkIfSure("delete")}
                   >
-                    מחק נכס
+                    {t("deleteProperty.1")}
                   </Button>
                 )}
               </form>
@@ -746,7 +854,11 @@ const UploadAsset = (props) => {
       />
       <AssetDeletedModal
         DeletedmodalOpen={DeletedmodalOpen}
-        message={"הנכס נמחק מהאתר בהצלחה!"}
+        message={
+          dir === "rtl"
+            ? "הנכס נמחק מהאתר בהצלחה!"
+            : "The property deleted successfully"
+        }
       />
       <AreYouSureModal
         modalOpen={areYouSureModal}

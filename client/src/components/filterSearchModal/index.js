@@ -4,6 +4,8 @@ import { clearAssets, resetSkip } from "../../store/reducers/assets_reducer";
 import { filterAssets } from "../../store/actions/assets.thunk";
 import { setFilteredSearch } from "../../store/reducers/assets_reducer";
 import { toastify, numberWithCommas } from "../../utils/tools";
+// Translator
+import { useTranslation } from "react-i18next";
 // Components
 import Url from "../Url";
 // Bootstrap
@@ -69,6 +71,9 @@ const ShareModal = ({
     eight: false,
     nine: false,
   });
+  const dir = useSelector((state) => state.users.language.dir);
+  const { t, i18n } = useTranslation();
+
   const firstUpdate = useRef(true);
   const dispatch = useDispatch();
 
@@ -180,6 +185,11 @@ const ShareModal = ({
   };
 
   const handleClick = () => {
+    if (roomsValue.length === 0) {
+      return toastify("ERROR", `${t("notValidRooms.1")}`);
+    } else if (area.length === 0) {
+      return toastify("ERROR", `${t("notValidArea.1")}`);
+    }
     const filteredObj = {
       location: area.includes("הכל") ? "הכל" : area.join(","),
       price,
@@ -195,9 +205,9 @@ const ShareModal = ({
   // Make the filter
   const handleSubmit = async () => {
     if (roomsValue.length === 0) {
-      toastify("ERROR", "אנא סמן מספר חדרים");
+      toastify("ERROR", `${t("notValidRooms.1")}`);
     } else if (area.length === 0) {
-      toastify("ERROR", "אנא בחר איזור");
+      toastify("ERROR", `${t("notValidArea.1")}`);
     } else {
       const filterObj = {
         isSublet,
@@ -338,15 +348,18 @@ const ShareModal = ({
         show={modalOpen}
         onHide={handleClick}
         className={classes.root}
+        dir={dir}
       >
         <Modal.Header>
           <Modal.Title style={{ margin: "auto" }}>
-            <p> סנן את החיפוש </p>
+            <p> {t("filter.1")}</p>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form className={classes.form} autoComplete="off">
-            <label className="time_label">מספר החדרים בנכס:</label>
+          <form autoComplete="off">
+            <label className="time_label">
+              <p> {t("maxRooms.1")}:</p>
+            </label>
 
             <div className={classes.roomsTab}>
               <FormControlLabel
@@ -412,11 +425,11 @@ const ShareModal = ({
                     checked={isCheckboxDisabled}
                   />
                 }
-                label="הכל"
+                label={dir === "rtl" ? "הכל" : "all"}
               />
             </div>
 
-            <label className="time_label">איזור מבוקש :</label>
+            <label className="time_label">{t("location.1")}:</label>
 
             <div className={classes.areaTab}>
               <FormControlLabel
@@ -427,7 +440,7 @@ const ShareModal = ({
                     checked={areaCheckboxesChecked.one}
                   />
                 }
-                label="הצפון הישן"
+                label={t("oldNorth.1")}
                 className={classes.areaTabChild}
                 disabled={isAreaCheckboxDisabled}
               />
@@ -439,7 +452,7 @@ const ShareModal = ({
                     checked={areaCheckboxesChecked.two}
                   />
                 }
-                label="הצפון החדש"
+                label={t("newNorth.1")}
                 className={classes.areaTabChild}
                 disabled={isAreaCheckboxDisabled}
               />
@@ -451,7 +464,7 @@ const ShareModal = ({
                     checked={areaCheckboxesChecked.three}
                   />
                 }
-                label="לב העיר"
+                label={t("center.1")}
                 className={classes.areaTabChild}
                 disabled={isAreaCheckboxDisabled}
               />
@@ -463,7 +476,7 @@ const ShareModal = ({
                     checked={areaCheckboxesChecked.four}
                   />
                 }
-                label="שוק הכרמל"
+                label={t("cramelMarket.1")}
                 className={classes.areaTabChild}
                 disabled={isAreaCheckboxDisabled}
               />
@@ -475,7 +488,7 @@ const ShareModal = ({
                     checked={areaCheckboxesChecked.five}
                   />
                 }
-                label="יפו"
+                label={t("jaffa.1")}
                 className={classes.areaTabChildBig}
                 disabled={isAreaCheckboxDisabled}
               />
@@ -487,7 +500,7 @@ const ShareModal = ({
                     checked={areaCheckboxesChecked.seven}
                   />
                 }
-                label="רוטשילד"
+                label={t("rotchild.1")}
                 className={classes.areaTabChildBig}
                 disabled={isAreaCheckboxDisabled}
               />
@@ -500,7 +513,7 @@ const ShareModal = ({
                     checked={areaCheckboxesChecked.eight}
                   />
                 }
-                label="כרם התימנים"
+                label={t("cerem.1")}
                 className={classes.areaTabChildBig}
                 disabled={isAreaCheckboxDisabled}
               />
@@ -512,7 +525,7 @@ const ShareModal = ({
                     checked={areaCheckboxesChecked.nine}
                   />
                 }
-                label="פלורנטין"
+                label={t("florentin.1")}
                 className={classes.areaTabChildSmall}
                 disabled={isAreaCheckboxDisabled}
               />
@@ -525,13 +538,13 @@ const ShareModal = ({
                   />
                 }
                 className={classes.areaTabChildBig}
-                label="אחר"
+                label={t("other.1")}
                 disabled={isAreaCheckboxDisabled}
               />
               <FormControlLabel
                 control={<Checkbox onChange={handleAreaChange} name="הכל" />}
                 className={classes.areaTabChildSmall}
-                label="הכל"
+                label={t("all.1")}
                 checked={isAreaCheckboxDisabled}
               />
             </div>
@@ -540,17 +553,17 @@ const ShareModal = ({
                 <KeyboardDatePicker
                   className={classes.textField}
                   disablePast
-                  label="תאריך כניסה"
+                  label={t("enterdate.1")}
                   value={enterDate ? enterDate : null}
                   format="dd/MM/yyyy"
                   onChange={handleEnterDateChange}
-                  helperText="המערכת תציג לך דירות שתאריך הכניסה שלהם הוא שבועיים אחורה ושבועיים קדימה מהתאריך הנבחר"
+                  helperText={t("dateHelperText.1")}
                 />
               </MuiPickersUtilsProvider>
             </div>
 
             <label>
-              מחיר מקסימלי (לחודש שכירות) :
+              {t("maximumPricePerMonth.1")} :
               <span className="price_span"> ₪{numberWithCommas(price)}</span>
             </label>
             <Slider

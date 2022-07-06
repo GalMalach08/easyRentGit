@@ -24,7 +24,7 @@ let DEFAULT_USER_STATE = {
     justEntered: null,
   },
   auth: null,
-  language: { dir: "rtl" },
+  language: null,
 };
 
 export const usersSlice = createSlice({
@@ -41,8 +41,7 @@ export const usersSlice = createSlice({
       state.data.justEntered = null;
     },
     setLanguage: (state, action) => {
-      console.log(action);
-      state.language = action.payload;
+      state.language = { ...state.language, ...action.payload };
     },
   },
 

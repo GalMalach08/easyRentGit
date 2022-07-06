@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sendVerificationMail } from "../../store/actions/user.thunk";
 import { toastify } from "../../utils/tools";
-
+// Translator
+import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
 
 const NotVerified = () => {
   const user = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const dir = useSelector((state) => state.users.language.dir);
+  const { t } = useTranslation();
 
   const sendEmail = () => {
     setButtonDisabled(true);
@@ -16,7 +19,7 @@ const NotVerified = () => {
       .unwrap()
       .then(({ success }) => {
         if (success) {
-          toastify("SUCCESS", "נשלח אימייל לאימות לכתובת המייל שהזנת");
+          toastify("SUCCESS", `${t("verifyEmail.1")}`);
           setButtonDisabled(false);
         }
       });
@@ -34,7 +37,9 @@ const NotVerified = () => {
               variant="outline-light"
               onClick={() => sendEmail()}
             >
-              המשתמש לא מאומת לשליחת מייל חדש לחץ כאן
+              {dir === "rtl"
+                ? "המשתמש לא מאומת לשליחת מייל חדש לחץ כאן"
+                : "The account is not verified click here to send new email"}
             </Button>{" "}
           </div>
         </>

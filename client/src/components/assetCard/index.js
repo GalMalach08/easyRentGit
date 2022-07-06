@@ -25,6 +25,8 @@ import { Link } from "react-router-dom";
 import ShareIcon from "@material-ui/icons/Share";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
 import EditIcon from "@material-ui/icons/Edit";
+// Translator
+import { useTranslation } from "react-i18next";
 // Moment
 import moment from "moment";
 // Style
@@ -36,23 +38,44 @@ const AssetCard = ({ asset, assetPage }) => {
   const [dense, setDense] = useState(false);
   const user = useSelector((state) => state.users.data);
   const navigate = useNavigate();
+  const dir = useSelector((state) => state.users.language.dir);
+  const { t } = useTranslation();
 
   const chips = [
-    { label: "מבוקש", color: "primary" },
-    { label: asset.area, color: "secondary" },
-    { label: asset.isSublet ? "סאבלט" : "השכרה", color: "primary" },
+    { label: dir === "rtl" ? "מבוקש" : "most-wanted", color: "primary" },
+    {
+      label: asset.isSublet
+        ? dir === "rtl"
+          ? "סאבלט"
+          : "Sublet"
+        : dir === "rtl"
+        ? "השכרה"
+        : "Rent",
+    },
   ];
 
   // Caculate how much time has passed from the asset's publish
   const updatedOn = (date) => {
-    if (moment().diff(date, "days") === 0) return "עודכן היום";
-    else if (
+    if (moment().diff(date, "days") === 0) {
+      if (dir === "rtl") {
+        return "עודכן היום";
+      } else {
+        return "updated today";
+      }
+    } else if (
       moment().diff(date, "days") < 6 &&
       moment().diff(date, "days") > 11
-    )
-      return "עודכן לפני כשבוע";
-    else if (moment().diff(date, "days") > 11) return "עודכן לפני מעל לשבועיים";
-    else return `עודכן לפני ${moment().diff(date, "days")} ימים`;
+    ) {
+      if (dir === "rtl") return "עודכן לפני כשבוע";
+      else return "updated one week ago";
+    } else if (moment().diff(date, "days") > 11) {
+      if (dir === "rtl") return "עודכן לפני מעל לשבועיים";
+      else return "updated more than 2 weeks ago";
+    } else {
+      if (dir === "rtl")
+        return `עודכן לפני ${moment().diff(date, "days")} ימים`;
+      else return `update before  ${moment().diff(date, "days")} days`;
+    }
   };
 
   // Move to the edit asset page
@@ -95,7 +118,19 @@ const AssetCard = ({ asset, assetPage }) => {
                   <div className="asset_price">
                     <div style={{ display: "flex" }}>
                       <h3>₪{numberWithCommas(asset.price)}</h3>
-                      <h3>{asset.pricePer}</h3>
+                      <h3>
+                        {dir === "rtl"
+                          ? asset.pricePer
+                          : asset.pricePer === "לכל התקופה"
+                          ? "For all period"
+                          : asset.pricePer === "לחודש"
+                          ? "For month"
+                          : asset.pricePer === "לשבוע"
+                          ? "For week"
+                          : asset.pricePer === "ליום"
+                          ? "For day"
+                          : null}
+                      </h3>
                     </div>
                     <div className="asset_icons">
                       <span
@@ -129,7 +164,13 @@ const AssetCard = ({ asset, assetPage }) => {
                     </Avatar>{" "}
                   </ListItemAvatar>
                   <ListItemText>
-                    <h6 className="asset_address">{asset.address}</h6>
+                    <h6
+                      className={
+                        dir === "rtl" ? "asset_address_hebrew" : "asset_address"
+                      }
+                    >
+                      {dir === "rtl" ? asset.address : asset.englishAddress}
+                    </h6>
                   </ListItemText>
                 </ListItem>
 
@@ -144,10 +185,12 @@ const AssetCard = ({ asset, assetPage }) => {
                     <div className="asset_price">
                       <p>
                         {asset.roomsNumber === "1"
-                          ? "חדר אחד"
+                          ? `${t("oneroom.1")}`
                           : asset.roomsNumber === "חדר בדירת שותפים"
-                          ? "חדר בדירת שותפים"
-                          : `${asset.roomsNumber} חדרים`}
+                          ? `${t("roomate.1")}`
+                          : `${asset.roomsNumber} ${
+                              dir === "rtl" ? "חדרים" : "rooms"
+                            }`}
                       </p>
                     </div>
                   </ListItemText>
@@ -165,11 +208,22 @@ const AssetCard = ({ asset, assetPage }) => {
                   </ListItemAvatar>
                   <ListItemText>
                     {asset.isSublet ? (
-                      <p className="asset_enter">
+                      <p
+                        className={`${
+                          dir === "rtl" ? "asset_enter_hebrew" : "asset_enter"
+                        }`}
+                      >
                         {asset.exitDate} - {asset.enterDate}
                       </p>
                     ) : (
-                      <p className="asset_enter">כניסה ב{asset.enterDate}</p>
+                      <p
+                        className={`${
+                          dir === "rtl" ? "asset_enter_hebrew" : "asset_enter"
+                        }`}
+                      >
+                        {dir === "rtl" ? "כניסה ב" : "enter in "}
+                        {asset.enterDate}
+                      </p>
                     )}
                   </ListItemText>
                 </ListItem>
@@ -181,7 +235,11 @@ const AssetCard = ({ asset, assetPage }) => {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText>
-                    <p className="asset_updatedOn">
+                    <p
+                      className={`${
+                        dir === "rtl" ? "asset_enter_hebrew" : "asset_enter"
+                      }`}
+                    >
                       {updatedOn(asset.updatedOn)}
                     </p>
                   </ListItemText>
@@ -195,15 +253,29 @@ const AssetCard = ({ asset, assetPage }) => {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText>
-                  <p className="asset_enter">
-                    {asset.notes ? asset.notes : "אין הערות"}
+                  <p
+                    className={`${
+                      dir === "rtl" ? "asset_enter_hebrew" : "asset_enter"
+                    }`}
+                  >
+                    {asset.notes
+                      ? dir === "rtl"
+                        ? asset.notes
+                        : asset.englishNotes
+                      : dir === "rtl"
+                      ? "אין הערות"
+                      : "No notes"}
                   </p>
                 </ListItemText>
               </ListItem>
             </List>
 
             {/* Chips */}
-            <p className="asset_labels">
+            <p
+              className={`${
+                dir === "rtl" ? "asset_labels_hebrew" : "asset_labels"
+              }`}
+            >
               {chips.map((chip, i) => (
                 <Chip
                   key={i}

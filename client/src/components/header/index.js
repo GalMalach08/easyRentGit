@@ -108,10 +108,10 @@ const TopNavBar = () => {
                     {t("QandA.1")}
                   </NavLink>
                 </Nav>
-                <LanguageAvatar changeSiteLanguage={changeSiteLanguage} />
               </Navbar.Collapse>
             </>
           ) : null}
+          <LanguageAvatar changeSiteLanguage={changeSiteLanguage} />
         </Navbar>
       </div>
     </>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, BrowserRouter, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import { setLanguage } from "./store/reducers/users_reducer";
 import AuthGuard from "./components/hoc/authGaurd";
 import { isAuth } from "./store/actions/user.thunk";
 import { Loader } from "./utils/tools";
@@ -28,6 +28,10 @@ import {
 import { CustomTheme } from "./utils/tools";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { createTheme } from "@material-ui/core/styles";
+
+// Translator
+import { useTranslation } from "react-i18next";
 
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -36,10 +40,17 @@ const Router = () => {
   const [loading, setLoading] = useState(true);
 
   const user = useSelector((state) => state.users);
+  const language = useSelector((state) => state.users.language);
+
   const dispatch = useDispatch();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     dispatch(isAuth());
+    const lang = localStorage.getItem("i18nextLng");
+    const direction = lang === "he" ? "rtl" : "ltr";
+    dispatch(setLanguage({ dir: direction }));
+    i18n.changeLanguage(lang);
   }, [dispatch]);
 
   useEffect(() => {
@@ -47,6 +58,10 @@ const Router = () => {
       setLoading(false);
     }
   }, [user]);
+
+  const CustomTheme = createTheme({
+    direction: language ? language.dir : "rtl",
+  });
 
   return (
     <>

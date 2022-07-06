@@ -13,6 +13,9 @@
   margin: 20px;
   text-align: center;
 }
+.signinHeader {
+  margin:10px 0px 20px;
+}
 
 .divs {
   background-color: red;
@@ -124,7 +127,7 @@
   background: #e74b37;
 }
 .error {
-  text-align: right;
+
   margin-top: 5px;
   font-size: 0.75rem;
 }

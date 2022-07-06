@@ -23,7 +23,10 @@
         "1": "On the website you will find hundreds of apartments that are updated daily."
     },
     "homePageDesc2": {
-        "1": "We invite you to use our filtered search to see only The apartments that are relevant to you and register on the site in order to stay updated And be the first to receive updates on the hottest apartments"
+        "1": "We invite you to use our filtered search to see only the apartments that are relevant to you and register on the site in order to stay updated and be the first to receive the updates about the hottest apartments."
+    },
+    "fliterboxTitle": {
+        "1": "You are watching filtered results"
     },
     "homePageDesc3": {
         "1": "An apartment owner ? Register and upload your apartment to the site so you can rent out Your apartment easily and efficientlys"
@@ -31,17 +34,350 @@
     "havefun": {
         "1": "Have Fun"
     },
-    "homePageDesc2": {
-        "1": "We invite you to use our filtered search to see only The apartments that are relevant to you and register on the site in order to stay updated And be the first to receive updates on the hottest apartments"
+    "location": {
+        "1": "Location"
     },
-    "homePageDesc2": {
-        "1": "We invite you to use our filtered search to see only The apartments that are relevant to you and register on the site in order to stay updated And be the first to receive updates on the hottest apartments"
+    "maxPrice": {
+        "1": "Maximum price per month"
     },
-    "homePageDesc2": {
-        "1": "We invite you to use our filtered search to see only The apartments that are relevant to you and register on the site in order to stay updated And be the first to receive updates on the hottest apartments"
+    "maxRooms": {
+        "1": "Number of rooms"
     },
-    "homePageDesc2": {
-        "1": "We invite you to use our filtered search to see only The apartments that are relevant to you and register on the site in order to stay updated And be the first to receive updates on the hottest apartments"
+    "dates": {
+        "1": "Enter range dates"
+    },
+    "oneAptFound":{
+        "1":"One apartment found matching your search"
+    },
+    "resetFilter":{
+        "1":"Reset filters"
+    },
+    "changeFilter":{
+        "1":"Change Filters"
+    },
+    "oneroom":{
+        "1":"One room"
+    },
+    "roomate":{
+        "1":"Room in shared aparment"
+    },
+    "noassets" :{
+        "1":"To continue looking for more properties reset the filter or change it In the panel that appears above"
+    },
+    "loadmore": {
+        "1":"Load more"
+    },
+    "filter":{
+        "1":"Filter your search"
+    },
+    "oldNorth": {
+        "1":"The old north"
+    },
+    "newNorth": {
+        "1":"The new north"
+    },
+    "center": {
+        "1":"Center"
+    },
+    "cramelMarket": {
+        "1":"The carmel market"
+    },
+    "jaffa": {
+        "1":"Jaffa"
+    },
+    "rotchild": {
+        "1":"Rotchild"
+    },
+
+    "cerem": {
+        "1":"The cerem"
+    },
+
+    "florentin": {
+        "1":"Florentin"
+    },
+    "other": {
+        "1":"Other"
+    },
+    "all" : {
+        "1":"all"
+    },
+    "enterdate":{
+        "1":"Enter date"
+    },
+    "enterdateError":{
+        "1":"The enter date has passed"
+    },
+    "exitdate":{
+        "1":"Exit date"
+    },
+    "exitdateError":{
+        "1":"The exit date has passed"
+    },
+    "enterArea":{
+        "1":"Please enter area"
+    },
+    "enterAreahelperText":{
+        "1":"Choosing an area will increase the popularity of your apartment"
+    },
+    
+    "dateHelperText":{
+        "1":"The system will show you apartments whose entry date is two weeks back and two weeks ahead of the selected date"
+    },
+    "maximumPricePerMonth":{
+        "1":"Maximum price (per month)"
+    },
+    "ownerName":{
+        "1":"Owner name"
+    },
+    "phoneNumber":{
+        "1":"phone number"
+    },
+    "email":{
+        "1":"Email"
+    },
+    "password":{
+        "1":"password"
+    },
+    "confirmPassword":{
+        "1":"confirm password"
+    },
+    "hebrewAddress":{
+        "1":"Address in hebrew"
+    },
+    "englishAddress":{
+        "1":"Address"
+    },
+    "hebrewNotes":{
+        "1":"Notes in hebrew"
+    },
+    "englishNotes":{
+        "1":"Notes"
+    },
+    "target":{
+        "1":"Target"
+    },
+    "price":{
+        "1":"Price"
+    },
+    "priceFor":{
+        "1": "The mentioned price is for"
+    },
+    "dayPrice":{
+        "1":"One day"
+    },
+    "weekPrice":{
+        "1":" week"
+    },
+    "monthPrice":{
+        "1":" month"
+    },
+    "allPeriodPrice":{
+        "1":" all period"
+    },
+    "notes":{
+        "1":"Notes"
+    },
+    "notesHelperText":{
+        "1":"It is advisable to note details that are important to pay attention to, for example: flexibility On dates"
+    },
+    "englishdescription":{
+        "1":"Detailed description of the property"
+    },
+    "hebrewDescription":{
+        "1":"Detailed description of the property in hebrew "
+    },
+   
+    "descriptionHelperText":{
+        "1":"Detailed description of the property (about the partners in the apartment, to where the apartment is close, details of the contract, additional contact options)"
+    },
+    "images":{
+        "1":"Upload photos of the property"
+    },
+    "imagesHelperText":{
+        "1":"The images will be displayed on the site at a width of 600px and a height of 400px, so we We recommend that you upload the image in this size. You can resize Image easily"
+    },
+    "oneRoom" : {
+        "1":"One room"
+    },
+    "rooms":{
+        "1":"room"
+    },
+    "uploadNewImage":{
+        "1":"Upload new image"
+    },
+    "nextLink":{
+        "1":"Here"
+    },
+    "updateProperty":{
+        "1": "Update Property"
+    },
+    "uploadProperty":{
+        "1": "Updload Property"
+    },
+    "deleteProperty":{
+        "1": "Delete Property"
+    },
+    "approve":{
+        "1": "Approve"
+    },
+    "upload":{
+        "1": "Approve"
+    },
+    "update":{
+        "1": "Update"
+    },
+    "delete":{
+        "1": "Delete"
+    },
+    "back":{
+        "1":"Back"
+    },
+    "areUsureUpload":{
+        "1":"Are you sure you want to upload the property ?"
+    },
+    "areUsureUpdate":{
+        "1":"Are you sure you want to update the property ?"
+    },
+    "areUsureDelete":{
+        "1":"Are you sure you want to delete the property ?"
+    },
+    "whoDesc": {
+        "1":"My name is Gal Malach and I am the founder of EasyRent. The site was established in 2022 due to the plight of many people to find suitable housing in Tel Aviv.",
+        "2":"Who am I ?"
+    },
+    "advantageDesc": {
+        "1":"Possibility to upload properties to the site yourself",
+        "2":"Possibility to talk to our digital assistant, with the help of which you can mark your preferences for finding an apartment and we will make sure to update you first when a relevant apartment comes up.",
+        "3":"What are the benefits of opening a user?"
+    },
+    "howToUpload":{
+        "1":"When you open a user, a tab will be added to the navigation menu called Property Upload. You will then need to fill out a short form showing your apartment and it will be sent for system approval. If the apartment is approved, it will be uploaded to the website and you will receive a notification by e-mail with which you registered. From there, the road to renting the property is shorter than ever!",
+        "2":"How to upload a new property to the site ?"
+    },
+    "howToContact":{
+        "1":"Through our email: galmalach2@gmail.com",
+        "2":"Through our WhatsApp: 050-592-0062",
+        "3":"How do you get in touch?"
+    },
+    "moreDetails":{
+        "1":"More details"
+    },
+    "ownerNameError":{
+        "1":"Name is mandatory"
+    },
+    "ownerEmailError":{
+        "1":" Email is mandatory"
+    },
+    "ownerNPhoneError":{
+        "1":"Phone is mandatory"
+    },
+    "assetHebrewError":{
+        "1":"The address of the property in hebrew is mandatory"
+    },
+    "assetEnglishError":{
+        "1":"The address of the property in english is mandatory"
+    },
+    
+    "priceError":{
+        "1":"The price is mandatory"
+    },
+    "notesError":{
+        "1":"Maximum 40 characters, full description in the next field"
+    },
+    "addressError":{
+        "1":"Please insert valid address"
+    },
+    "login": {
+        "1":"log in"
+    },
+    "passwordError":{
+        "1":"Password is mandatory"
+    },
+    "passwordMinError":{
+        "1":"Min 6 characters"
+    },
+    "confirmpasswordError":{
+        "1":"Please verify the password"
+    },
+    "confirmpasswordError1":{
+        "1":"Incompatible passwords"
+    },
+    "notHasUser": {
+        "1":"You dont have user? sign up"
+    },
+    "forgotPassword":{
+        "1":"I forgot my password"
+    },
+    "loginTitle":{
+        "1":"Log in"
+    },
+    "ownerEmailTypeError":{
+        "1":"Please insert valid email"
+    },
+    "userIsEcxistWithGoogle":{
+        "1": "This user is linked to a Google Account, in order to log in click on the 'Log in via Google' button on the login page"
+    },
+    "userNotFound":{
+        "1":"No user was found with this email"
+    },
+    "signUpTitle":{
+        "1":"Sign up"
+    },
+    "firstname":{
+        "1":"First name"
+    },
+    "firstnameError":{
+        "1":"First name is mandatory"
+    },
+    
+    "lastname":{
+        "1":"Fast name"
+    },
+    "lastnameError":{
+        "1":"Last name is mandatory"
+    },
+    "preferredLang":{
+        "1":"Preffered language"
+    },
+    "notValidPhone":{
+        "1":"Please enter valid phone number"
+    },
+    "notValidRooms":{
+        "1":"Please enter numbers of rooms"
+    },
+    "notValidArea":{
+        "1":"Please choose area"
+    },
+    "verifyEmail":{
+        "1":"Verification email sent to the email address you entered"
+    },
+    "emailHasVerified":{
+        "1":"The user verified successfully"
+    },
+    "signInMessageError": {
+        "1":"Username or password incorrect"
+    },
+    "signUpMessageError": {
+        "1":"Email already in use"
     }
 
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
 }
+

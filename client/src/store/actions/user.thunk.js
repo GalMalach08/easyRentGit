@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { toastify } from "../../utils/tools";
 import { getAuthHeader, getTokenCookie } from "../../utils/tools";
 // Sign in user
 export const signinUser = createAsyncThunk(
@@ -20,7 +19,6 @@ export const signinUser = createAsyncThunk(
           auth: true,
         };
       } else {
-        toastify("ERROR", message);
         return {
           data: null,
           auth: false,
@@ -70,8 +68,7 @@ export const registerUser = createAsyncThunk(
         auth: true,
       };
     } else {
-      toastify("ERROR", message);
-      return { data: null, auth: false };
+      return { data: null, auth: false, message };
     }
   }
 );

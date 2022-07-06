@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 // React router dom
 import { useParams } from "react-router-dom";
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getAssetById,
   approveAssetById,
@@ -16,9 +16,10 @@ import AssetDeletedModal from "../uploadAsset/AssetDeltedModal";
 import AreYouSureModal from "../areYouSureModal";
 // Utils
 import { Loader } from "../../utils/tools";
+// Translator
+import { useTranslation } from "react-i18next";
 // Material ui
 import { Grid, Grow } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import FacebookIcon from "@material-ui/icons/Facebook";
 // React bootstrap
 import { Button } from "react-bootstrap";
@@ -46,6 +47,8 @@ const Asset = () => {
   const params = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
+  const dir = useSelector((state) => state.users.language.dir);
+  const { t } = useTranslation();
   const { id } = params;
 
   // Open modal that checks if the user sure about the action
@@ -112,24 +115,34 @@ const Asset = () => {
   }, []);
 
   // Make the text for the whatsapp button
-  const createMarkup = () => {
+  const createMarkup = useMemo(() => {
     return {
-      __html: `<img src="https://www.herzog.ac.il/wp-content/uploads/2017/11/whatsapp-icon-logo-vector.png" width:"25px" height="25px"/> &nbsp;&nbsp;צור קשר עם ${asset.owner} בווצאפ `,
+      __html: `<img src="https://www.herzog.ac.il/wp-content/uploads/2017/11/whatsapp-icon-logo-vector.png" width:"25px" height="25px"/> 
+      &nbsp;&nbsp;${
+        dir === "rtl"
+          ? `צור קשר עם ${asset.owner} בווצאפ`
+          : `Contact ${asset.owner} via whatsapp`
+      } `,
     };
-  };
+  }, [dir, asset.owner]);
 
   return (
     <div>
       {!loading ? (
-        <Grid container>
+        <Grid container dir={dir}>
           {asset && (
             <Grow in={true} timeout={700} key={asset.id}>
               <Grid item xs={12} className={classes.root}>
                 <AssetCard asset={asset} assetPage={true} />
                 {/* More details  */}
-                <div className="more_details">
-                  <h4>פרטים נוספים</h4>
-                  <p>{asset.description}</p>
+                <div className="more_details" dir={dir}>
+                  <h4>{t("moreDetails.1")}</h4>
+
+                  {dir === "rtl" ? (
+                    <p> {asset.description} </p>
+                  ) : (
+                    <p>{asset.englishDescription} </p>
+                  )}
                 </div>
                 {/* Whatsapp */}
                 <div className="contact_btn_div">
@@ -137,7 +150,7 @@ const Asset = () => {
                     <ReactWhatsapp
                       number={`+972-${asset.userId.phoneNumber}`}
                       message={`היי ${asset.userId.firstname}, אני מעוניין בדירה שפרסמת ברחוב ${asset.address},האם עוד רלוונטי  ?`}
-                      dangerouslySetInnerHTML={createMarkup()}
+                      dangerouslySetInnerHTML={createMarkup}
                       className="ip-add-cart whatsapps"
                     />
                   </div>
@@ -149,7 +162,9 @@ const Asset = () => {
                       appId="111391301676"
                     >
                       <FacebookIcon className={classes.icon} />
-                      צור קשר עם {asset.owner} בפייסבוק
+                      {dir === "rtl"
+                        ? `צור קשר עם ${asset.owner} בפייסבוק`
+                        : `Contact ${asset.owner} via facebook`}
                     </FacebookMessengerShareButton>
                   </button>
                 </div>

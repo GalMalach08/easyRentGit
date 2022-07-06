@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 // Bootstrap
 import Modal from "react-bootstrap/Modal";
-
+// Translator
+import { useTranslation } from "react-i18next";
 // Target of the component - open a modal that assure that the user intrested to continue with the action (delete,updateor add) asset
 const AreYouSureModal = ({
   modalOpen,
@@ -14,10 +15,13 @@ const AreYouSureModal = ({
   modalType,
 }) => {
   const user = useSelector((state) => state.users.data);
+  const dir = useSelector((state) => state.users.language.dir);
+  const { t } = useTranslation();
 
   return (
     <>
       <Modal
+        dir={dir}
         size="md"
         centered
         show={modalOpen}
@@ -31,7 +35,11 @@ const AreYouSureModal = ({
               margin: "auto",
             }}
           >
-            <p>שלום {user.firstname} !</p>
+            {dir === "rtl" ? (
+              <p>שלום {user.firstname} !</p>
+            ) : (
+              <p>Hello {user.firstname} !</p>
+            )}
 
             <h5>{message}</h5>
           </Modal.Title>
@@ -53,12 +61,12 @@ const AreYouSureModal = ({
             }}
           >
             {modalType === "approve"
-              ? "אשר"
+              ? `${t("approve.1")}`
               : modalType === "upload"
-              ? "אישור"
+              ? `${t("upload.1")}`
               : modalType === "update"
-              ? "עדכן"
-              : "מחק"}
+              ? `${t("update.1")}`
+              : `${t("delete.1")}`}
           </Button>
           <Button
             className="m-3"
@@ -66,7 +74,7 @@ const AreYouSureModal = ({
             size="lg"
             onClick={() => setModalOpen(false)}
           >
-            חזור
+            {t("back.1")}
           </Button>
         </Modal.Body>
       </Modal>

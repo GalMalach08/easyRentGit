@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 // Redux
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   signinUser,
   signinUserByGoogle,
   registerUser,
 } from "../../store/actions/user.thunk";
 // Formik
-import { errorHelper, signinValidationSchema } from "../../utils/formik";
+import { errorHelper } from "../../utils/formik";
 import { useFormik } from "formik";
+import * as Yup from "yup";
+
 // Components
 import EmailStepper from "./emailStepper";
 // import Url from "../Url";
 // Packages
 import GoogleLogin from "react-google-login";
-// import FacebookLogin from "react-facebook-login";
+// Translator
+import { useTranslation } from "react-i18next";
 // Material ui
 import {
   Grid,
@@ -36,6 +39,7 @@ import Modal from "react-bootstrap/Modal";
 // Style
 import "./style.css";
 import { makeStyles } from "@material-ui/core/styles";
+import { toastify } from "../../utils/tools";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "50px auto 10px ",
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    margin: theme.spacing(2, 4, 4),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -80,6 +84,9 @@ const SignIn = (props) => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [emailModal, setEmailModal] = useState(false);
   const [googleButtonDisabled, setGoogleButtonDisabled] = useState(false);
+  const dir = useSelector((state) => state.users.language.dir);
+
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -87,7 +94,12 @@ const SignIn = (props) => {
   // Formik
   const formik = useFormik({
     initialValues: { email: "", password: "" },
-    validationSchema: signinValidationSchema,
+    validationSchema: Yup.object({
+      email: Yup.string().required(`${t("ownerEmailError.1")}`),
+      password: Yup.string()
+        .required(`${t("passwordError.1")}`)
+        .min(6, `${t("passwordMinError.1")}`),
+    }),
     onSubmit: (values, { resetForm }) => {
       loginUser(values);
     },
@@ -109,6 +121,8 @@ const SignIn = (props) => {
         .then(({ data }) => {
           if (data) {
             navigate(prevUrl);
+          } else {
+            toastify("ERROR", `${t("signInMessageError.1")}`);
           }
           setButtonDisabled(false);
         });
@@ -116,50 +130,6 @@ const SignIn = (props) => {
       console.error(error);
     }
   };
-
-  // Facebook login
-  // const responseFacebook = async (facebookRes) => {
-  //   const { id, email, name } = facebookRes;
-  //   const firstname = name.split(" ")[0];
-  //   const lastname = name.split(" ")[1];
-
-  //   const response = await fetch(`${Url}/user/isexcist`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ facebookId: id, googleId: null }),
-  //   });
-  //   const { success, user } = await response.json();
-  //   if (success) {
-  //     localStorage.setItem("user", JSON.stringify(user));
-  //     // dispatch(setIsAuth(true));
-  //     navigate(prevUrl);
-  //   } else {
-  //     const newUserObj = {
-  //       email,
-  //       firstname,
-  //       lastname,
-  //       facebookId: id,
-  //     };
-  //     const response = await fetch(`${Url}/user/signup`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ ...newUserObj }),
-  //     });
-  //     const { user, message } = await response.json();
-  //     if (user) {
-  //       localStorage.setItem("user", JSON.stringify(user));
-  //       //  dispatch(setIsAuth(true));
-  //       navigate(prevUrl);
-  //     } else {
-  //       setMessage(message);
-  //       setOpenAlert(true);
-  //     }
-  // }
-  // };
 
   // Google login
   const responseGoogle = async (googleRes) => {
@@ -195,7 +165,7 @@ const SignIn = (props) => {
 
   return (
     <>
-      <Grid container className={classes.root}>
+      <Grid container className={classes.root} dir={dir}>
         {/* Form grid */}
         <Grid
           item
@@ -213,7 +183,8 @@ const SignIn = (props) => {
               crop="scale"
               alt="cart"
             />
-            <h4 className="signup_header">דף התחברות</h4>
+
+            <h4 className="signinHeader">{t("loginTitle.1")}</h4>
             <form
               className={classes.form}
               onSubmit={formik.handleSubmit}
@@ -224,7 +195,7 @@ const SignIn = (props) => {
                 variant="outlined"
                 margin="normal"
                 fullWidth
-                label="אימייל"
+                label={`${t("email.1")}`}
                 name="email"
                 {...formik.getFieldProps("email")}
                 {...errorHelper(formik, "email")}
@@ -249,7 +220,7 @@ const SignIn = (props) => {
                 margin="normal"
                 fullWidth
                 name="password"
-                label="סיסמה"
+                label={`${t("password.1")}`}
                 type={showPassword ? "text" : "password"}
                 {...formik.getFieldProps("password")}
                 {...errorHelper(formik, "password")}
@@ -298,9 +269,9 @@ const SignIn = (props) => {
                 fullWidth
               >
                 {" "}
-                התחבר{" "}
+                {t("login.1")}
               </Button>
-              <GoogleLogin
+              {/* <GoogleLogin
                 render={(renderProps) => (
                   <>
                     <button
@@ -318,12 +289,12 @@ const SignIn = (props) => {
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
-              />
+              /> */}
 
               <Grid container>
                 <Grid item>
                   <Link to="/signup" variant="body2">
-                    אין לך משתמש באתר? עבור לדף הרשמה
+                    {t("notHasUser.1")}
                   </Link>
                 </Grid>
                 <Grid container>
@@ -333,7 +304,7 @@ const SignIn = (props) => {
                       variant="body2"
                       onClick={() => openModal()}
                     >
-                      שכחתי את הסיסמה
+                      {t("forgotPassword.1")}
                     </Link>
                   </Grid>
                 </Grid>
@@ -343,12 +314,21 @@ const SignIn = (props) => {
         </Grid>
 
         {/* Modal */}
-        <Modal size="lg" centered show={emailModal} onHide={closeModal}>
+        <Modal
+          size="lg"
+          centered
+          show={emailModal}
+          onHide={closeModal}
+          dir={dir}
+        >
           <Modal.Header style={{ display: "flex", justifyContent: "center" }}>
             {" "}
             <Modal.Title>
               {" "}
-              <h4> עדכן את הסיסמה שלך </h4>
+              <h4>
+                {" "}
+                {dir === "rtl" ? "עדכן את הסיסמה שלך" : "Update your password"}
+              </h4>
             </Modal.Title>{" "}
           </Modal.Header>
           <Modal.Body>

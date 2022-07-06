@@ -26,6 +26,8 @@ const NotApprovedAssets = (props) => {
   const user = useSelector((state) => state.users.data);
   const loading = useSelector((state) => state.assets.loading);
   const assets = useSelector((state) => state.assets.data);
+  const dir = useSelector((state) => state.users.language.dir);
+  console.log(assets);
   const dispatch = useDispatch();
   const classes = useStyles();
   // const [assets, setAssets] = useState("");
@@ -40,7 +42,7 @@ const NotApprovedAssets = (props) => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container" dir={dir}>
       {loading ? (
         <Loader />
       ) : (
@@ -54,15 +56,19 @@ const NotApprovedAssets = (props) => {
           ))}
           {assets.length === 0 && (
             <div className="container m-auto mt-5">
-              <Alert variant="success">
-                <Alert.Heading>שלום {user.firstname}</Alert.Heading>
-                <p>אין נכסים לבדיקה נכון לזמן זה</p>
-                <hr />
-                <p className="mb-0">
-                  על מנת להעלות נכס חדש לאתר
-                  <span className="click_here">לחץ כאן</span>
-                </p>
-              </Alert>
+              {dir === "rtl" ? (
+                <Alert variant="success">
+                  <Alert.Heading>שלום {user.firstname}</Alert.Heading>
+                  <p>אין נכסים לבדיקה נכון לזמן זה</p>
+                  <hr />
+                </Alert>
+              ) : (
+                <Alert variant="success">
+                  <Alert.Heading>Hello {user.firstname}</Alert.Heading>
+                  <p>There is no propery to check at this point.</p>
+                  <hr />
+                </Alert>
+              )}
             </div>
           )}
         </Grid>

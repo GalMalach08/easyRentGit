@@ -4,15 +4,17 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { Loader } from "../../utils/tools";
 import { verifyUserEmail } from "../../store/actions/user.thunk";
 import { toastify } from "../../utils/tools";
+// Translator
+import { useTranslation } from "react-i18next";
+
 const Varification = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useSearchParams();
   const navigate = useNavigate();
   const token = search.get("t");
-
+  const { t } = useTranslation();
   useEffect(() => {
     if (token) {
-      console.log(token);
       dispatch(verifyUserEmail(token))
         .unwrap()
         .then(({ verified, message }) => {
@@ -22,7 +24,7 @@ const Varification = () => {
             if (message) {
               toastify("SUCCESS", message);
             } else {
-              toastify("SUCCESS", "המשתמש אומת בהצלחה");
+              toastify("SUCCESS", `${t("emailHasVerified.1")}`);
             }
           }
         });

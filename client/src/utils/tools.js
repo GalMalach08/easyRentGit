@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import cookie from "react-cookies";
-import { createTheme } from "@material-ui/core/styles";
 
 import "./tools.css";
 const API_KEY = "AIzaSyAR_O7jPWJ4PerXuIKr1ioZI-IzuTVNxNs";
@@ -62,10 +61,6 @@ export const getLocation = async (address) => {
   if (results.length === 0) return false;
   else return true;
 };
-
-export const CustomTheme = createTheme({
-  direction: "rtl",
-});
 
 // Making avatar name
 export const userAvatarName = (fName, lName) => {

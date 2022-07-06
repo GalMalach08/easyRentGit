@@ -18,6 +18,8 @@ const NotRelvantModal = ({
   const [textValue, setTextValue] = useState("");
   const [error, setError] = useState("");
   const user = useSelector((state) => state.users.data);
+  const dir = useSelector((state) => state.users.language.dir);
+
   const dispatch = useDispatch();
   // Find errors in input
   const findError = (e) => {
@@ -42,7 +44,12 @@ const NotRelvantModal = ({
       .then(({ request }) => {
         if (request) {
           setNotRelevantModal(false);
-          toastify("SUCCESS", "תודה! פנייתך נרשמה במערכת ותטופל בהקדם");
+          toastify(
+            "SUCCESS",
+            dir === "rtl"
+              ? "תודה! פנייתך נרשמה במערכת ותטופל בהקדם"
+              : "Thanks! Your request has been registered in the system and will be processed soon"
+          );
         }
       });
   };

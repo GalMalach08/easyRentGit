@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import "./style.css";
 const PopUp = () => {
   const user = useSelector((state) => state.users.data);
+  const dir = useSelector((state) => state.users.language.dir);
 
   return (
     <Popup
@@ -25,7 +26,7 @@ const PopUp = () => {
         </Avatar>
       }
       style={{ backgroundColor: "" }}
-      position="bottom right"
+      position={dir === "rtl" ? "bottom right" : "bottom left"}
     >
       <Card
         sx={{ minWidth: 193, minHeight: 176 }}
@@ -50,7 +51,7 @@ const PopUp = () => {
         <CardActions>
           <Link to={`/logout`} className="nav_link" activeclassname="selected">
             <Button style={{ color: "black" }} variant="outline-secondary">
-              התנתק
+              {dir === "rtl" ? "התנתק" : "Logout"}
             </Button>
           </Link>
         </CardActions>

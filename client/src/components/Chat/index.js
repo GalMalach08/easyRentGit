@@ -8,9 +8,12 @@ import ChatBot from "react-simple-chatbot";
 // Style
 import { ThemeProvider } from "styled-components";
 import "./style.css";
+// Translator
+import { useTranslation } from "react-i18next";
 
 const ChatBotComp = ({ handleChatbot }) => {
   const user = useSelector((state) => state.users.data);
+  const dir = useSelector((state) => state.users.language.dir);
   const theme = {
     background: "#f5f8fb",
     fontFamily: "arial",
@@ -32,7 +35,10 @@ const ChatBotComp = ({ handleChatbot }) => {
           // Welcome message
           {
             id: "1",
-            message: `שלום ${user.firstname}, כאן שלומי ואני העוזר הדיגטלי של EasyRent 😎 אני מזמין אותך לסמן את ההעדפות שלך לדירה ונדאג לשלוח לך מייל כשאר יעלו דירות רלוונטיות`,
+            message:
+              dir === "rtl"
+                ? `שלום ${user.firstname}, כאן שלומי ואני העוזר הדיגטלי של EasyRent 😎 אני מזמין אותך לסמן את ההעדפות שלך לדירה ונדאג לשלוח לך מייל כשאר יעלו דירות רלוונטיות`
+                : `Hello ${user.firstname}, here's Shlomi and I's EasyRent's digital assistant😎,I invite you to mark your preferences for the apartment and we will make sure to send you an email when the rest of the relevant apartments will go up`,
             trigger: "2",
           },
           // Ask if the user wants to continue
@@ -40,12 +46,12 @@ const ChatBotComp = ({ handleChatbot }) => {
             id: "2",
             options: [
               {
-                label: "מעוניין להמשיך",
+                label: dir === "rtl" ? "מעוניין להמשיך" : "continue",
                 trigger: "numberOfRoomsMessage",
                 value: "yes",
               },
               {
-                label: "אוותר בינתיים",
+                label: dir === "rtl" ? "אוותר בינתיים" : "No,thanks",
                 trigger: "end-message-not",
                 value: "not",
               },
@@ -54,7 +60,7 @@ const ChatBotComp = ({ handleChatbot }) => {
           // Number of rooms message
           {
             id: "numberOfRoomsMessage",
-            message: "מספר החדרים:",
+            message: dir === "rtl" ? "מספר החדרים:" : "Number of rooms:",
             trigger: "numberOfRooms",
           },
 
@@ -71,7 +77,7 @@ const ChatBotComp = ({ handleChatbot }) => {
           // Price message
           {
             id: "priceMessage",
-            message: "טווח המחירים:",
+            message: dir === "rtl" ? "טווח המחירים:" : "Price range:",
             trigger: "price",
           },
 
@@ -81,22 +87,25 @@ const ChatBotComp = ({ handleChatbot }) => {
             options: [
               {
                 value: "6000",
-                label: "עד ששת אלפים שח",
+                label: dir === "rtl" ? "עד ששת אלפים שח" : "maximum 6,000 ILS",
                 trigger: "areaMessage",
               },
               {
                 value: "8000",
-                label: "עד שמונת אלפים שח",
+                label:
+                  dir === "rtl" ? "עד שמונת אלפים שח" : "maximum 8,000 ILS",
                 trigger: "areaMessage",
               },
               {
                 value: "10000",
-                label: "עד עשרת אלפים שח",
+                label:
+                  dir === "rtl" ? "עד עשרת אלפים שח" : "maximun 10,000 ILS",
                 trigger: "areaMessage",
               },
               {
                 value: "20000",
-                label: "עד עשרים אלפים שח",
+                label:
+                  dir === "rtl" ? "עד עשרים אלפים שח" : "maximun 20,000 ILS",
                 trigger: "areaMessage",
               },
             ],
@@ -104,7 +113,7 @@ const ChatBotComp = ({ handleChatbot }) => {
           // Area message
           {
             id: "areaMessage",
-            message: "איזור מבוקש:",
+            message: dir === "rtl" ? "איזור מבוקש:" : "Wanted area:",
             trigger: "area",
           },
 
@@ -114,26 +123,42 @@ const ChatBotComp = ({ handleChatbot }) => {
             options: [
               {
                 value: "הצפון הישן",
-                label: "הצפון הישן",
+                label: dir === "rtl" ? "הצפון הישן" : "The old north",
                 trigger: "pre-review",
               },
               {
                 value: "הצפון החדש",
-                label: "הצפון החדש",
+                label: dir === "rtl" ? "הצפון החדש" : "The new north",
                 trigger: "pre-review",
               },
-              { value: "לב העיר", label: "לב העיר", trigger: "pre-review" },
-              { value: "פלורנטין", label: "פלורנטין", trigger: "pre-review" },
-              { value: "שוק הכרמל", label: "שוק הכרמל", trigger: "pre-review" },
-              { value: "רוטשילד", label: "רוטשילד", trigger: "pre-review" },
+              {
+                value: "לב העיר",
+                label: dir === "rtl" ? "לב העיר" : "Center",
+                trigger: "pre-review",
+              },
+              {
+                value: "פלורנטין",
+                label: dir === "rtl" ? "פלורנטין" : "Florentin",
+                trigger: "pre-review",
+              },
+              {
+                value: "שוק הכרמל",
+                label: dir === "rtl" ? "שוק הכרמל" : "Carmel market",
+                trigger: "pre-review",
+              },
+              {
+                value: "רוטשילד",
+                label: dir === "rtl" ? "רוטשילד" : "Rotchild",
+                trigger: "pre-review",
+              },
               {
                 value: "כרם התימנים",
-                label: "כרם התימנים",
+                label: dir === "rtl" ? "כרם התימנים" : "The cerem",
                 trigger: "pre-review",
               },
               {
                 value: "יפו",
-                label: "יפו",
+                label: dir === "rtl" ? "יפו" : "Jaffa",
                 trigger: "pre-review",
               },
             ],

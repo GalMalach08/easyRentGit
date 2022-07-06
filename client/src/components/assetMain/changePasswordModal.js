@@ -22,7 +22,10 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 // Formik
 import { Formik } from "formik";
 import zxcvbn from "zxcvbn";
+import * as Yup from "yup";
 
+// Translator
+import { useTranslation } from "react-i18next";
 // Styles
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -44,11 +47,21 @@ const ChangePasswordModal = ({
   const [successModal, setSuccessModal] = useState(false);
   const [score, setScore] = useState(0);
   const user = useSelector((state) => state.users.data);
+  const dir = useSelector((state) => state.users.language.dir);
+
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   // Form validation
-  const validationSchema = resetPasswordSchema;
+  const validationSchema = Yup.object().shape({
+    password: Yup.string()
+      .required(`${t("passwordError.1")}`)
+      .min(6, `${t("passwordMinError.1")}`),
+    confirmPassword: Yup.string()
+      .required(`${t("confirmpasswordError.1")}`)
+      .oneOf([Yup.ref("password"), null], `${t("confirmpasswordError1.1")}`),
+  });
 
   // Handle password visiblity
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -97,14 +110,18 @@ const ChangePasswordModal = ({
         centered
         show={changePasswordModal}
         onHide={() => setChangedPasswordModal(false)}
+        dir={dir}
       >
         <Modal.Header>
           {" "}
           <Modal.Title style={{ textAlign: "center", width: "100%" }}>
-            <h4>עדכן את הסיסמה שלך</h4>
+            <h4>
+              {dir === "rtl" ? "עדכן את הסיסמה שלך" : "Update your password"}
+            </h4>
             <h6>
-              שמנו לב שבצעת איפוס סיסמה, אנו ממליצים לך לשנות את הסיסמה לאחת
-              שתזכור{" "}
+              {dir === "rtl"
+                ? "שמנו לב שבצעת איפוס סיסמה, אנו ממליצים לך לשנות את הסיסמה לאחת שתזכור"
+                : "We noticed that you have reset your password, we recommend that you change your password to one Remember"}{" "}
             </h6>
           </Modal.Title>{" "}
         </Modal.Header>
@@ -132,7 +149,7 @@ const ChangePasswordModal = ({
                     margin="normal"
                     fullWidth
                     name="password"
-                    label="סיסמה"
+                    label={`${t("password.1")}`}
                     onKeyUp={(e) => checkPasswordStrength(e.target.value)}
                     {...props.getFieldProps("password")}
                     {...errorHelper(props, "password")}
@@ -164,7 +181,7 @@ const ChangePasswordModal = ({
                       margin: "2px",
                     }}
                   >
-                    {createPasswordLabel(score)}
+                    {createPasswordLabel(score, dir)}
                   </p>
 
                   <TextField
@@ -174,7 +191,7 @@ const ChangePasswordModal = ({
                     margin="normal"
                     fullWidth
                     name="confirmPassword"
-                    label="אימות סיסמה"
+                    label={`${t("confirmPassword.1")}`}
                     {...props.getFieldProps("confirmPassword")}
                     {...errorHelper(props, "confirmPassword")}
                     InputProps={{
@@ -205,14 +222,14 @@ const ChangePasswordModal = ({
                     className="btn btn-primary m-3 btn-sm"
                     onClick={() => changePassword(props.values)}
                   >
-                    אפס סיסמה
+                    {dir === "rtl" ? "אפס סיסמה" : "Reset password"}
                   </button>
                   <button
                     type="button"
                     className="btn btn-primary btn-sm px-4"
                     onClick={() => skip()}
                   >
-                    דלג
+                    {dir === "rtl" ? "דלג" : "Skip"}
                   </button>
                 </form>
               </>
@@ -229,13 +246,17 @@ const ChangePasswordModal = ({
       >
         <Modal.Header>
           <Modal.Title style={{ textAlign: "center", width: "100%" }}>
-            <h4>הסיסמה שונתה בהצלחה!</h4>
+            <h4>
+              {dir === "rtl"
+                ? "הסיסמה שונתה בהצלחה!"
+                : "The password has changed successfully"}
+            </h4>
             <button
               type="button"
               className="btn btn-primary btn-sm px-4"
               onClick={() => setSuccessModal(false)}
             >
-              סיים
+              {dir === "rtl" ? "סיים" : "Done"}
             </button>
           </Modal.Title>{" "}
         </Modal.Header>

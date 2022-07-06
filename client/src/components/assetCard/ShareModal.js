@@ -1,6 +1,8 @@
 import React from "react";
 // Bootstrap
 import Modal from "react-bootstrap/Modal";
+// Redux
+import { useSelector } from "react-redux";
 // React-share
 import {
   FacebookShareButton,
@@ -15,6 +17,8 @@ import "./style.css";
 
 // Share modal - allowed to share asset by whatsapp facebook and twitter
 const ShareModal = ({ modalOpen, setModalOpen }) => {
+  const dir = useSelector((state) => state.users.language.dir);
+
   return (
     <>
       <Modal
@@ -26,7 +30,7 @@ const ShareModal = ({ modalOpen, setModalOpen }) => {
       >
         <Modal.Header>
           <Modal.Title style={{ margin: "auto" }}>
-            <p>שתף את הנכס</p>
+            {dir === "rtl" ? <p>שתף את הנכס</p> : <p>Share the asset</p>}
             <div className="share_icons_div">
               <FacebookShareButton
                 url={`https://lesublet.com/asset/610a5488b69afec97ce74ae2?p=0`}

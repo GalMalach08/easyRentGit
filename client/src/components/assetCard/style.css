@@ -52,13 +52,21 @@ div.contain h3 {
   margin: 0px 10px;
 }
 
-.asset_address {
+.asset_address_hebrew {
   text-align: right;
   margin: 10px 5px;
 }
+.asset_address {
+  margin: 10px 5px;
+  font-weight: 400 ;
+}
 
-.asset_enter {
+.asset_enter_hebrew {
   text-align: right;
+  margin: 5px 5px;
+}
+.asset_enter {
+
   margin: 5px 5px;
 }
 
@@ -67,8 +75,12 @@ div.contain h3 {
   margin: 5px 5px;
 }
 
-.asset_labels {
+.asset_labels_hebrew {
   text-align: right;
+  margin: 20px 5px;
+}
+.asset_labels{
+  text-align: left;
   margin: 20px 5px;
 }
 

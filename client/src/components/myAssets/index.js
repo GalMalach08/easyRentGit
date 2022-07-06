@@ -28,7 +28,8 @@ const MyAssets = (props) => {
   const user = useSelector((state) => state.users.data);
   const assets = useSelector((state) => state.assets.data);
   const loading = useSelector((state) => state.assets.loading);
-  const classes = useStyles();
+  const dir = useSelector((state) => state.users.language.dir);
+
   const [notApprovedAssets, setNotApprovedAssets] = useState("");
   const navigate = useNavigate();
   const params = useParams();
@@ -47,7 +48,7 @@ const MyAssets = (props) => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container" dir={dir}>
       <Grid container>
         {loading ? (
           <Loader />
@@ -56,49 +57,78 @@ const MyAssets = (props) => {
             {" "}
             {notApprovedAssets.length !== 0 && (
               <div className="container m-auto mt-5">
-                <Alert variant="success">
-                  <Alert.Heading>שלום {user.firstname}</Alert.Heading>
-                  <p>
-                    ברשותך
-                    {notApprovedAssets.length === 1
-                      ? " נכס אחד שממתין "
-                      : ` ${notApprovedAssets.length} נכסים שממתינים `}
-                    לאישור. כאשר הנכס יאושר תקבל על כך הודעה למייל שאיתו רשמת את
-                    הנכס לאתר.
-                  </p>
-                  <hr />
-                </Alert>
+                {dir === "rtl" ? (
+                  <Alert variant="success">
+                    <Alert.Heading>שלום {user.firstname}</Alert.Heading>
+                    <p>
+                      ברשותך
+                      {notApprovedAssets.length === 1
+                        ? " נכס אחד שממתין "
+                        : ` ${notApprovedAssets.length} נכסים שממתינים `}
+                      לאישור. כאשר הנכס יאושר תקבל על כך הודעה למייל שאיתו רשמת
+                      את הנכס לאתר.
+                    </p>
+                    <hr />
+                  </Alert>
+                ) : (
+                  <Alert variant="success">
+                    <Alert.Heading>Hello {user.firstname}</Alert.Heading>
+                    <p>
+                      You have
+                      {notApprovedAssets.length === 1
+                        ? " one property"
+                        : ` ${notApprovedAssets.length} properties `}
+                      waiting to be approved. When the property will be
+                      approved, you will receive a notification by e-mail
+                    </p>
+                    <hr />
+                  </Alert>
+                )}
               </div>
             )}
             {assets.length !== 0
               ? assets.map((asset, i) => (
                   <Grow in={true} timeout={700} key={i}>
-                    <Grid item xs={11} lg={6} className={classes.root}>
+                    <Grid item xs={11} lg={6}>
                       <AssetCard asset={asset} />
                     </Grid>
                   </Grow>
                 ))
               : notApprovedAssets.length === 0 && (
                   <div className="container m-auto mt-5">
-                    <Alert variant="success">
-                      <Alert.Heading>שלום {user.firstname}</Alert.Heading>
-                      <p>
-                        אין ברשותך נכסים שהועלו לאתר, באם העלת נכס והוא לא מופיע
-                        בדף זה, הנכס שלך נמצא בבדיקה של המערכת ותקבל עדכון לגביו
-                        במייל שבו רשמת את הנכס
-                      </p>
+                    {dir === "rtl" ? (
+                      <Alert variant="success">
+                        <Alert.Heading>שלום {user.firstname}</Alert.Heading>
+                        <p>אין ברשותך נכסים שהועלו לאתר</p>
 
-                      <hr />
-                      <p className="mb-0">
-                        על מנת להעלות נכס חדש לאתר
-                        <span
-                          className="click_here"
-                          onClick={() => navigate("/upload")}
-                        >
-                          לחץ כאן
-                        </span>
-                      </p>
-                    </Alert>
+                        <hr />
+                        <p className="mb-0">
+                          על מנת להעלות נכס חדש לאתר
+                          <span
+                            className="click_here"
+                            onClick={() => navigate("/upload")}
+                          >
+                            לחץ כאן
+                          </span>
+                        </p>
+                      </Alert>
+                    ) : (
+                      <Alert variant="success">
+                        <Alert.Heading>שלום {user.firstname}</Alert.Heading>
+                        <p>You do not have any assets uploaded to the site</p>
+
+                        <hr />
+                        <p className="mb-0">
+                          In order to upload new property to the website
+                          <span
+                            className="click_here"
+                            onClick={() => navigate("/upload")}
+                          >
+                            click here
+                          </span>
+                        </p>
+                      </Alert>
+                    )}
                   </div>
                 )}
           </>

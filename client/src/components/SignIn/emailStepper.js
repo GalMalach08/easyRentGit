@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   checkIfUserExcistByEmail,
   sendResetPasswordMail,
@@ -9,6 +9,8 @@ import {
 import { useFormik } from "formik";
 import { errorHelper } from "../../utils/formik";
 import * as Yup from "yup";
+// Translator
+import { useTranslation } from "react-i18next";
 // Material ui
 import { TextField, Button, Stepper, Step, StepLabel } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
@@ -30,7 +32,16 @@ const EmailStepper = ({ setEmailModal }) => {
   const [user, setUser] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
+  const dir = useSelector((state) => state.users.language.dir);
+  const { t } = useTranslation();
+
   const steps = ["הכנס את המייל שלך", "אימות משתמש", "האם אתה בטוח ?", "בוצע"];
+  const englishSteps = [
+    "Inset your email",
+    "User Identify",
+    "Are you sure ?",
+    "Done",
+  ];
 
   // Handle steps functions
   const handleNext = () => setActiveStep((prev) => prev + 1);
@@ -50,13 +61,13 @@ const EmailStepper = ({ setEmailModal }) => {
           }
         }}
       >
-        המשך
+        {dir === "rtl" ? "המשך" : "Next"}
       </Button>
     );
   };
   const prevBtn = () => (
     <Button className="m-3" variant="contained" onClick={handleBack}>
-      חזור
+      {dir === "rtl" ? "חזור" : "Back"}
     </Button>
   );
 
@@ -68,9 +79,7 @@ const EmailStepper = ({ setEmailModal }) => {
       .then(({ success, user }) => {
         if (success) {
           if (user.googleId) {
-            setErrorMessage(
-              'משתמש זה מקושר לחשבון של גוגל, על מנת להתחבר לחץ על הכפתור "התחבר באמצעות גוגל" שבדף ההתחברות'
-            );
+            setErrorMessage(`${t("userIsEcxistWithGoogle.1")}`);
           } else if (user.facebookId) {
             setErrorMessage(
               'משתמש זה מקושר לחשבון של פייסבוק, על מנת להתחבר לחץ על הכפתור "התחבר באמצעות פייסבוק" שבדף ההתחברות'
@@ -80,7 +89,7 @@ const EmailStepper = ({ setEmailModal }) => {
             handleNext();
           }
         } else {
-          setErrorMessage("לא נמצא משתמש עם מייל זה");
+          setErrorMessage(`${t("userNotFound.1")}`);
         }
         setButtonDisabled(false);
       });
@@ -101,12 +110,8 @@ const EmailStepper = ({ setEmailModal }) => {
     initialValues: { email: "" },
     validationSchema: Yup.object({
       email: Yup.string()
-        .required("זהו שדה חובה")
-        .email("האימייל אינו תקין")
-        .test("isValid", "נא הכנס כתובת מלאה ותקינה", function() {
-          if (formik.errors.email) setErrorMessage("");
-          return true;
-        }),
+        .required(`${t("ownerEmailError.1")}`)
+        .email(`${t("ownerEmailTypeError.1")}`),
     }),
     onSubmit: (values) => {
       sendEmail(values);
@@ -116,12 +121,19 @@ const EmailStepper = ({ setEmailModal }) => {
   return (
     <>
       <Stepper activeStep={activeStep}>
-        {steps.map((step) => (
-          <Step key={step}>
-            {" "}
-            <StepLabel>{step}</StepLabel>
-          </Step>
-        ))}
+        {dir === "rtl"
+          ? steps.map((step) => (
+              <Step key={step}>
+                {" "}
+                <StepLabel>{step}</StepLabel>
+              </Step>
+            ))
+          : englishSteps.map((step) => (
+              <Step key={step}>
+                {" "}
+                <StepLabel>{step}</StepLabel>
+              </Step>
+            ))}
       </Stepper>
 
       <form
@@ -133,7 +145,7 @@ const EmailStepper = ({ setEmailModal }) => {
             <TextField
               style={{ width: "100%" }}
               name="email"
-              label="הכנס את האימייל שלך"
+              label={`${t("email.1")}`}
               variant="outlined"
               {...formik.getFieldProps("email")}
               {...errorHelper(formik, "email")}
@@ -164,7 +176,7 @@ const EmailStepper = ({ setEmailModal }) => {
                     </Avatar>
                   </Typography>
                   <Typography color="textSecondary" component="p">
-                    האם זה אתה ?
+                    {dir === "rtl" ? "האם זה אתה ?" : "Is that you ?"}
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -176,7 +188,7 @@ const EmailStepper = ({ setEmailModal }) => {
                   color="primary"
                   onClick={() => setActiveStep((prev) => prev + 1)}
                 >
-                  כן
+                  {dir === "rtl" ? "כן" : "Yes"}
                 </Button>
                 {prevBtn()}
               </CardActions>
@@ -195,7 +207,7 @@ const EmailStepper = ({ setEmailModal }) => {
                 formik.submitForm();
               }}
             >
-              שלח לי סיסמה חדשה
+              {dir === "rtl" ? "שלח לי סיסמה חדשה" : "Send me new password"}
             </Button>
             {prevBtn()}
           </div>
@@ -203,7 +215,11 @@ const EmailStepper = ({ setEmailModal }) => {
 
         {activeStep === 3 ? (
           <div className="form-group">
-            <h5>אימייל נשלח לכתובת {formik.values.email}</h5>
+            {dir === "rtl" ? (
+              <h5>אימייל נשלח לכתובת {formik.values.email}</h5>
+            ) : (
+              <h5>Email sent to {formik.values.email}</h5>
+            )}
             <Button
               className="m-3"
               variant="contained"

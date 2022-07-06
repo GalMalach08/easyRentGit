@@ -164,15 +164,26 @@ const Home = () => {
                 ))
               : !loading && (
                   <Alert variant="success" style={{ margin: "50px auto" }}>
-                    <Alert.Heading>שלום {user.firstname}</Alert.Heading>
-                    <p>
-                      אין נכסים {isSublet ? "למטרת סאבלט" : "להשכרה"} התואמים
-                      לתנאים שהזנת
-                    </p>
-                    <p>
-                      על מנת להמשיך ולחפש נכסים נוספים אפס את הסינון או שנה אותו
-                      בחלונית המופיעה מעלה
-                    </p>
+                    {dir === "rtl" ? (
+                      <>
+                        <Alert.Heading>שלום {user.firstname}</Alert.Heading>
+
+                        <p>
+                          אין נכסים {isSublet ? "למטרת סאבלט" : "להשכרה"}{" "}
+                          התואמים לתנאים שהזנת
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Alert.Heading>hello {user.firstname}</Alert.Heading>
+                        <p>
+                          There is no assets{" "}
+                          {isSublet ? "for sublet" : "for rent"} that matches
+                          your results
+                        </p>
+                      </>
+                    )}
+                    <p>{t("noassets.1")}</p>
                   </Alert>
                 )}
           </Grid>
@@ -187,7 +198,7 @@ const Home = () => {
                 else getAssets();
               }}
             >
-              טען עוד דירות
+              {t("loadmore.1")}
             </Button>
           ) : (
             !loading && (

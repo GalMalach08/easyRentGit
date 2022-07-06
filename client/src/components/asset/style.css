@@ -2,7 +2,7 @@
   position: relative;
   top: 15px;
   border: none;
-  padding: 12px 50px;
+  padding: 12px 40px;
   color: #fff;
   text-transform: uppercase;
   font-weight: bold;
@@ -31,6 +31,7 @@
   background: #17980e;
   box-shadow: 0px 5px 5px #17980e;
   margin-bottom: 40px;
+  text-transform: lowercase;
 
 }
 .whatapp_div {
@@ -71,7 +72,6 @@
   width: 500px;
   border: 2px solid lightgrey;
   padding: 10px;
-  text-align: right;
   background-color: white;
   border-radius: 10px;
 }

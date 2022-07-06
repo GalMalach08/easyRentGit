@@ -9,6 +9,10 @@ const notApprovedAssetSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  englishAddress: {
+    type: String,
+    required: true,
+  },
   enterDate: {
     type: String,
     required: true,
@@ -36,7 +40,13 @@ const notApprovedAssetSchema = new mongoose.Schema({
   notes: {
     type: String,
   },
+  englishNotes: {
+    type: String,
+  },
   description: {
+    type: String,
+  },
+  englishDescription: {
     type: String,
   },
   images: {

@@ -5,8 +5,8 @@ import Avatar from "@mui/material/Avatar";
 
 const LanguageAvatar = ({ changeSiteLanguage }) => {
   const SmallAvatar = styled(Avatar)(({ theme }) => ({
-    width: 30,
-    height: 30,
+    width: 20,
+    height: 20,
     border: `2px solid ${theme.palette.background.paper}`,
   }));
 
@@ -14,7 +14,7 @@ const LanguageAvatar = ({ changeSiteLanguage }) => {
     <>
       <Badge
         style={{
-          margin: "0px 50px 0px 50px",
+          margin: "0px 20px 0px 20px",
           cursor: "pointer",
         }}
         overlap="circular"
@@ -54,7 +54,7 @@ const LanguageAvatar = ({ changeSiteLanguage }) => {
             alt="Remy Sharp"
           >
             {" "}
-            he
+            עב
           </SmallAvatar>
         }
       >

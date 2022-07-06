@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { errorHelper, signupValidationSchema } from "../../utils/formik";
 import {
@@ -7,7 +7,9 @@ import {
   changePasswordColor,
 } from "../../utils/password";
 import { toastify } from "../../utils/tools";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+// Translator
+import { useTranslation } from "react-i18next";
 // import { setIsAuth } from "../../store/actions";
 import { registerUser } from "../../store/actions/user.thunk";
 import RegisterModal from "./registrationModal/RegistrationModal";
@@ -20,6 +22,9 @@ import {
   Paper,
   Collapse,
   InputAdornment,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
@@ -29,6 +34,8 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 // formik
 import { Formik } from "formik";
 import zxcvbn from "zxcvbn";
+import * as Yup from "yup";
+
 // css
 import "./style.css";
 
@@ -58,27 +65,68 @@ const useStyles = makeStyles((theme) => ({
     margin: "15px 10px",
     width: "100%",
   },
+  label: {
+    margin: "15px 10px",
+    display: "block",
+    textAlign: "left",
+  },
   form: {
     width: "100%",
     marginTop: theme.spacing(1),
   },
+  radioGroup: {
+    flexWrap: "nowrap",
+    flexDirection: "row",
+    margin: "10px",
+  },
 }));
 
 const SignUp = () => {
+  const dir = useSelector((state) => state.users.language.dir);
+
   const [message, setMessage] = useState("");
   const [openAlert, setOpenAlert] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [preferredLang, setPreferredLang] = useState(
+    dir === "rtl" ? "he" : "en"
+  );
+
+  const mes = useMemo(() => {
+    return setPreferredLang(dir === "rtl" ? "he" : "en");
+  }, [dir]);
+
   const [registerModalOpen, setRegisterModalOpen] = useState(true);
   const [score, setScore] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
   const classes = useStyles();
 
   // Form validation
-  const validationSchema = signupValidationSchema;
+  const validationSchema = Yup.object().shape({
+    firstname: Yup.string().required(`${t("firstnameError.1")}`),
+    lastname: Yup.string().required(`${t("lastnameError.1")}`),
+    email: Yup.string()
+      .required(`${t("ownerEmailTypeError.1")}`)
+      .email("כתובת האימייל אינה תקינה"),
+    password: Yup.string()
+      .required(`${t("passwordError.1")}`)
+      .min(6, `${t("passwordMinError.1")}`),
+    confirmPassword: Yup.string()
+      .required(`${t("confirmpasswordError.1")}`)
+      .oneOf([Yup.ref("password"), null], `${t("confirmpasswordError1.1")}`),
+    phoneNumber: Yup.string()
+      .required(`${t("ownerNPhoneError.1")}`)
+      .min(6, `${t("notValidPhone.1")}`)
+      .matches(
+        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+        `${t("notValidPhone.1")}`
+      ),
+  });
 
   // Handle password visiblity
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -93,16 +141,25 @@ const SignUp = () => {
       setButtonDisabled(true);
       dispatch(registerUser(values))
         .unwrap()
-        .then(({ data }) => {
+        .then(({ data, message }) => {
           if (data) {
             navigate("/");
             toastify(
               "SUCCESS",
-              "ברוכה הבאה! אנא בדוק את המייל שלך על מנת לאמת את המשתמש"
+              dir === "rtl"
+                ? "ברוכה הבאה! אנא בדוק את המייל שלך על מנת לאמת את המשתמש"
+                : "Welcome ! check your email to verify your account"
             );
+          } else {
+            if (message === "כתובת האיימיל הינה בשימוש") {
+              toastify("ERROR", `${t("signUpMessageError.1")}`);
+            } else {
+              toastify("ERROR", message);
+            }
           }
           setButtonDisabled(false);
-        });
+        })
+        .catch((err) => setButtonDisabled(false));
     } catch (error) {
       console.error(error);
     }
@@ -115,7 +172,7 @@ const SignUp = () => {
   };
 
   return (
-    <Grid container className={classes.root}>
+    <Grid container className={classes.root} dir={dir}>
       {/* Sign up form */}
       <Grid
         item
@@ -134,7 +191,7 @@ const SignUp = () => {
             crop="scale"
             alt="cart"
           />
-          <h4 className="signup_header">דף הרשמה</h4>
+          <h4 className="signup_header">{t("signUpTitle.1")}</h4>
 
           <Formik
             initialValues={{
@@ -145,7 +202,7 @@ const SignUp = () => {
               lastname: "",
               phoneNumber: "",
             }}
-            onSubmit={(values) => signUpUser(values)}
+            onSubmit={(values) => signUpUser({ ...values, preferredLang })}
             validationSchema={validationSchema}
             enableReinitialize={true}
           >
@@ -161,7 +218,7 @@ const SignUp = () => {
                       className={classes.textField}
                       name="email"
                       margin="normal"
-                      label="אימייל"
+                      label={`*${t("email.1")}`}
                       variant="outlined"
                       fullWidth
                       {...props.getFieldProps("email")}
@@ -175,7 +232,7 @@ const SignUp = () => {
                       margin="normal"
                       fullWidth
                       name="password"
-                      label="סיסמה"
+                      label={`*${t("password.1")}`}
                       onKeyUp={(e) => checkPasswordStrength(e.target.value)}
                       {...props.getFieldProps("password")}
                       {...errorHelper(props, "password")}
@@ -217,7 +274,7 @@ const SignUp = () => {
                       margin="normal"
                       fullWidth
                       name="confirmPassword"
-                      label="אימות סיסמה"
+                      label={`*${t("confirmPassword.1")}`}
                       {...props.getFieldProps("confirmPassword")}
                       {...errorHelper(props, "confirmPassword")}
                       InputProps={{
@@ -241,7 +298,7 @@ const SignUp = () => {
                     className={classes.textField}
                     name="firstname"
                     margin="normal"
-                    label="שם פרטי"
+                    label={`*${t("firstname.1")}`}
                     variant="outlined"
                     fullWidth
                     {...props.getFieldProps("firstname")}
@@ -251,7 +308,7 @@ const SignUp = () => {
                     className={classes.textField}
                     name="lastname"
                     margin="normal"
-                    label="שם משפחה"
+                    label={`*${t("lastname.1")}`}
                     variant="outlined"
                     fullWidth
                     {...props.getFieldProps("lastname")}
@@ -262,12 +319,32 @@ const SignUp = () => {
                     className={classes.textField}
                     name="phoneNumber"
                     margin="normal"
-                    label="מספר טלפון"
+                    label={`*${t("phoneNumber.1")}`}
                     variant="outlined"
                     fullWidth
                     {...props.getFieldProps("phoneNumber")}
                     {...errorHelper(props, "phoneNumber")}
                   />
+
+                  <label className={classes.label}>
+                    *{t("preferredLang.1")}:
+                  </label>
+                  <RadioGroup
+                    value={preferredLang}
+                    onChange={(e) => setPreferredLang(e.target.value)}
+                    className={classes.radioGroup}
+                  >
+                    <FormControlLabel
+                      value="he"
+                      control={<Radio />}
+                      label="עברית"
+                    />
+                    <FormControlLabel
+                      value="en"
+                      control={<Radio />}
+                      label="English"
+                    />
+                  </RadioGroup>
 
                   <Button
                     disabled={
@@ -290,8 +367,7 @@ const SignUp = () => {
                     fullWidth
                     onClick={() => signUpUser(props.values)}
                   >
-                    {" "}
-                    הרשם{" "}
+                    {dir === "rtl" ? "הרשם" : "Sign up"}
                   </Button>
 
                   {/* Alert error */}
@@ -317,7 +393,9 @@ const SignUp = () => {
                     <Grid item>
                       <Link to="/signin" variant="body2">
                         {" "}
-                        יש לך משתמש ? עבור לדף ההתחברות
+                        {dir === "rtl"
+                          ? "יש לך משתמש ? עבור לדף ההתחברות"
+                          : "Already have user ? sign in"}
                       </Link>
                     </Grid>
                   </Grid>

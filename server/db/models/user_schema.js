@@ -65,6 +65,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  preferredLang: {
+    type: String,
+    default: "en",
+  },
 });
 
 userSchema.pre("save", async function (next) {
