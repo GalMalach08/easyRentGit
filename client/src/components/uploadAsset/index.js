@@ -484,31 +484,37 @@ const UploadAsset = (props) => {
                   {...props.getFieldProps("email")}
                   {...errorHelper(props, "email")}
                 />
-
-                {/* Hebrew address */}
-                <TextField
-                  className={classes.textField}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  label={`*${t("hebrewAddress.1")}`}
-                  name="address"
-                  {...props.getFieldProps("address")}
-                  {...errorHelper(props, "address")}
-                  ref={addressRef}
-                />
-                {/* English address */}
-                <TextField
-                  className={classes.textField}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  label={`*${t("englishAddress.1")}`}
-                  name="addressEnglish"
-                  {...props.getFieldProps("englishAddress")}
-                  {...errorHelper(props, "englishAddress")}
-                  ref={addressRef}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: dir === "rtl" ? "column" : "column-reverse",
+                  }}
+                >
+                  {/* Hebrew address */}
+                  <TextField
+                    className={classes.textField}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    label={`*${t("hebrewAddress.1")}`}
+                    name="address"
+                    {...props.getFieldProps("address")}
+                    {...errorHelper(props, "address")}
+                    ref={addressRef}
+                  />
+                  {/* English address */}
+                  <TextField
+                    className={classes.textField}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    label={`*${t("englishAddress.1")}`}
+                    name="addressEnglish"
+                    {...props.getFieldProps("englishAddress")}
+                    {...errorHelper(props, "englishAddress")}
+                    ref={addressRef}
+                  />
+                </div>
 
                 <label className="time_label">*{t("target.1")}:</label>
                 <RadioGroup
@@ -573,7 +579,7 @@ const UploadAsset = (props) => {
                   {...props.getFieldProps("price")}
                   {...errorHelper(props, "price")}
                 />
-                <label className="time_label">* {t("priceFor.1")}:</label>
+                <label className="time_label">*{t("priceFor.1")}:</label>
                 <Tabs
                   value={timeValue}
                   onChange={handleTimeChange}
@@ -643,35 +649,42 @@ const UploadAsset = (props) => {
                     flexDirection: dir === "rtl" ? "column" : "column-reverse",
                   }}
                 >
-                  {/*Hebrew Notes */}
-                  <TextField
-                    className={classes.textField}
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    label={`${t("hebrewNotes.1")} :`}
-                    name="notes"
-                    {...props.getFieldProps("notes")}
-                    {...errorHelper(props, "notes")}
-                  />
-                  <FormHelperText className={classes.helperText}>
-                    {t("notesHelperText.1")}
-                  </FormHelperText>
-
-                  {/*English Notes */}
-                  <TextField
-                    className={classes.textField}
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    label={`${t("englishNotes.1")} :`}
-                    name="englishNotes"
-                    {...props.getFieldProps("englishNotes")}
-                    {...errorHelper(props, "englishNotes")}
-                  />
-                  <FormHelperText className={classes.helperText}>
-                    {t("notesHelperText.1")}
-                  </FormHelperText>
+                  <div>
+                    {/*Hebrew Notes */}
+                    <TextField
+                      className={classes.textField}
+                      variant="outlined"
+                      margin="normal"
+                      fullWidth
+                      label={`${t("hebrewNotes.1")}:`}
+                      name="notes"
+                      {...props.getFieldProps("notes")}
+                      {...errorHelper(props, "notes")}
+                    />
+                    {dir === "rtl" && (
+                      <FormHelperText className={classes.helperText}>
+                        {t("notesHelperText.1")}
+                      </FormHelperText>
+                    )}
+                  </div>
+                  <div>
+                    {/*English Notes */}
+                    <TextField
+                      className={classes.textField}
+                      variant="outlined"
+                      margin="normal"
+                      fullWidth
+                      label={`${t("englishNotes.1")}:`}
+                      name="englishNotes"
+                      {...props.getFieldProps("englishNotes")}
+                      {...errorHelper(props, "englishNotes")}
+                    />
+                    {dir !== "rtl" && (
+                      <FormHelperText className={classes.helperText}>
+                        {t("notesHelperText.1")}
+                      </FormHelperText>
+                    )}
+                  </div>
                 </div>
 
                 <div
@@ -688,7 +701,9 @@ const UploadAsset = (props) => {
                     <TextareaAutosize
                       className={classes.textArea}
                       rowsMin={3}
-                      placeholder={`${t("descriptionHelperText.1")}`}
+                      placeholder={
+                        dir === "rtl" && `${t("descriptionHelperText.1")}`
+                      }
                       {...props.getFieldProps("description")}
                       {...errorHelper(props, "description")}
                     />
@@ -701,7 +716,9 @@ const UploadAsset = (props) => {
                     <TextareaAutosize
                       className={classes.textArea}
                       rowsMin={3}
-                      placeholder={`${t("descriptionHelperText.1")}`}
+                      placeholder={
+                        dir !== "rtl" && `${t("descriptionHelperText.1")}`
+                      }
                       {...props.getFieldProps("englishDescription")}
                       {...errorHelper(props, "englishDescription")}
                     />

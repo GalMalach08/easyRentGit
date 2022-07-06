@@ -11,6 +11,8 @@ import "./style.css";
 
 const AssetDeletedModal = ({ DeletedmodalOpen, message }) => {
   const user = useSelector((state) => state.users.data);
+  const dir = useSelector((state) => state.users.language.dir);
+
   const navigate = useNavigate();
 
   return (
@@ -19,7 +21,7 @@ const AssetDeletedModal = ({ DeletedmodalOpen, message }) => {
         size="md"
         centered
         show={DeletedmodalOpen}
-        onHide={() => navigate("/5")}
+        onHide={() => navigate("/")}
         style={{ margin: "auto", textAlign: "center" }}
       >
         <Modal.Header>
@@ -29,7 +31,9 @@ const AssetDeletedModal = ({ DeletedmodalOpen, message }) => {
               margin: "auto",
             }}
           >
-            <p>תודה {user.firstname}!</p>
+            <p>
+              {dir === "rtl" ? "תודה" : "Thanks"} {user.firstname}!
+            </p>
 
             <h5>{message}</h5>
           </Modal.Title>
@@ -40,9 +44,9 @@ const AssetDeletedModal = ({ DeletedmodalOpen, message }) => {
             variant="contained"
             color="primary"
             size="large"
-            onClick={() => navigate("/5")}
+            onClick={() => navigate("/")}
           >
-            מעבר לדף הבית
+            {dir === "rtl" ? "מעבר לדף הבית" : "Move to Home Page"}
           </Button>
           <Button
             className="m-3"
@@ -52,7 +56,7 @@ const AssetDeletedModal = ({ DeletedmodalOpen, message }) => {
             onClick={() => navigate(`/myassets/${user._id}`)}
           >
             {" "}
-            מעבר לדף הכנסים האישי
+            {dir === "rtl" ? "מעבר לדף הנכסים האישי" : "Move to My asset Page"}
           </Button>
         </Modal.Body>
       </Modal>

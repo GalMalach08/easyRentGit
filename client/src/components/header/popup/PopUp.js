@@ -19,7 +19,11 @@ const PopUp = () => {
       trigger={
         <Avatar
           alt="Remy Sharp"
-          style={{ cursor: "pointer", backgroundColor: "#D9952C" }}
+          style={{
+            cursor: "pointer",
+            backgroundColor: "#D9952C",
+            margin: "0px",
+          }}
         >
           {" "}
           {user.firstname[0]}

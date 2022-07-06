@@ -17,7 +17,6 @@ import { useTranslation } from "react-i18next";
 // Components
 import AssetCard from "../assetCard";
 import FilterSearchModal from "../filterSearchModal";
-// import ChatBot from "../chatbot";
 import ChatBot from "../Chat";
 import FilterBox from "../filterSearchModal/FilterBox";
 // Material ui
@@ -175,7 +174,7 @@ const Home = () => {
                       </>
                     ) : (
                       <>
-                        <Alert.Heading>hello {user.firstname}</Alert.Heading>
+                        <Alert.Heading>Hello {user.firstname}</Alert.Heading>
                         <p>
                           There is no assets{" "}
                           {isSublet ? "for sublet" : "for rent"} that matches
@@ -203,7 +202,9 @@ const Home = () => {
           ) : (
             !loading && (
               <h3 className="seen_all_header">
-                ראיתם הכל, דירות חדשות עולות כל הזמן המשיכו להתעדכן 😀
+                {dir === "rtl"
+                  ? "ראיתם הכל, דירות חדשות עולות כל הזמן המשיכו להתעדכן 😀"
+                  : "You saw everything, new apartments are uploading all the time, keep up to date 😀"}
               </h3>
             )
           )}

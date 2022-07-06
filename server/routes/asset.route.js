@@ -104,7 +104,13 @@ router.post("/aproveasset", auth(), async (req, res) => {
     await NotApprovedAsset.findByIdAndDelete(id);
     const user = await User.findById(newAsset.userId);
     res.send({ success: true });
-    sendAssetApprovedEmail(user.email, newAsset, user.firstname);
+    console.log(user);
+    sendAssetApprovedEmail(
+      user.email,
+      newAsset,
+      user.firstname,
+      user.preferredLang
+    );
     checkUsersPrefrences(newAsset);
   } catch (err) {
     console.log(err);

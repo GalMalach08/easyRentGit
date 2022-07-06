@@ -54,10 +54,10 @@ const Asset = () => {
   // Open modal that checks if the user sure about the action
   const checkIfSure = (whatType) => {
     if (whatType === "approve") {
-      setModalMessage("האם אתה בטוח שברצונך לאשר את הנכס ?");
+      setModalMessage(`${t("areUsureUpload.1")}`);
       setFunctionToExcute(() => () => approveAsset());
     } else if (whatType === "delete") {
-      setModalMessage("האם אתה בטוח שברצונך למחוק את הנכס ?");
+      setModalMessage(`${t("areUsureDelete.1")}`);
       setFunctionToExcute(() => () => deleteAsset());
     }
     setModalType(whatType);
@@ -81,7 +81,7 @@ const Asset = () => {
     dispatch(approveAssetById(asset._id))
       .unwrap()
       .then(() => {
-        setModalMessage("הנכס אושר בהצלחה !");
+        setModalMessage(`${t("uploadSuccess.1")}`);
         setDeletedmodalOpen(true);
         setLoading(false);
       });
@@ -103,7 +103,7 @@ const Asset = () => {
     dispatch(deleteAssetByid(asset._id))
       .unwrap()
       .then(() => {
-        setModalMessage("הנכס נמחק בהצלחה !");
+        setModalMessage(`${t("deletedSuccess.1")}`);
         setDeletedmodalOpen(true);
         setLoading(false);
       });
@@ -181,18 +181,20 @@ const Asset = () => {
                       variant="success"
                       onClick={() => checkIfSure("approve")}
                     >
-                      אשר נכס
+                      {dir === "rtl" ? "אשר נכס" : "Approve property"}
                     </Button>{" "}
                     <CopyToClipboard text={asset.userId.email}>
                       <Button variant="info" onClick={contact}>
-                        צור קשר עם בעל הנכס
+                        {dir === "rtl"
+                          ? " צור קשר עם בעל הנכס"
+                          : "Contact the owner"}
                       </Button>
                     </CopyToClipboard>
                     <Button
                       variant="danger"
                       onClick={() => checkIfSure("delete")}
                     >
-                      מחק נכס
+                      {dir === "rtl" ? "מחק נכס" : "Delete property"}
                     </Button>{" "}
                   </div>
                 )}

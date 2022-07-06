@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-
+// Translator
+import { useTranslation } from "react-i18next";
 const Review = ({ steps }) => {
   const [preferences, setPreferences] = useState({
     price: "",
     area: "",
     numberOfRooms: "",
   });
+  const { t } = useTranslation();
 
   useEffect(() => {
     const { price, area, numberOfRooms } = steps;
@@ -14,21 +16,21 @@ const Review = ({ steps }) => {
 
   return (
     <div style={{ width: "100%" }}>
-      <h3>סיכום</h3>
+      <h3>{t("summary.1")}</h3>
 
       <table className="table " style={{ color: "white" }}>
         <thead>
           <tr>
-            <th scope="col">מחיר</th>
-            <th scope="col">איזור</th>
-            <th scope="col"> חדרים</th>
+            <th scope="col">{t("price.1")}</th>
+            <th scope="col">{t("area.1")}</th>
+            <th scope="col"> {t("rooms.1")}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>עד {preferences.price.value} שח</td>
-            <td>{preferences.area.value}</td>
-            <td>{preferences.numberOfRooms.value}</td>
+            <td> {preferences.price.message} </td>
+            <td>{preferences.area.message}</td>
+            <td>{preferences.numberOfRooms.message}</td>
           </tr>
         </tbody>
       </table>

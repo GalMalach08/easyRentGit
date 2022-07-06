@@ -105,7 +105,7 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
             {dir === "rtl" ? (
               <span> שלום {user.firstname}, על מנת לצפות בתוצאות מסוננות</span>
             ) : (
-              <span>hello {user.firstname}, to watch filtered results</span>
+              <span>Hello {user.firstname}, to watch filtered results</span>
             )}
             <Button
               size="sm"

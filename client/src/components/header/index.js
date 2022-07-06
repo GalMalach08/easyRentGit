@@ -40,7 +40,9 @@ const TopNavBar = () => {
           <NavLink to="/">
             <Navbar.Brand className="nav_brand">
               {" "}
-              <span style={{ color: "#F1A32B" }}>Easy</span>
+              <span style={{ color: "#F1A32B", marginBottom: "10px" }}>
+                Easy
+              </span>
               <span style={{ color: "#3882A6" }}>Rent</span>
             </Navbar.Brand>
           </NavLink>
@@ -108,10 +110,11 @@ const TopNavBar = () => {
                     {t("QandA.1")}
                   </NavLink>
                 </Nav>
+                <LanguageAvatar changeSiteLanguage={changeSiteLanguage} />
               </Navbar.Collapse>
             </>
           ) : null}
-          <LanguageAvatar changeSiteLanguage={changeSiteLanguage} />
+          {!auth && <LanguageAvatar changeSiteLanguage={changeSiteLanguage} />}
         </Navbar>
       </div>
     </>

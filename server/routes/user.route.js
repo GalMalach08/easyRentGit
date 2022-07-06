@@ -53,7 +53,12 @@ router.post("/signup", async (req, res) => {
     });
     const doc = await user.save();
     const token = await doc.generateAuthToken();
-    sendVerificationMail(doc.email, `${doc.firstname} ${doc.lastname}`, token);
+    sendVerificationMail(
+      doc.email,
+      `${doc.firstname} ${doc.lastname}`,
+      token,
+      user.preferredLang
+    );
     res
       .status(200)
       .cookie("x-access-token", token)
@@ -101,7 +106,8 @@ router.post("/resetpassword", async (req, res) => {
   const response = await sendResetPasswordEmail(
     email,
     user.firstname,
-    user.lastname
+    user.lastname,
+    user.preferredLang
   );
   if (response.success) {
     console.log("the email sent successfuly");

@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 const ChatBotComp = ({ handleChatbot }) => {
   const user = useSelector((state) => state.users.data);
   const dir = useSelector((state) => state.users.language.dir);
+
   const theme = {
     background: "#f5f8fb",
     fontFamily: "arial",
@@ -24,6 +25,7 @@ const ChatBotComp = ({ handleChatbot }) => {
     botFontColor: "#fff",
     userBubbleColor: "#fff",
     userFontColor: "#EF6C00",
+    position: "fixed",
   };
   return (
     <ThemeProvider theme={theme}>
@@ -166,7 +168,10 @@ const ChatBotComp = ({ handleChatbot }) => {
           // Summary of the details
           {
             id: "pre-review",
-            message: "נהדר! הנה סיכום של הפרטים שמלאת:",
+            message:
+              dir === "rtl"
+                ? "נהדר! הנה סיכום של הפרטים שמלאת:"
+                : "Great! here is summary of the details",
             trigger: "review",
           },
           {
@@ -177,20 +182,34 @@ const ChatBotComp = ({ handleChatbot }) => {
           },
           {
             id: "update",
-            message: "האם ברצונך לעדכן שדה כלשהו?",
+            message:
+              dir === "rtl"
+                ? "האם ברצונך לעדכן שדה כלשהו?"
+                : "Are you want to update one of the fields?",
             trigger: "update-question",
           },
           // Update if nesscessry
           {
             id: "update-question",
             options: [
-              { value: "yes", label: "כן", trigger: "update-yes" },
-              { value: "no", label: "לא", trigger: "end-message" },
+              {
+                value: "yes",
+                label: dir === "rtl" ? "כן" : "yes",
+                trigger: "update-yes",
+              },
+              {
+                value: "no",
+                label: dir === "rtl" ? "לא" : "no",
+                trigger: "end-message",
+              },
             ],
           },
           {
             id: "update-yes",
-            message: "איזה שדה ברצונך לעדכן?",
+            message:
+              dir === "rtl"
+                ? "איזה שדה ברצונך לעדכן?"
+                : "What field do you want to update ?",
             trigger: "update-fields",
           },
           {
@@ -198,11 +217,19 @@ const ChatBotComp = ({ handleChatbot }) => {
             options: [
               {
                 value: "numberOfRooms",
-                label: "מספר החדרים",
+                label: dir === "rtl" ? "מספר החדרים" : "Number of rooms",
                 trigger: "update-rooms",
               },
-              { value: "area", label: "איזור", trigger: "update-area" },
-              { value: "price", label: "מחיר", trigger: "update-price" },
+              {
+                value: "area",
+                label: dir === "rtl" ? "איזור" : "Area",
+                trigger: "update-area",
+              },
+              {
+                value: "price",
+                label: dir === "rtl" ? "מחיר" : "Price",
+                trigger: "update-price",
+              },
             ],
           },
           {
@@ -223,13 +250,17 @@ const ChatBotComp = ({ handleChatbot }) => {
           {
             id: "end-message",
             message:
-              "תודה! הפרטים נקלטו בהצלחה. אנו נדאג לעדכן אותך כשיעלו דירות רלוונטיות לאתר. מאחלים לך הרבה הצלחה במציאת הדירה הבאה שלך🥰",
+              dir === "rtl"
+                ? "תודה! הפרטים נקלטו בהצלחה. אנו נדאג לעדכן אותך כשיעלו דירות רלוונטיות לאתר. מאחלים לך הרבה הצלחה במציאת הדירה הבאה שלך🥰"
+                : "Thanks! The details were sent successfully. We will make sure to update you when relevant apartments are uploaded to the site. We wish you a lot of success in finding your next apartment🥰",
             end: true,
           },
           {
             id: "end-message-not",
             message:
-              "תודה, צוות EasyRent מאחל לך בהצלחה במציאת הדירה הבאה שלך!",
+              dir === "rtl"
+                ? "תודה, צוות EasyRent מאחל לך בהצלחה במציאת הדירה הבאה שלך!"
+                : "Thank you, the EasyRent team wishes you success in finding your next apartment!",
             end: true,
           },
         ]}

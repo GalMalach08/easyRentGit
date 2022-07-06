@@ -24,6 +24,15 @@
   display: flex;
   justify-content: space-around;
 }
+.badge {
+  margin: 0px 20px 10px 30px;
+  cursor: pointer;
+}
+@media screen and (max-width: 1000px) {
+  .badge {
+    margin: 0px 10px 10px 0px;
+  }
+}
 
 .nav_link {
   color: black;
@@ -41,6 +50,9 @@
 .nav_brand {
   color: white !important;
   margin-bottom: 10px;
+  height:100px;
+position: relative;
+bottom: 6px;
 }
 .nav_brand:hover {
   color: #707070 !important;

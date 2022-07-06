@@ -76,7 +76,7 @@ const MyAssets = (props) => {
                     <p>
                       You have
                       {notApprovedAssets.length === 1
-                        ? " one property"
+                        ? " one property "
                         : ` ${notApprovedAssets.length} properties `}
                       waiting to be approved. When the property will be
                       approved, you will receive a notification by e-mail

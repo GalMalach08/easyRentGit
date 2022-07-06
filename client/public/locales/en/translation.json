@@ -17,19 +17,19 @@
         "1": "Q&A"
     },
     "welcome": {
-        "1": "Welcome to the biggest site for renting apartment in israel"
+        "1": "Welcome to the largest website for renting apartment in Tel Aviv"
     },
     "homePageDesc1": {
         "1": "On the website you will find hundreds of apartments that are updated daily."
     },
     "homePageDesc2": {
-        "1": "We invite you to use our filtered search to see only the apartments that are relevant to you and register on the site in order to stay updated and be the first to receive the updates about the hottest apartments."
+        "1": "We invite you to use our filtered search to see only the apartments that are relevant to you and register on the website in order to stay updated and be the first to receive the updates about the hottest apartments."
     },
     "fliterboxTitle": {
         "1": "You are watching filtered results"
     },
     "homePageDesc3": {
-        "1": "An apartment owner ? Register and upload your apartment to the site so you can rent out Your apartment easily and efficientlys"
+        "1": "An apartment owner ? Register and upload your apartment to the website so you can rent out Your apartment easily and efficientlys"
     },
     "havefun": {
         "1": "Have Fun"
@@ -201,7 +201,7 @@
         "1":"One room"
     },
     "rooms":{
-        "1":"room"
+        "1":"Room"
     },
     "uploadNewImage":{
         "1":"Upload new image"
@@ -360,6 +360,18 @@
     },
     "signUpMessageError": {
         "1":"Email already in use"
+    },
+    "deletedSuccess":{
+        "1":"The propery has deleted successfully"
+    },
+    "uploadSuccess":{
+        "1":"The propery has uploaded successfully"
+    },
+    "area":{
+        "1":"Area"
+    },
+    "summary":{
+        "1":"Summary"
     }
 
 

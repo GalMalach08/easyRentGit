@@ -13,10 +13,7 @@ const LanguageAvatar = ({ changeSiteLanguage }) => {
   return (
     <>
       <Badge
-        style={{
-          margin: "0px 20px 0px 20px",
-          cursor: "pointer",
-        }}
+        className="badge"
         overlap="circular"
         onClick={() => changeSiteLanguage("en")}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -27,6 +24,8 @@ const LanguageAvatar = ({ changeSiteLanguage }) => {
               color: "black",
               fontSize: "15px",
               margin: "0px 5px",
+              width: "20px",
+              height: "20px",
             }}
             alt="Remy Sharp"
           >
@@ -39,7 +38,7 @@ const LanguageAvatar = ({ changeSiteLanguage }) => {
       </Badge>
 
       <Badge
-        style={{ margin: "0px 15px", cursor: "pointer" }}
+        className="badge"
         onClick={() => changeSiteLanguage("he")}
         overlap="circular"
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -50,6 +49,8 @@ const LanguageAvatar = ({ changeSiteLanguage }) => {
               color: "black",
               fontSize: "15px",
               cursor: "pointer",
+              width: "20px",
+              height: "20px",
             }}
             alt="Remy Sharp"
           >

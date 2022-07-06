@@ -36,25 +36,25 @@ const Home = () => {
   const content = [
     {
       id: 1,
-      title: dir === "rtl" ? "דירות למטרת סאבלט" : "Apartment for Sublet",
+      title: dir === "rtl" ? "דירות למטרת סאבלט" : "Apartments for Sublet",
       body:
         dir === "rtl"
           ? `חולמים להעביר את הקיץ בחופים של תל אביב?
         אולי בדירה מהממת בצפון?
           אצלנו תמצאו מאגר של מעל ${subletCount} דירות המיועדות לסאבלט, אז למה אתם מחכים ?`
           : `Dreaming of spending the summer on the beaches of Tel Aviv?
-          Maybe in a stunning apartment up north?
-            With us you will find a database of over ${subletCount} apartments for sublet, so what are you waiting for? `,
+          Maybe in a stunning apartment in the north of the city?
+            With us you will find over ${subletCount} apartments for sublet, so what are you WATING FOR? `,
       image:
         "https://thumbs.dreamstime.com/b/condominium-apartment-building-isolated-white-background-d-illustration-condominium-apartment-building-isolated-white-141265126.jpg",
     },
     {
       id: 2,
-      title: dir === "rtl" ? "דירות להשכרה" : "Apartment for Rent",
+      title: dir === "rtl" ? "דירות להשכרה" : "Apartments for Rent",
       body:
         dir === "rtl"
           ? `בעל הדירה העלה לכם את החוזה? מחפשים לעבור לדירה חדשה? מעל ${rentCount} דירות להשכרה בלחיצת כפתור `
-          : `Did the landlord bring you the contract? Looking to move to a new apartment? Above ${rentCount} apartments for rent at the click of a button`,
+          : `Has the owner raised your rent? Looking to move to a new apartment? Above ${rentCount} apartments for rent on ONE CLICK`,
       image:
         "https://media.istockphoto.com/photos/modern-business-office-building-isolated-on-white-background-picture-id467820575?k=20&m=467820575&s=612x612&w=0&h=46vxEGz0ycVI8QJneiZ5Anl7EYHzN_hmJIBqcSH1wXQ=",
     },

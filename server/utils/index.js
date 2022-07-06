@@ -31,7 +31,12 @@ const checkUsersPrefrences = async (asset) => {
       minRoom <= asset.roomsNumber <= maxRoom
     ) {
       const user = await User.findById(pref.userId);
-      sendRelevantAssetEmail(user.email, asset, user.firstname);
+      sendRelevantAssetEmail(
+        user.email,
+        asset,
+        user.firstname,
+        user.preferredLang
+      );
     }
   });
 };

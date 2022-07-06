@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // Redux
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signinUser,
@@ -90,6 +90,7 @@ const SignIn = (props) => {
   const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   // Formik
   const formik = useFormik({
@@ -139,7 +140,7 @@ const SignIn = (props) => {
       .unwrap()
       .then(({ auth }) => {
         if (auth) {
-          navigate("/");
+          navigate(prevUrl);
         } else {
           const newUserObj = {
             email,
@@ -160,8 +161,8 @@ const SignIn = (props) => {
   };
 
   useEffect(() => {
-    setPrevUrl(props.location ? props.location.state.path : "/");
-  }, [props.location]);
+    setPrevUrl(location.state ? location.state.pathname : "/");
+  }, []);
 
   return (
     <>
