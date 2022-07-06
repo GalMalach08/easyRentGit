@@ -172,7 +172,7 @@ const UploadAsset = (props) => {
 
     price: Yup.number().required(`${t("priceError.1")}`),
     notes: Yup.string().max(40, `${t("notesError.1")}`),
-    notesEnglish: Yup.string().max(40, `${t("notesError.1")}`),
+    englishNotes: Yup.string().max(40, `${t("notesError.1")}`),
   });
 
   // Handle the date state

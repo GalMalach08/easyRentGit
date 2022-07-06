@@ -139,7 +139,7 @@ const SignUp = () => {
   const signUpUser = async (values) => {
     try {
       setButtonDisabled(true);
-      dispatch(registerUser(values))
+      dispatch(registerUser({ ...values, preferredLang }))
         .unwrap()
         .then(({ data, message }) => {
           if (data) {
@@ -202,7 +202,7 @@ const SignUp = () => {
               lastname: "",
               phoneNumber: "",
             }}
-            onSubmit={(values) => signUpUser({ ...values, preferredLang })}
+            onSubmit={(values) => signUpUser(values)}
             validationSchema={validationSchema}
             enableReinitialize={true}
           >
@@ -264,7 +264,7 @@ const SignUp = () => {
                         margin: "2px",
                       }}
                     >
-                      {createPasswordLabel(score)}
+                      {createPasswordLabel(score, dir)}
                     </p>
 
                     <TextField
