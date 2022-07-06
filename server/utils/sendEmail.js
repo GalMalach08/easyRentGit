@@ -144,9 +144,7 @@ const sendAssetApprovedEmail = async (
   preferredLang
 ) => {
   try {
-    console.log(preferredLang);
     const isEnglish = preferredLang === "en" ? true : false;
-    console.log(isEnglish);
 
     let mailGenerator = new Mailgen({
       theme: "salted",
@@ -176,7 +174,7 @@ const sendAssetApprovedEmail = async (
             text: isEnglish
               ? "Click here to see the property"
               : "כנס לקישור על מנת לצפות בנכס",
-            link: `https://easyrent2023.herokuapp.com/asset/${asset._id}`,
+            link: `https://easyrent2023.herokuapp.com/myassets/${asset.userId}`,
           },
         },
         outro: isEnglish
