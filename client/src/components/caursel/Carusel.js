@@ -15,6 +15,7 @@ const Carusel = ({ images, assetPage }) => {
       fade
       className={assetPage ? classes.Bigslider : classes.regularSlider}
       interval={2000}
+      controls={images && images.length > 1 ? true : false}
     >
       {images &&
         images.map((image, i) => (
