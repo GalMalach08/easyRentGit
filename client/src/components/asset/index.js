@@ -48,6 +48,8 @@ const Asset = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const dir = useSelector((state) => state.users.language.dir);
+  const user = useSelector((state) => state.users.data);
+
   const { t } = useTranslation();
   const { id } = params;
 
@@ -175,7 +177,7 @@ const Asset = () => {
                 </div>
 
                 {/* Buttons */}
-                {asset.notApproved && (
+                {asset.notApproved && user.isAdmin && (
                   <div className="btns_div">
                     <Button
                       variant="success"

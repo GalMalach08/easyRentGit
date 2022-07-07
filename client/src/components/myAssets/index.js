@@ -37,18 +37,18 @@ const MyAssets = (props) => {
 
   return (
     <div className="container" dir={dir}>
-      <div className="header myasset_header">
-        <h1>{dir === "rtl" ? "הנכסים שלי." : "My assets."}</h1>
-      </div>
-      <LegendBox
-        notApprovedLength={notApprovedAssets.length}
-        approvedLength={assets.length - notApprovedAssets.length}
-      />{" "}
       <Grid container>
         {loading ? (
           <Loader />
         ) : (
           <>
+            <div className="header myasset_header">
+              <h1>{dir === "rtl" ? "הנכסים שלי." : "My assets."}</h1>
+            </div>
+            <LegendBox
+              notApprovedLength={notApprovedAssets.length}
+              approvedLength={assets.length - notApprovedAssets.length}
+            />{" "}
             {notApprovedAssets.length !== 0 && (
               <div className="container m-auto mt-5">
                 {dir === "rtl" ? (
