@@ -281,7 +281,9 @@ const SignIn = (props) => {
                       type="button"
                       className="loginBtn loginBtn--google mb-3"
                     >
-                      התחבר באמצעות גוגל
+                      {dir === "rtl"
+                        ? "התחבר באמצעות גוגל"
+                        : "Log in by google"}
                     </button>
                   </>
                 )}
