@@ -283,7 +283,7 @@ const SignIn = (props) => {
                     >
                       {dir === "rtl"
                         ? "התחבר באמצעות גוגל"
-                        : "Log in by google"}
+                        : "Log in with google"}
                     </button>
                   </>
                 )}
