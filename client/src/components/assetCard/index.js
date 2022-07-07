@@ -101,6 +101,7 @@ const AssetCard = ({ asset, assetPage }) => {
             border: asset.notApproved
               ? " 2px solid red"
               : " 2px solid lightgrey",
+            height: "750px",
           }}
         >
           {/* Image Carusel */}
