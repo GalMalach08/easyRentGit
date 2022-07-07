@@ -86,8 +86,10 @@ export const getAssetsOfUser = createAsyncThunk(
   "assets/getAssetsOfUser",
   async (id) => {
     const response = await fetch(`/asset/byuser/${id}`);
-    const { assets } = await response.json();
-    return { assets };
+    const data = await response.json();
+    const res = await fetch(`/asset/notapproved/byuser/${id}`);
+    const info = await res.json();
+    return { assets: [...info.notApprovedAssets, ...data.assets] };
   }
 );
 

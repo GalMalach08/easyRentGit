@@ -95,11 +95,13 @@ const AssetCard = ({ asset, assetPage }) => {
       <Link to={`/asset/${asset._id}`}>
         <div
           className="contain"
-          style={
-            assetPage
-              ? { cursor: "auto", width: "600px" }
-              : { cursor: "cursor" }
-          }
+          style={{
+            cursor: assetPage ? "auto" : "cursor",
+            width: assetPage ? "600px" : "",
+            border: asset.notApproved
+              ? " 2px solid red"
+              : " 2px solid lightgrey",
+          }}
         >
           {/* Image Carusel */}
           <Carousel images={asset.images} assetPage={assetPage} />

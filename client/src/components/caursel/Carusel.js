@@ -13,7 +13,7 @@ const Carusel = ({ images, assetPage }) => {
   return (
     <Carousel
       fade
-      className={assetPage ? classes.Bigslider : classes.regularSlider}
+      className={classes.regularSlider}
       interval={2000}
       controls={images && images.length > 1 ? true : false}
     >

@@ -6,3 +6,12 @@
 .myasset_header {
   margin-top:40px;
 }
+.MuiSvgIcon-fontSizeSmall {
+  font-size: 0.7rem !important;
+} 
+.legend_box {
+  margin:5px 10px;
+}
+.legend_span {
+  margin:0px 3px 10px;
+}
