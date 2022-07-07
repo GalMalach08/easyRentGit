@@ -22,7 +22,7 @@ const sendResetPasswordEmail = async (
   preferredLang
 ) => {
   try {
-    const isEnglish = preferredLang === "en" ? true : false;
+    const isEnglish = preferredLang === "he" ? false : true;
 
     const password = Math.random().toString(36).slice(2);
 
@@ -85,7 +85,7 @@ const sendRelevantAssetEmail = async (
   preferredLang
 ) => {
   try {
-    const isEnglish = preferredLang === "en" ? true : false;
+    const isEnglish = preferredLang === "he" ? false : true;
     let mailGenerator = new Mailgen({
       theme: "salted",
       textDirection: isEnglish ? "ltr" : "rtl",
@@ -144,7 +144,7 @@ const sendAssetApprovedEmail = async (
   preferredLang
 ) => {
   try {
-    const isEnglish = preferredLang === "en" ? true : false;
+    const isEnglish = preferredLang === "he" ? false : true;
 
     let mailGenerator = new Mailgen({
       theme: "salted",
@@ -159,7 +159,7 @@ const sendAssetApprovedEmail = async (
     const email = {
       body: {
         title: isEnglish
-          ? `<h2>Hello ${name} your propery uploaded successfully to EasyRent websitw </h2>`
+          ? `<h2>Hello ${name} your propery uploaded successfully to EasyRent website </h2>`
           : `<h2>שלום ${name} הנכס שלך הועלה בהצלחה לאתר EasyRent </h2> `,
         action: {
           instructions: isEnglish
@@ -203,7 +203,7 @@ const sendAssetApprovedEmail = async (
 // Send when the asset is approved
 const sendVerificationMail = async (userEmail, name, token, preferredLang) => {
   try {
-    const isEnglish = preferredLang === "en" ? true : false;
+    const isEnglish = preferredLang === "he" ? false : true;
     let mailGenerator = new Mailgen({
       theme: "salted",
       textDirection: isEnglish ? "ltr" : "rtl",
