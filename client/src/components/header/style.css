@@ -24,12 +24,16 @@
   display: flex;
   justify-content: space-around;
 }
-.badge {
-  margin: 0px 20px 10px 30px;
+.badge_english {
+  margin: 0px 40px 10px 40px;
+  cursor: pointer;
+}
+.badge_hebrew {
+  margin: 0px 10px 10px 10px;
   cursor: pointer;
 }
 @media screen and (max-width: 1000px) {
-  .badge {
+  .badge_english {
     margin: 0px 10px 10px 0px;
   }
 }

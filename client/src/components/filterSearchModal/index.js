@@ -612,7 +612,7 @@ const ShareModal = ({
               fullWidth
             >
               {" "}
-              בצע סינון{" "}
+              {dir === "rtl" ? "בצע סינון" : "Click to filter"}{" "}
             </button>
           </form>
         </Modal.Body>

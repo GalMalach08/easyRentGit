@@ -13,7 +13,7 @@ const LanguageAvatar = ({ changeSiteLanguage }) => {
   return (
     <>
       <Badge
-        className="badge"
+        className="badge_english"
         overlap="circular"
         onClick={() => changeSiteLanguage("en")}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -38,7 +38,7 @@ const LanguageAvatar = ({ changeSiteLanguage }) => {
       </Badge>
 
       <Badge
-        className="badge"
+        className="badge_hebrew"
         onClick={() => changeSiteLanguage("he")}
         overlap="circular"
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
