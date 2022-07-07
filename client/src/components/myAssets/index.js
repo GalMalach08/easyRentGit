@@ -5,16 +5,12 @@ import {
   getAssetsOfUser,
   getNotApprovedAssetsOfUser,
 } from "../../store/actions/assets.thunk";
-import Url from "../Url";
+import LegendBox from "./LegendBox";
 import AssetCard from "../assetCard";
 import { Grid, Grow } from "@material-ui/core";
 import { Alert } from "react-bootstrap";
 import { Loader } from "../../utils/tools";
 import "./style.css";
-// material ui style
-import Box from "@mui/material/Box";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { red, grey } from "@mui/material/colors";
 
 const MyAssets = (props) => {
   const user = useSelector((state) => state.users.data);
@@ -44,33 +40,15 @@ const MyAssets = (props) => {
       <div className="header myasset_header">
         <h1>{dir === "rtl" ? "הנכסים שלי." : "My assets."}</h1>
       </div>
-      <Box
-        sx={{
-          width: 400,
-          height: 50,
-          border: "1px solid grey",
-          display: "flex",
-          padding: "10px",
-          alignItems: "center",
-        }}
-      >
-        <h5 style={{ marginTop: "5px" }}>מקרא:</h5>
-
-        <div className="legend_box">
-          <FiberManualRecordIcon fontSize="small" sx={{ color: red[500] }} />
-          <span className="legend_span">נכסים לא מאושרים</span>
-        </div>
-        <div className="legend_box">
-          <FiberManualRecordIcon fontSize="small" sx={{ color: grey[500] }} />
-          <span className="legend_span">נכסים מאושרים</span>
-        </div>
-      </Box>
+      <LegendBox
+        notApprovedLength={notApprovedAssets.length}
+        approvedLength={assets.length - notApprovedAssets.length}
+      />{" "}
       <Grid container>
         {loading ? (
           <Loader />
         ) : (
           <>
-            {" "}
             {notApprovedAssets.length !== 0 && (
               <div className="container m-auto mt-5">
                 {dir === "rtl" ? (
