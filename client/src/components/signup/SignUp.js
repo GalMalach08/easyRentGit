@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 // import { setIsAuth } from "../../store/actions";
 import { registerUser } from "../../store/actions/user.thunk";
+
 import RegisterModal from "./registrationModal/RegistrationModal";
 // material ui
 import { makeStyles } from "@material-ui/core/styles";
@@ -222,6 +223,11 @@ const SignUp = () => {
                       fullWidth
                       {...props.getFieldProps("email")}
                       {...errorHelper(props, "email")}
+                      autoComplete="off"
+                      renderinput={(params) => {
+                        const inputProps = params.inputProps;
+                        inputProps.autoComplete = "off";
+                      }}
                     />
 
                     <TextField

@@ -3,9 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 export const updateAssetForm = (theme) => ({
   formGrid: {
     margin: "50px auto 10px ",
+    paddingTop: "10px",
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    margin: theme.spacing(4, 4),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -17,6 +18,7 @@ export const updateAssetForm = (theme) => ({
   textField: {
     margin: "15px 10px",
     width: "100%",
+    paddingbtop: "15px",
   },
   select: {
     margin: "5px 10px 3px",

@@ -63,7 +63,7 @@ const Home = () => {
     dispatch(getAssetsByCategory({ id, skip, limit }))
       .unwrap()
       .then(({ assets }) => {
-        if (!assets) navigate("/5");
+        if (!assets) navigate("/");
       });
   };
 

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import HomeCard from "./HomeCard";
+import ChatBot from "../Chat";
 import { getNumberOfAssets } from "../../store/actions/assets.thunk";
 import ChangePasswordModal from "../assetMain/changePasswordModal";
+import { setUserPrefrences } from "../../store/actions/user.thunk";
+
 // Translator
 import { useTranslation } from "react-i18next";
 import "./style.css";
@@ -14,6 +17,7 @@ const Home = () => {
   const [changedPasswordModal, setChangedPasswordModal] = useState(false);
   const user = useSelector((state) => state.users.data);
   const dir = useSelector((state) => state.users.language.dir);
+  const isVerified = useSelector((state) => state.users.data.isVerified);
 
   const { t, i18n } = useTranslation();
 
@@ -25,12 +29,26 @@ const Home = () => {
         setSubletCount(subletCount);
       });
   };
+  const handleChatbot = ({ values }) => {
+    if (values[0] !== "not") {
+      const [, numberOfRooms, price, area] = values;
+      dispatch(
+        setUserPrefrences({
+          userId: user._id,
+          roomsNumber: numberOfRooms,
+          price,
+          area,
+        })
+      );
+    }
+  };
 
   useEffect(() => {
     if (user.isJustChangedPassword) {
       setChangedPasswordModal(true);
     }
     getAssetsCount();
+    window.scrollTo(0, 0);
   }, []);
 
   const content = [
@@ -88,6 +106,11 @@ const Home = () => {
           ))}
         </div>
       </div>
+      {isVerified && (
+        <div className="chatbot">
+          <ChatBot handleChatbot={handleChatbot} />
+        </div>
+      )}
       {/* Modals */}
       <ChangePasswordModal
         changePasswordModal={changedPasswordModal}

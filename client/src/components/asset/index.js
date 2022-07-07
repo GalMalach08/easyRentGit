@@ -205,7 +205,9 @@ const Asset = () => {
                     className="not_relevant"
                     onClick={() => setNotRelevantModal(true)}
                   >
-                    הנכס לא רלוונטי? עדכנו אותנו
+                    {dir === "rtl"
+                      ? "הנכס לא רלוונטי? עדכנו אותנו"
+                      : "The property is not relevant ? let us know"}
                   </h6>
                 )}
                 <NotRelvantModal

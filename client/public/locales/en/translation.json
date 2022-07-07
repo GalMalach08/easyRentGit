@@ -212,6 +212,12 @@
     "updateProperty":{
         "1": "Update Property"
     },
+    "dateBeforeError" : {
+        "1":"The enter date is before or equal the exit date"
+    },
+    "dateSameError" : {
+        "1":"The enter date is equal the exit date"
+    },
     "uploadProperty":{
         "1": "Updload Property"
     },
@@ -375,6 +381,9 @@
     },
     "ownerNPhoneError2":{
         "1":"Please enter valid phone number"
+    },
+    "priceMinError":{
+        "1":"Please enter positive number"
     }
 
 

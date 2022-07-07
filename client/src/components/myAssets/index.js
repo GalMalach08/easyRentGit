@@ -49,6 +49,9 @@ const MyAssets = (props) => {
 
   return (
     <div className="container" dir={dir}>
+      <div className="header myasset_header">
+        <h1>{dir === "rtl" ? "הנכסים שלי." : "My assets."}</h1>
+      </div>
       <Grid container>
         {loading ? (
           <Loader />

@@ -17,7 +17,6 @@ const ChatBotComp = ({ handleChatbot }) => {
 
   const theme = {
     background: "#f5f8fb",
-    fontFamily: "arial",
     headerBgColor: "#EF6C00",
     headerFontColor: "#fff",
     headerFontSize: "15px",
@@ -33,6 +32,8 @@ const ChatBotComp = ({ handleChatbot }) => {
         handleEnd={handleChatbot}
         headerTitle="EasyBot"
         floating={true}
+        inputStyle={{ display: "none" }}
+        hideSubmitButton={true}
         steps={[
           // Welcome message
           {

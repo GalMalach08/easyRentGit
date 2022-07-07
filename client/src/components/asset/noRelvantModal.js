@@ -64,13 +64,19 @@ const NotRelvantModal = ({
       >
         <Modal.Header>
           <Modal.Title style={{ textAlign: "center", width: "100%" }}>
-            <h4>אנא פרט את הסיבה שבגללה הנכס לא רלוונטי</h4>
+            <h4>
+              {dir === "rtl"
+                ? "אנא פרט את הסיבה שבגללה הנכס לא רלוונטי"
+                : "Please explain the reason this propery is not relevant anymore"}
+            </h4>
           </Modal.Title>{" "}
         </Modal.Header>
         <Modal.Body style={{ textAlign: "center" }}>
           <TextareaAutosize
             rowsMin={3}
-            placeholder=" מינימום 20 תווים.."
+            placeholder={
+              dir === "rtl" ? " מינימום 20 תווים.." : "Min 20 characters"
+            }
             name="textValue"
             style={{ width: "80%", padding: "7px" }}
             onChange={(e) =>
@@ -92,7 +98,7 @@ const NotRelvantModal = ({
             onClick={() => sendMessage()}
             style={{ width: "50%", margin: "10px auto" }}
           >
-            שלח
+            {dir === "rtl" ? "שלח" : "Send"}
           </button>
         </Modal.Body>
       </Modal>

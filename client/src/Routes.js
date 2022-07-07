@@ -141,7 +141,7 @@ const Router = () => {
                     </AuthGuard>
                   }
                 />
-                {/* <Route path="*" element={<Navigate to="/5" />} /> */}
+                <Route path="*" element={<Navigate to="/" />} />
               </Routes>
               <ToastContainer />
             </BrowserRouter>

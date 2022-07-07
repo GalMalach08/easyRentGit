@@ -15,7 +15,7 @@ import AssetDeletedModal from "./AssetDeltedModal";
 import AreYouSureModal from "../areYouSureModal";
 import AlertBox from "./AlertBox";
 // Utils
-import { Loader, phoneRegex } from "../../utils/tools";
+import { Loader, phoneRegex, toastify } from "../../utils/tools";
 // Translator
 import { useTranslation } from "react-i18next";
 // Material ui components
@@ -172,7 +172,9 @@ const UploadAsset = (props) => {
       }),
     englishAddress: Yup.string().required(`${t("assetEnglishError.1")}`),
 
-    price: Yup.number().required(`${t("priceError.1")}`),
+    price: Yup.number()
+      .required(`${t("priceError.1")}`)
+      .test("Is positive?", `${t("priceMinError.1")}`, (value) => value > 0),
     notes: Yup.string().max(40, `${t("notesError.1")}`),
     englishNotes: Yup.string().max(40, `${t("notesError.1")}`),
   });
@@ -184,6 +186,12 @@ const UploadAsset = (props) => {
   // Handle rooms and time states
   const handleTimeChange = (e, index) => setTimeValue(index);
   const handleRoomsChange = (e, index) => setRoomsValue(index);
+
+  function isBefore(date1, date2) {
+    if (date1 > date2 || date1.toDateString() === date2.toDateString())
+      return false;
+    return true;
+  }
 
   // Handle image change
   const handleChangeImage = (e, setFieldValue) => {
@@ -267,6 +275,10 @@ const UploadAsset = (props) => {
   // Submit the new asset and add to database
   const handeSubmit = async (values) => {
     try {
+      if (!isBefore(enterDate, exitDate)) {
+        toastify("ERROR", `${t("dateBeforeError.1")}`);
+        return;
+      }
       setIsLoading(true);
       setbuttonDisabled(true);
       const pricePer = caculatePricePer();
@@ -425,6 +437,9 @@ const UploadAsset = (props) => {
       square
       className={classes.formGrid}
     >
+      <h1 className="header myasset_header">
+        {isUpdate ? `${t("updateProperty.1")}` : `${t("uploadProperty.1")}`}
+      </h1>
       {user.isVerified ? (
         <div className={classes.paper} dir={dir}>
           <img
@@ -576,6 +591,7 @@ const UploadAsset = (props) => {
                   variant="outlined"
                   margin="normal"
                   fullWidth
+                  min="0"
                   label={`*${t("price.1")}`}
                   name="price"
                   {...props.getFieldProps("price")}
@@ -819,6 +835,7 @@ const UploadAsset = (props) => {
                   disabled={
                     area !== "0" &&
                     props.values.price &&
+                    !props.errors.price &&
                     props.values.owner &&
                     props.values.address &&
                     !props.errors.address &&
