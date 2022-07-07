@@ -428,455 +428,462 @@ const UploadAsset = (props) => {
   }, []);
 
   return (
-    <Grid
-      dir={dir}
-      item
-      xs={10}
-      md={6}
-      component={Paper}
-      square
-      className={classes.formGrid}
-    >
-      <h1 className="header myasset_header">
-        {isUpdate ? `${t("updateProperty.1")}` : `${t("uploadProperty.1")}`}
-      </h1>
+    <>
       {user.isVerified ? (
-        <div className={classes.paper} dir={dir}>
-          <img
-            src="https://static.crozdesk.com/web_app_library/providers/logos/000/005/518/original/easyrent-1559230516-logo.png?1559230516"
-            width="100"
-            height="100"
-            crop="scale"
-            alt="cart"
-          />
-          {dir === "rtl" ? (
-            <h5 className="signup_header">
-              שלום {user.firstname}, על מנת{" "}
-              {updatedAsset ? " לעדכן את הנכס הנבחר" : " להעלות נכס חדש לאתר"},
-              אנא מלא את הפרטים הבאים:
-            </h5>
-          ) : (
-            <h5 className="signup_header">
-              Hello {user.firstname}, in order to{" "}
-              {updatedAsset ? " update the asset" : " upload new asset"} please
-              fill the details:
-            </h5>
-          )}
+        <Grid
+          dir={dir}
+          item
+          xs={10}
+          md={6}
+          component={Paper}
+          square
+          className={classes.formGrid}
+        >
+          <div className={classes.paper} dir={dir}>
+            <h1 className="header myasset_header">
+              {isUpdate
+                ? `${t("updateProperty.1")}`
+                : `${t("uploadProperty.1")}`}
+            </h1>
+            <img
+              src="https://static.crozdesk.com/web_app_library/providers/logos/000/005/518/original/easyrent-1559230516-logo.png?1559230516"
+              width="100"
+              height="100"
+              crop="scale"
+              alt="cart"
+            />
+            {dir === "rtl" ? (
+              <h5 className="signup_header">
+                שלום {user.firstname}, על מנת{" "}
+                {updatedAsset ? " לעדכן את הנכס הנבחר" : " להעלות נכס חדש לאתר"}
+                , אנא מלא את הפרטים הבאים:
+              </h5>
+            ) : (
+              <h5 className="signup_header">
+                Hello {user.firstname}, in order to{" "}
+                {updatedAsset ? " update the asset" : " upload new asset"}{" "}
+                please fill the details:
+              </h5>
+            )}
 
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            enableReinitialize={true}
-          >
-            {(props) => (
-              <form className={classes.form} autoComplete="off" dir={dir}>
-                <TextField
-                  className={classes.textField}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  label={`*${t("ownerName.1")}`}
-                  name="owner"
-                  {...props.getFieldProps("owner")}
-                  {...errorHelper(props, "owner")}
-                />
-                <TextField
-                  className={classes.textField}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  label={`*${t("phoneNumber.1")}`}
-                  name="phoneNumber"
-                  {...props.getFieldProps("phoneNumber")}
-                  {...errorHelper(props, "phoneNumber")}
-                />
-
-                <TextField
-                  className={classes.textField}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  label={`*${t("email.1")}`}
-                  name="email"
-                  {...props.getFieldProps("email")}
-                  {...errorHelper(props, "email")}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: dir === "rtl" ? "column" : "column-reverse",
-                  }}
-                >
-                  {/* Hebrew address */}
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              enableReinitialize={true}
+            >
+              {(props) => (
+                <form className={classes.form} autoComplete="off" dir={dir}>
                   <TextField
                     className={classes.textField}
                     variant="outlined"
                     margin="normal"
                     fullWidth
-                    label={`*${t("hebrewAddress.1")}`}
-                    name="address"
-                    {...props.getFieldProps("address")}
-                    {...errorHelper(props, "address")}
-                    ref={addressRef}
+                    label={`*${t("ownerName.1")}`}
+                    name="owner"
+                    {...props.getFieldProps("owner")}
+                    {...errorHelper(props, "owner")}
                   />
-                  {/* English address */}
                   <TextField
                     className={classes.textField}
                     variant="outlined"
                     margin="normal"
                     fullWidth
-                    label={`*${t("englishAddress.1")}`}
-                    name="addressEnglish"
-                    {...props.getFieldProps("englishAddress")}
-                    {...errorHelper(props, "englishAddress")}
-                    ref={addressRef}
+                    label={`*${t("phoneNumber.1")}`}
+                    name="phoneNumber"
+                    {...props.getFieldProps("phoneNumber")}
+                    {...errorHelper(props, "phoneNumber")}
                   />
-                </div>
 
-                <label className="time_label">*{t("target.1")}:</label>
-                <RadioGroup
-                  value={isSublet}
-                  onChange={(e) => {
-                    setIsSublet(e.target.value);
-                    if (e.target.value === "0") {
-                      setExitDate(
-                        new Date(
-                          new Date().setFullYear(new Date().getFullYear() + 1)
-                        )
-                      );
-                      setTimeValue(2);
-                    } else {
-                      setExitDate(new Date());
-                      setTimeValue(3);
-                    }
-                  }}
-                  className={classes.radioGroup}
-                >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio />}
-                    label={`${t("Sublet.1")}`}
-                  />
-                  <FormControlLabel
-                    value="0"
-                    control={<Radio />}
-                    label={`${t("Rent.1")}`}
-                  />
-                </RadioGroup>
-
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
+                  <TextField
                     className={classes.textField}
-                    disablePast
-                    label={`${t("enterdate.1")}`}
-                    value={enterDate ? enterDate : null}
-                    format="dd/MM/yyyy"
-                    onChange={handleEnterDateChange}
-                    minDateMessage={`${t("enterdateError.1")}`}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    label={`*${t("email.1")}`}
+                    name="email"
+                    {...props.getFieldProps("email")}
+                    {...errorHelper(props, "email")}
                   />
-                  <KeyboardDatePicker
-                    className={classes.textField}
-                    disablePast
-                    label={`${t("exitdate.1")}`}
-                    format="dd/MM/yyyy"
-                    value={exitDate ? exitDate : null}
-                    onChange={handleExitDateChange}
-                    minDateMessage={`${t("exitdateError.1")}`}
-                  />
-                </MuiPickersUtilsProvider>
-
-                <TextField
-                  type="number"
-                  className={classes.textField}
-                  variant="outlined"
-                  margin="normal"
-                  fullWidth
-                  min="0"
-                  label={`*${t("price.1")}`}
-                  name="price"
-                  {...props.getFieldProps("price")}
-                  {...errorHelper(props, "price")}
-                />
-                <label className="time_label">*{t("priceFor.1")}:</label>
-                <Tabs
-                  value={timeValue}
-                  onChange={handleTimeChange}
-                  style={{ margin: "0px 10px" }}
-                >
-                  <Tab label={`${t("dayPrice.1")}`} {...a11yProps(3)} />
-                  <Tab label={`${t("weekPrice.1")}`} {...a11yProps(2)} />
-                  <Tab label={`${t("monthPrice.1")}`} {...a11yProps(1)} />
-                  <Tab label={`${t("allPeriodPrice.1")}`} {...a11yProps(0)} />
-                </Tabs>
-
-                {/* Area */}
-                <label className="time_label">*{t("location.1")}:</label>
-
-                <Select
-                  value={area}
-                  onChange={(e) => setArea(e.target.value)}
-                  displayEmpty
-                  className={classes.select}
-                  inputProps={{ "aria-label": "Without label" }}
-                  fullWidth
-                >
-                  <MenuItem value="0" disabled>
-                    {t("enterArea.1")}
-                  </MenuItem>
-                  {menuItem.map(({ value, label }, i) => (
-                    <MenuItem key={i} value={value}>
-                      {label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText className={classes.helperText}>
-                  {t("enterAreahelperText.1")}
-                </FormHelperText>
-
-                {/* Number of rooms */}
-                <label className="time_label">*{t("maxRooms.1")}:</label>
-                <RadioGroup
-                  value={roomsValue}
-                  onChange={(e) => setRoomsValue(e.target.value)}
-                >
-                  <div className={classes.roomsTab}>
-                    {rooms1.map(({ value, label }, i) => (
-                      <FormControlLabel
-                        key={i}
-                        value={value}
-                        label={label}
-                        control={<Radio />}
-                      />
-                    ))}
-                  </div>
-                  <div className={classes.roomsTab}>
-                    {rooms2.map(({ value, label }, i) => (
-                      <FormControlLabel
-                        key={i}
-                        value={value}
-                        label={label}
-                        control={<Radio />}
-                      />
-                    ))}
-                  </div>
-                </RadioGroup>
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: dir === "rtl" ? "column" : "column-reverse",
-                  }}
-                >
-                  <div>
-                    {/*Hebrew Notes */}
-                    <TextField
-                      className={classes.textField}
-                      variant="outlined"
-                      margin="normal"
-                      fullWidth
-                      label={`${t("hebrewNotes.1")}:`}
-                      name="notes"
-                      {...props.getFieldProps("notes")}
-                      {...errorHelper(props, "notes")}
-                    />
-                    {dir === "rtl" && (
-                      <FormHelperText className={classes.helperText}>
-                        {t("notesHelperText.1")}
-                      </FormHelperText>
-                    )}
-                  </div>
-                  <div>
-                    {/*English Notes */}
-                    <TextField
-                      className={classes.textField}
-                      variant="outlined"
-                      margin="normal"
-                      fullWidth
-                      label={`${t("englishNotes.1")}:`}
-                      name="englishNotes"
-                      {...props.getFieldProps("englishNotes")}
-                      {...errorHelper(props, "englishNotes")}
-                    />
-                    {dir !== "rtl" && (
-                      <FormHelperText className={classes.helperText}>
-                        {t("notesHelperText.1")}
-                      </FormHelperText>
-                    )}
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: dir === "rtl" ? "column" : "column-reverse",
-                  }}
-                >
-                  {/* hebrew Description */}
-                  <div>
-                    <FormLabel className={classes.formLabel}>
-                      {t("hebrewDescription.1")}:
-                    </FormLabel>
-                    <TextareaAutosize
-                      className={classes.textArea}
-                      rowsMin={3}
-                      placeholder={
-                        dir === "rtl" && `${t("descriptionHelperText.1")}`
-                      }
-                      {...props.getFieldProps("description")}
-                      {...errorHelper(props, "description")}
-                    />
-                  </div>
-                  <div>
-                    {/* english Description */}
-                    <FormLabel className={classes.formLabel}>
-                      {t("englishdescription.1")}:
-                    </FormLabel>
-                    <TextareaAutosize
-                      className={classes.textArea}
-                      rowsMin={3}
-                      placeholder={
-                        dir !== "rtl" && `${t("descriptionHelperText.1")}`
-                      }
-                      {...props.getFieldProps("englishDescription")}
-                      {...errorHelper(props, "englishDescription")}
-                    />
-                  </div>
-                </div>
-
-                {/* Image */}
-                <label className="time_label">* {t("images.1")}:</label>
-
-                <Input
-                  multiple
-                  id="file"
-                  type="file"
-                  name="images"
-                  onChange={(e) =>
-                    handleChangeImage(e, props.setFieldValue, props)
-                  }
-                  hidden
-                  accept="image/*"
-                />
-                <Button
-                  type="button"
-                  style={{ display: "block", margin: "10px 10px" }}
-                  color="primary"
-                  variant="outlined"
-                >
-                  <ImageIcon className="" />
-                  <label htmlFor="file">
-                    {imageName
-                      ? `${imageName} ${dir === "rtl" ? "עלתה" : "uploaded"}`
-                      : `${t("uploadNewImage.1")}`}{" "}
-                  </label>
-                </Button>
-                <FormHelperText style={{ margin: "5px 9px 5px" }}>
-                  {t("imagesHelperText.1")}
-                  <a
-                    style={{ color: "black" }}
-                    href="https://www.iloveimg.com/resize-image"
-                    target="_blank"
-                    rel="noreferrer"
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection:
+                        dir === "rtl" ? "column" : "column-reverse",
+                    }}
                   >
-                    {" "}
-                    {t("nextLink.1")}
-                  </a>
-                </FormHelperText>
-
-                {/* Image Gallery */}
-                {galleryImages.length !== 0 && (
-                  <div className="ab">
-                    <ImageGallery
-                      items={galleryImages}
-                      showFullscreenButton={false}
-                      showPlayButton={false}
-                      isRTL={true}
-                      ref={galleryRef}
-                      originalClass="gallery_image"
+                    {/* Hebrew address */}
+                    <TextField
+                      className={classes.textField}
+                      variant="outlined"
+                      margin="normal"
+                      fullWidth
+                      label={`*${t("hebrewAddress.1")}`}
+                      name="address"
+                      {...props.getFieldProps("address")}
+                      {...errorHelper(props, "address")}
+                      ref={addressRef}
                     />
-                    <button
-                      type="button"
-                      className="middle btn btn-danger p-2"
-                      onClick={(e) =>
-                        deleteImage(
-                          e,
-                          galleryRef.current.getCurrentIndex(),
-                          props.setFieldValue
-                        )
+                    {/* English address */}
+                    <TextField
+                      className={classes.textField}
+                      variant="outlined"
+                      margin="normal"
+                      fullWidth
+                      label={`*${t("englishAddress.1")}`}
+                      name="addressEnglish"
+                      {...props.getFieldProps("englishAddress")}
+                      {...errorHelper(props, "englishAddress")}
+                      ref={addressRef}
+                    />
+                  </div>
+
+                  <label className="time_label">*{t("target.1")}:</label>
+                  <RadioGroup
+                    value={isSublet}
+                    onChange={(e) => {
+                      setIsSublet(e.target.value);
+                      if (e.target.value === "0") {
+                        setExitDate(
+                          new Date(
+                            new Date().setFullYear(new Date().getFullYear() + 1)
+                          )
+                        );
+                        setTimeValue(2);
+                      } else {
+                        setExitDate(new Date());
+                        setTimeValue(3);
+                      }
+                    }}
+                    className={classes.radioGroup}
+                  >
+                    <FormControlLabel
+                      value="1"
+                      control={<Radio />}
+                      label={`${t("Sublet.1")}`}
+                    />
+                    <FormControlLabel
+                      value="0"
+                      control={<Radio />}
+                      label={`${t("Rent.1")}`}
+                    />
+                  </RadioGroup>
+
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      className={classes.textField}
+                      disablePast
+                      label={`${t("enterdate.1")}`}
+                      value={enterDate ? enterDate : null}
+                      format="dd/MM/yyyy"
+                      onChange={handleEnterDateChange}
+                      minDateMessage={`${t("enterdateError.1")}`}
+                    />
+                    <KeyboardDatePicker
+                      className={classes.textField}
+                      disablePast
+                      label={`${t("exitdate.1")}`}
+                      format="dd/MM/yyyy"
+                      value={exitDate ? exitDate : null}
+                      onChange={handleExitDateChange}
+                      minDateMessage={`${t("exitdateError.1")}`}
+                    />
+                  </MuiPickersUtilsProvider>
+
+                  <TextField
+                    type="number"
+                    className={classes.textField}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    min="0"
+                    label={`*${t("price.1")}`}
+                    name="price"
+                    {...props.getFieldProps("price")}
+                    {...errorHelper(props, "price")}
+                  />
+                  <label className="time_label">*{t("priceFor.1")}:</label>
+                  <Tabs
+                    value={timeValue}
+                    onChange={handleTimeChange}
+                    style={{ margin: "0px 10px" }}
+                  >
+                    <Tab label={`${t("dayPrice.1")}`} {...a11yProps(3)} />
+                    <Tab label={`${t("weekPrice.1")}`} {...a11yProps(2)} />
+                    <Tab label={`${t("monthPrice.1")}`} {...a11yProps(1)} />
+                    <Tab label={`${t("allPeriodPrice.1")}`} {...a11yProps(0)} />
+                  </Tabs>
+
+                  {/* Area */}
+                  <label className="time_label">*{t("location.1")}:</label>
+
+                  <Select
+                    value={area}
+                    onChange={(e) => setArea(e.target.value)}
+                    displayEmpty
+                    className={classes.select}
+                    inputProps={{ "aria-label": "Without label" }}
+                    fullWidth
+                  >
+                    <MenuItem value="0" disabled>
+                      {t("enterArea.1")}
+                    </MenuItem>
+                    {menuItem.map(({ value, label }, i) => (
+                      <MenuItem key={i} value={value}>
+                        {label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText className={classes.helperText}>
+                    {t("enterAreahelperText.1")}
+                  </FormHelperText>
+
+                  {/* Number of rooms */}
+                  <label className="time_label">*{t("maxRooms.1")}:</label>
+                  <RadioGroup
+                    value={roomsValue}
+                    onChange={(e) => setRoomsValue(e.target.value)}
+                  >
+                    <div className={classes.roomsTab}>
+                      {rooms1.map(({ value, label }, i) => (
+                        <FormControlLabel
+                          key={i}
+                          value={value}
+                          label={label}
+                          control={<Radio />}
+                        />
+                      ))}
+                    </div>
+                    <div className={classes.roomsTab}>
+                      {rooms2.map(({ value, label }, i) => (
+                        <FormControlLabel
+                          key={i}
+                          value={value}
+                          label={label}
+                          control={<Radio />}
+                        />
+                      ))}
+                    </div>
+                  </RadioGroup>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection:
+                        dir === "rtl" ? "column" : "column-reverse",
+                    }}
+                  >
+                    <div>
+                      {/*Hebrew Notes */}
+                      <TextField
+                        className={classes.textField}
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        label={`${t("hebrewNotes.1")}:`}
+                        name="notes"
+                        {...props.getFieldProps("notes")}
+                        {...errorHelper(props, "notes")}
+                      />
+                      {dir === "rtl" && (
+                        <FormHelperText className={classes.helperText}>
+                          {t("notesHelperText.1")}
+                        </FormHelperText>
+                      )}
+                    </div>
+                    <div>
+                      {/*English Notes */}
+                      <TextField
+                        className={classes.textField}
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        label={`${t("englishNotes.1")}:`}
+                        name="englishNotes"
+                        {...props.getFieldProps("englishNotes")}
+                        {...errorHelper(props, "englishNotes")}
+                      />
+                      {dir !== "rtl" && (
+                        <FormHelperText className={classes.helperText}>
+                          {t("notesHelperText.1")}
+                        </FormHelperText>
+                      )}
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection:
+                        dir === "rtl" ? "column" : "column-reverse",
+                    }}
+                  >
+                    {/* hebrew Description */}
+                    <div>
+                      <FormLabel className={classes.formLabel}>
+                        {t("hebrewDescription.1")}:
+                      </FormLabel>
+                      <TextareaAutosize
+                        className={classes.textArea}
+                        rowsMin={3}
+                        placeholder={
+                          dir === "rtl" && `${t("descriptionHelperText.1")}`
+                        }
+                        {...props.getFieldProps("description")}
+                        {...errorHelper(props, "description")}
+                      />
+                    </div>
+                    <div>
+                      {/* english Description */}
+                      <FormLabel className={classes.formLabel}>
+                        {t("englishdescription.1")}:
+                      </FormLabel>
+                      <TextareaAutosize
+                        className={classes.textArea}
+                        rowsMin={3}
+                        placeholder={
+                          dir !== "rtl" && `${t("descriptionHelperText.1")}`
+                        }
+                        {...props.getFieldProps("englishDescription")}
+                        {...errorHelper(props, "englishDescription")}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Image */}
+                  <label className="time_label">* {t("images.1")}:</label>
+
+                  <Input
+                    multiple
+                    id="file"
+                    type="file"
+                    name="images"
+                    onChange={(e) =>
+                      handleChangeImage(e, props.setFieldValue, props)
+                    }
+                    hidden
+                    accept="image/*"
+                  />
+                  <Button
+                    type="button"
+                    style={{ display: "block", margin: "10px 10px" }}
+                    color="primary"
+                    variant="outlined"
+                  >
+                    <ImageIcon className="" />
+                    <label htmlFor="file">
+                      {imageName
+                        ? `${imageName} ${dir === "rtl" ? "עלתה" : "uploaded"}`
+                        : `${t("uploadNewImage.1")}`}{" "}
+                    </label>
+                  </Button>
+                  <FormHelperText style={{ margin: "5px 9px 5px" }}>
+                    {t("imagesHelperText.1")}
+                    <a
+                      style={{ color: "black" }}
+                      href="https://www.iloveimg.com/resize-image"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {" "}
+                      {t("nextLink.1")}
+                    </a>
+                  </FormHelperText>
+
+                  {/* Image Gallery */}
+                  {galleryImages.length !== 0 && (
+                    <div className="ab">
+                      <ImageGallery
+                        items={galleryImages}
+                        showFullscreenButton={false}
+                        showPlayButton={false}
+                        isRTL={true}
+                        ref={galleryRef}
+                        originalClass="gallery_image"
+                      />
+                      <button
+                        type="button"
+                        className="middle btn btn-danger p-2"
+                        onClick={(e) =>
+                          deleteImage(
+                            e,
+                            galleryRef.current.getCurrentIndex(),
+                            props.setFieldValue
+                          )
+                        }
+                      >
+                        {dir === "rtl" ? "לחץ למחיקה" : "Delete"}
+                      </button>
+                    </div>
+                  )}
+                  {props.errors.image && props.touched.image ? (
+                    <div className="error">{props.errors.image}</div>
+                  ) : null}
+
+                  {/* Error Alert */}
+                  <Collapse in={openAlert}>
+                    <Alert
+                      severity="error"
+                      action={
+                        <IconButton
+                          color="inherit"
+                          size="small"
+                          onClick={() => setOpenAlert(false)}
+                        >
+                          {" "}
+                          <CloseIcon fontSize="inherit" />{" "}
+                        </IconButton>
                       }
                     >
-                      {dir === "rtl" ? "לחץ למחיקה" : "Delete"}
-                    </button>
-                  </div>
-                )}
-                {props.errors.image && props.touched.image ? (
-                  <div className="error">{props.errors.image}</div>
-                ) : null}
-
-                {/* Error Alert */}
-                <Collapse in={openAlert}>
-                  <Alert
-                    severity="error"
-                    action={
-                      <IconButton
-                        color="inherit"
-                        size="small"
-                        onClick={() => setOpenAlert(false)}
-                      >
-                        {" "}
-                        <CloseIcon fontSize="inherit" />{" "}
-                      </IconButton>
+                      {message}
+                    </Alert>
+                  </Collapse>
+                  <Button
+                    disabled={
+                      area !== "0" &&
+                      props.values.price &&
+                      !props.errors.price &&
+                      props.values.owner &&
+                      props.values.address &&
+                      !props.errors.address &&
+                      props.values.englishAddress &&
+                      !props.errors.englishAddress &&
+                      props.values.phoneNumber &&
+                      imagesArr.length !== 0 &&
+                      !buttonDisabled
+                        ? false
+                        : true
+                    }
+                    className="m-3"
+                    style={{ width: `${updatedAsset ? "44%" : "95%"}` }}
+                    variant="contained"
+                    color="primary"
+                    onClick={() =>
+                      checkIfSure(
+                        updatedAsset ? "update" : "upload",
+                        props.values
+                      )
                     }
                   >
-                    {message}
-                  </Alert>
-                </Collapse>
-                <Button
-                  disabled={
-                    area !== "0" &&
-                    props.values.price &&
-                    !props.errors.price &&
-                    props.values.owner &&
-                    props.values.address &&
-                    !props.errors.address &&
-                    props.values.englishAddress &&
-                    !props.errors.englishAddress &&
-                    props.values.phoneNumber &&
-                    imagesArr.length !== 0 &&
-                    !buttonDisabled
-                      ? false
-                      : true
-                  }
-                  className="m-3"
-                  style={{ width: `${updatedAsset ? "44%" : "95%"}` }}
-                  variant="contained"
-                  color="primary"
-                  onClick={() =>
-                    checkIfSure(
-                      updatedAsset ? "update" : "upload",
-                      props.values
-                    )
-                  }
-                >
-                  {updatedAsset
-                    ? `${t("updateProperty.1")}`
-                    : `${t("uploadProperty.1")}`}
-                </Button>
-                {updatedAsset && (
-                  <Button
-                    className="m-3"
-                    style={{ width: "44%" }}
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => checkIfSure("delete")}
-                  >
-                    {t("deleteProperty.1")}
+                    {updatedAsset
+                      ? `${t("updateProperty.1")}`
+                      : `${t("uploadProperty.1")}`}
                   </Button>
-                )}
-              </form>
-            )}
-          </Formik>
-        </div>
+                  {updatedAsset && (
+                    <Button
+                      className="m-3"
+                      style={{ width: "44%" }}
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => checkIfSure("delete")}
+                    >
+                      {t("deleteProperty.1")}
+                    </Button>
+                  )}
+                </form>
+              )}
+            </Formik>
+          </div>
+        </Grid>
       ) : (
         <>
           <AlertBox />
@@ -904,7 +911,7 @@ const UploadAsset = (props) => {
         modalType={type}
       />
       {isLoading && <Loader />}
-    </Grid>
+    </>
   );
 };
 

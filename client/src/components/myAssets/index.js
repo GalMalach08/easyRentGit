@@ -108,7 +108,7 @@ const MyAssets = (props) => {
                       </Alert>
                     ) : (
                       <Alert variant="success">
-                        <Alert.Heading>שלום {user.firstname}</Alert.Heading>
+                        <Alert.Heading>Hello {user.firstname}</Alert.Heading>
                         <p>You do not have any assets uploaded to the site</p>
 
                         <hr />
