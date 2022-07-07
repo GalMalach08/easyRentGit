@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
+// React redux
 import { useDispatch, useSelector } from "react-redux";
+import { getNumberOfAssets } from "../../store/actions/assets.thunk";
+import { setUserPrefrences } from "../../store/actions/user.thunk";
+// Components
 import HomeCard from "./HomeCard";
 import ChatBot from "../Chat";
-import { getNumberOfAssets } from "../../store/actions/assets.thunk";
 import ChangePasswordModal from "../assetMain/changePasswordModal";
-import { setUserPrefrences } from "../../store/actions/user.thunk";
-
+// Utils
+import { Loader } from "../../utils/tools";
 // Translator
 import { useTranslation } from "react-i18next";
+// Stylr
 import "./style.css";
 
 const Home = () => {
@@ -15,18 +19,24 @@ const Home = () => {
   const [rentCount, setRentCount] = useState(0);
   const [subletCount, setSubletCount] = useState(0);
   const [changedPasswordModal, setChangedPasswordModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.users.data);
   const dir = useSelector((state) => state.users.language.dir);
   const isVerified = useSelector((state) => state.users.data.isVerified);
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const getAssetsCount = () => {
+    setLoading(true);
     dispatch(getNumberOfAssets())
       .unwrap()
       .then(({ rentCount, subletCount }) => {
         setRentCount(rentCount);
         setSubletCount(subletCount);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
       });
   };
   const handleChatbot = ({ values }) => {
@@ -78,45 +88,53 @@ const Home = () => {
     },
   ];
   return (
-    <div dir={dir}>
-      {/* Header */}
-      <header className="styled_header">
-        <div className="styled_container">
-          <div className="styled_nav">
-            <div className="styled_flex">
-              <div>
-                <h1> {t("welcome.1")}</h1>
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div dir={dir}>
+          {/* Header */}
+          <header className="styled_header">
+            <div className="styled_container">
+              <div className="styled_nav">
+                <div className="styled_flex">
+                  <div>
+                    <h1> {t("welcome.1")}</h1>
 
-                <h5>{t("homePageDesc1.1")}</h5>
+                    <h5>{t("homePageDesc1.1")}</h5>
 
-                <h5 style={{ lineHeight: "1.5" }}>{t("homePageDesc2.1")}</h5>
-                <h5> {t("homePageDesc3.1")}</h5>
-                <h2 style={{ textAlign: "center", marginTop: "10px" }}>
-                  {t("havefun.1")}😎
-                </h2>
+                    <h5 style={{ lineHeight: "1.5" }}>
+                      {t("homePageDesc2.1")}
+                    </h5>
+                    <h5> {t("homePageDesc3.1")}</h5>
+                    <h2 style={{ textAlign: "center", marginTop: "10px" }}>
+                      {t("havefun.1")}😎
+                    </h2>
+                  </div>
+                </div>
               </div>
             </div>
+          </header>
+          <div className="styled_container">
+            <div className="styled_flex">
+              {content.map((item, i) => (
+                <HomeCard item={item} />
+              ))}
+            </div>
           </div>
-        </div>
-      </header>
-      <div className="styled_container">
-        <div className="styled_flex">
-          {content.map((item, i) => (
-            <HomeCard item={item} />
-          ))}
-        </div>
-      </div>
-      {isVerified && (
-        <div className="chatbot">
-          <ChatBot handleChatbot={handleChatbot} />
+          {isVerified && (
+            <div className="chatbot">
+              <ChatBot handleChatbot={handleChatbot} />
+            </div>
+          )}
+          {/* Modals */}
+          <ChangePasswordModal
+            changePasswordModal={changedPasswordModal}
+            setChangedPasswordModal={setChangedPasswordModal}
+          />
         </div>
       )}
-      {/* Modals */}
-      <ChangePasswordModal
-        changePasswordModal={changedPasswordModal}
-        setChangedPasswordModal={setChangedPasswordModal}
-      />
-    </div>
+    </>
   );
 };
 
