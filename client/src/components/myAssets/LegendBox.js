@@ -12,7 +12,7 @@ const LegendBox = ({ notApprovedLength, approvedLength }) => {
     <div>
       <Box
         sx={{
-          maxWidth: 600,
+          maxWidth: 550,
           height: 50,
           border: "1px solid grey",
           display: "flex",

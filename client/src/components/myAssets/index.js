@@ -45,10 +45,13 @@ const MyAssets = (props) => {
             <div className="header myasset_header">
               <h1>{dir === "rtl" ? "הנכסים שלי." : "My assets."}</h1>
             </div>
-            <LegendBox
-              notApprovedLength={notApprovedAssets.length}
-              approvedLength={assets.length - notApprovedAssets.length}
-            />{" "}
+            <div style={{ width: "100%" }}>
+              <LegendBox
+                notApprovedLength={notApprovedAssets.length}
+                approvedLength={assets.length - notApprovedAssets.length}
+              />{" "}
+            </div>
+
             {notApprovedAssets.length !== 0 && (
               <div className="container m-auto mt-5">
                 {dir === "rtl" ? (
