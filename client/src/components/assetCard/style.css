@@ -11,6 +11,7 @@ div.contain {
   color: #202020;
   background-color: #ebfbff;
   font-family: "Arimo", sans-serif !important;
+  margin:20px;
 }
 a {
   text-decoration: none !important;
@@ -18,10 +19,18 @@ a {
 div.contain:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 1300px) {
   div.contain {
     margin: 15px auto 20px;
   }
+ 
+}
+
+@media screen and (max-width:900px) {
+
+    .pair_items {
+      flex-wrap: wrap;
+    }
 }
 .pair_items {
   display: flex;
