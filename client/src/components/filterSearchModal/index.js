@@ -59,6 +59,7 @@ const ShareModal = ({
     three: false,
     four: false,
     five: false,
+    seven: false,
   });
   const [areaCheckboxesChecked, setAreacheckboxesChecked] = useState({
     one: false,
@@ -102,6 +103,10 @@ const ShareModal = ({
         isChecked && name === "5"
           ? true
           : name !== "5" && checkboxesChecked.five,
+      seven:
+        isChecked && name === "חדר בדירת שותפים"
+          ? true
+          : name !== "חדר בדירת שותפים" && checkboxesChecked.seven,
     });
   };
 
@@ -211,7 +216,9 @@ const ShareModal = ({
     } else {
       const filterObj = {
         isSublet,
-        roomsNumber: roomsValue,
+        roomsNumber: roomsValue.includes("7")
+          ? roomsValue.filter((room) => room !== "7").push("חדר בדירת שותפים")
+          : roomsValue,
         dates,
         price,
         area,
@@ -259,6 +266,7 @@ const ShareModal = ({
 
   const setFieldsValue = () => {
     const { numberOfRooms, location } = filteredSearch;
+
     if (!numberOfRooms.includes("הכל")) {
       setIsCheckboxDisabled(false);
       setcheckboxesChecked({
@@ -267,6 +275,7 @@ const ShareModal = ({
         three: numberOfRooms.includes("3") ? true : false,
         four: numberOfRooms.includes("4") ? true : false,
         five: numberOfRooms.includes("5") ? true : false,
+        seven: numberOfRooms.includes("חדר בדירת שותפים") ? true : false,
       });
     }
 
@@ -304,6 +313,7 @@ const ShareModal = ({
       three: false,
       four: false,
       five: false,
+      seven: false,
     });
     setIsCheckboxDisabled(true);
     setIsAreaCheckboxDisabled(true);
@@ -415,6 +425,21 @@ const ShareModal = ({
                   />
                 }
                 label="5"
+                disabled={isCheckboxDisabled}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChange}
+                    name="חדר בדירת שותפים"
+                    checked={checkboxesChecked.seven}
+                  />
+                }
+                label={
+                  dir === "rtl"
+                    ? "חדר בדירת שותפים"
+                    : "Roon in shared apartment"
+                }
                 disabled={isCheckboxDisabled}
               />
               <FormControlLabel
