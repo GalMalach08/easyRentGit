@@ -63,9 +63,16 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
             <h6 className="filter_item">
               {t("maxRooms.1")}:
               <span style={{ fontWeight: "400" }}>
-                {dir === "rtl" || filteredSearch.numberOfRooms !== "הכל"
+                {dir === "rtl"
                   ? filteredSearch.numberOfRooms
-                  : "all"}
+                  : filteredSearch.numberOfRooms.includes("חדר בדירת שותפים")
+                  ? `${filteredSearch.numberOfRooms.replace(
+                      "חדר בדירת שותפים",
+                      "room in shared apartment"
+                    )}`
+                  : filteredSearch.numberOfRooms === "הכל"
+                  ? "all"
+                  : filteredSearch.numberOfRooms}
               </span>
             </h6>
             <h6 className="filter_item">
