@@ -22,18 +22,23 @@ const MyAssets = (props) => {
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
+  const { id } = params;
 
   const getAssets = async () => {
-    const { id } = params;
-    dispatch(getNotApprovedAssetsOfUser(id))
-      .unwrap()
-      .then((data) => setNotApprovedAssets(data.notApprovedAssets));
-    dispatch(getAssetsOfUser(id));
+    if (id !== user._id) {
+      // Dont let other user get in by url
+      navigate(`/myassets/${user._id}`);
+    } else {
+      dispatch(getNotApprovedAssetsOfUser(id))
+        .unwrap()
+        .then((data) => setNotApprovedAssets(data.notApprovedAssets));
+      dispatch(getAssetsOfUser(id));
+    }
   };
 
   useEffect(() => {
     getAssets();
-  }, []);
+  }, [id]);
 
   return (
     <div className="container" dir={dir}>
