@@ -384,7 +384,14 @@
     },
     "priceMinError":{
         "1":"Please enter positive number"
+    },
+    "hebrewErr":{
+        "1":"Please enter the value in hebrew"
+    },
+    "englishErr":{
+        "1":"Please enter the value in english"
     }
+
 
 
 

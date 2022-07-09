@@ -167,17 +167,67 @@ const UploadAsset = (props) => {
       .matches(phoneRegex, `${t("ownerNPhoneError2.1")}`),
     address: Yup.string()
       .required(`${t("assetHebrewError.1")}`)
-      .test("isValid", "נא הכנס כתובת מלאה ותקינה", function(value) {
-        return getLocation(value);
-      }),
-    englishAddress: Yup.string().required(`${t("assetEnglishError.1")}`),
-
+      .test(
+        "isValid",
+        `${
+          dir === "rtl"
+            ? "אנא הכנס כתובת מלאה ותקינה"
+            : "Please enter valid address"
+        }`,
+        function(value) {
+          return getLocation(value);
+        }
+      )
+      .test("isEnglish", `${t("hebrewErr.1")}`, (value) =>
+        checkisHebrew(value)
+      ),
+    englishAddress: Yup.string()
+      .required(`${t("assetEnglishError.1")}`)
+      .test("isEnglish", `${t("englishErr.1")}`, (value) =>
+        checkisEnglish(value)
+      ),
     price: Yup.number()
       .required(`${t("priceError.1")}`)
       .test("Is positive?", `${t("priceMinError.1")}`, (value) => value > 0),
-    notes: Yup.string().max(40, `${t("notesError.1")}`),
-    englishNotes: Yup.string().max(40, `${t("notesError.1")}`),
+    notes: Yup.string()
+      .max(40, `${t("notesError.1")}`)
+      .test("isEnglish", `${t("hebrewErr.1")}`, (value) =>
+        checkisHebrew(value)
+      ),
+    englishNotes: Yup.string()
+      .max(40, `${t("notesError.1")}`)
+      .test("isEnglish", `${t("englishErr.1")}`, (value) =>
+        checkisEnglish(value)
+      ),
+    description: Yup.string().test(
+      "isEnglish",
+      `${t("hebrewErr.1")}`,
+      (value) => checkisHebrew(value)
+    ),
+    englishDescription: Yup.string().test(
+      "isEnglish",
+      `${t("englishErr.1")}`,
+      (value) => checkisEnglish(value)
+    ),
   });
+
+  const checkisHebrew = (value) => {
+    console.log(value);
+    var ltrChars =
+        "A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF" +
+        "\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF",
+      rtlChars = "\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC",
+      rtlDirCheck = new RegExp("^[^" + ltrChars + "]*[" + rtlChars + "]");
+    return rtlDirCheck.test(value);
+  };
+  const checkisEnglish = (value) => {
+    var ltrChars =
+        "A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF" +
+        "\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF",
+      rtlChars = "\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC",
+      rtlDirCheck = new RegExp("^[^" + ltrChars + "]*[" + rtlChars + "]");
+    return !rtlDirCheck.test(value);
+  };
 
   // Handle the date state
   const handleEnterDateChange = (date) => setEnterDate(date);

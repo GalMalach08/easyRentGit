@@ -139,11 +139,16 @@ const Asset = () => {
                 {/* More details  */}
                 <div className="more_details" dir={dir}>
                   <h4>{t("moreDetails.1")}</h4>
-
-                  {dir === "rtl" ? (
-                    <p> {asset.description} </p>
+                  {asset.description || asset.englishDescription ? (
+                    dir === "rtl" ? (
+                      <p> {asset.description} </p>
+                    ) : (
+                      <p>{asset.englishDescription} </p>
+                    )
+                  ) : dir === "rtl" ? (
+                    "אין תיאור זמין"
                   ) : (
-                    <p>{asset.englishDescription} </p>
+                    "No description available"
                   )}
                 </div>
                 {/* Whatsapp */}
