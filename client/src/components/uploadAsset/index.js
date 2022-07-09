@@ -186,7 +186,7 @@ const UploadAsset = (props) => {
       .test("isEnglish", `${t("englishErr.1")}`, (value) =>
         checkisEnglish(value)
       ),
-    price: Yup.number()
+    price: Yup.number(`${dir === "rtl" ? "מספרים בלבד" : "Numbers only"}`)
       .required(`${t("priceError.1")}`)
       .test("Is positive?", `${t("priceMinError.1")}`, (value) => value > 0),
     notes: Yup.string()
