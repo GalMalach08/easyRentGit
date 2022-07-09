@@ -142,13 +142,13 @@ const Home = () => {
 
       <div className="not_filtered_divs">
         {/* Chat Bot Box */}
-        {isVerified && (
-          <div className="chatbot">
-            <Grow in={true} timeout={3000}>
-              <ChatBot handleChatbot={handleChatbot} />
-            </Grow>
-          </div>
-        )}
+
+        <div className="chatbot">
+          <Grow in={true} timeout={3000}>
+            <ChatBot handleChatbot={handleChatbot} />
+          </Grow>
+        </div>
+
         {/* Header */}
       </div>
       <div className="header">

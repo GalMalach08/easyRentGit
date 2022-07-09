@@ -605,19 +605,12 @@ const UploadAsset = (props) => {
                   <Tabs
                     value={timeValue}
                     onChange={handleTimeChange}
-                    className="price_for_tabs"
+                    style={{ margin: "0px 10px", flexWrap: "wrap" }}
                   >
-                    <div>
-                      <Tab label={`${t("dayPrice.1")}`} {...a11yProps(3)} />
-                      <Tab label={`${t("weekPrice.1")}`} {...a11yProps(2)} />
-                    </div>
-                    <div>
-                      <Tab label={`${t("monthPrice.1")}`} {...a11yProps(1)} />
-                      <Tab
-                        label={`${t("allPeriodPrice.1")}`}
-                        {...a11yProps(0)}
-                      />
-                    </div>
+                    <Tab label={`${t("dayPrice.1")}`} {...a11yProps(3)} />
+                    <Tab label={`${t("weekPrice.1")}`} {...a11yProps(2)} />
+                    <Tab label={`${t("monthPrice.1")}`} {...a11yProps(1)} />
+                    <Tab label={`${t("allPeriodPrice.1")}`} {...a11yProps(0)} />
                   </Tabs>
 
                   {/* Area */}

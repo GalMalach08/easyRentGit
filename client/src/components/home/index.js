@@ -122,11 +122,11 @@ const Home = () => {
               ))}
             </div>
           </div>
-          {isVerified && (
-            <div className="chatbot">
-              <ChatBot handleChatbot={handleChatbot} />
-            </div>
-          )}
+
+          <div className="chatbot">
+            <ChatBot handleChatbot={handleChatbot} />
+          </div>
+
           {/* Modals */}
           <ChangePasswordModal
             changePasswordModal={changedPasswordModal}

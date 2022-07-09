@@ -38,9 +38,3 @@
   display: block;
   font-weight: 600;
 }
-
-.price_for_tabs {
- margin: 0px 10px;
-  flex-wrap:wrap;
-  flex-direction: column;
-}
