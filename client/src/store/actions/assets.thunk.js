@@ -25,15 +25,28 @@ export const addAsset = createAsyncThunk(
 export const updateAsset = createAsyncThunk(
   "assets/updateAsset",
   async (assetObj) => {
-    const response = await fetch(`/asset`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(assetObj),
-    });
-    const { asset, message } = await response.json();
-    return { message, asset };
+    if (assetObj.notApproved) {
+      const response = await fetch(`/asset/notapproved`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(assetObj),
+      });
+      const { asset, message } = await response.json();
+      return { message, asset };
+    } else {
+      delete assetObj["notApproved"];
+      const response = await fetch(`/asset`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(assetObj),
+      });
+      const { asset, message } = await response.json();
+      return { message, asset };
+    }
   }
 );
 

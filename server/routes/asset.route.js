@@ -145,14 +145,15 @@ router.get("/op", async (req, res) => {
 // Update asset
 router.patch("/", async (req, res) => {
   try {
+    console.log(req.body);
     const { id } = req.body;
     const images = JSON.parse(req.body.images);
-    console.log(images);
     let newImagesArr = [];
     let isImageChanged = false;
     let flag = true;
 
     let asset = await Asset.findById(id);
+
     if (images.length !== asset.images.length) {
       isImageChanged = true;
     } else {
@@ -194,6 +195,79 @@ router.patch("/", async (req, res) => {
     }
     if (flag) {
       const newAsset = await Asset.findByIdAndUpdate(
+        id,
+        {
+          ...req.body,
+          roomsNumber:
+            req.body.roomsNumber == 6
+              ? "חדר בדירת שותפים"
+              : req.body.roomsNumber,
+          images: newImagesArr,
+        },
+        { new: true }
+      );
+      const doc = await newAsset.save();
+      res.status(200).send({ asset: doc });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(401).json({ message: "Error", error: err });
+  }
+});
+
+// Update asset
+router.patch("/notapproved", async (req, res) => {
+  try {
+    console.log("not approved asset update");
+    const { id } = req.body;
+    const images = JSON.parse(req.body.images);
+    console.log(id);
+    let newImagesArr = [];
+    let isImageChanged = false;
+    let flag = true;
+
+    let asset = await NotApprovedAsset.findById(id);
+    if (images.length !== asset.images.length) {
+      isImageChanged = true;
+    } else {
+      images.forEach((image) => {
+        if (
+          !asset.images.filter((item) => item.image === image.image).length > 0
+        ) {
+          isImageChanged = true;
+        }
+      });
+    }
+    if (isImageChanged) {
+      const imagesArr = images;
+      for (let i = 0; i < imagesArr.length; i++) {
+        const isValid = isPhotoValid(imagesArr[i].name);
+        if (!isValid) {
+          flag = false;
+          res.send({
+            message: `העלה רק תמונות, ${imagesArr[i].name} לא תקינה`,
+          });
+        } else {
+          const uploadedResponse = await cloudinary.uploader.upload(
+            imagesArr[i].image,
+            {
+              upload_preset: "ml_default",
+              fetch_format: "jpg",
+            }
+          );
+          newImagesArr.push({
+            image: uploadedResponse.url,
+            imageName: imagesArr[i].name,
+          });
+        }
+      }
+    } else {
+      images.forEach((image) =>
+        newImagesArr.push({ image: image.image, imageName: image.name })
+      );
+    }
+    if (flag) {
+      const newAsset = await NotApprovedAsset.findByIdAndUpdate(
         id,
         {
           ...req.body,

@@ -85,6 +85,7 @@ const UploadAsset = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [areYouSureModal, setAreYouSureModal] = useState(false);
   const [functionToExcute, setFunctionToExcute] = useState("");
+  const [notApproved, setNotApproved] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const galleryRef = useRef();
   const addressRef = useRef();
@@ -296,6 +297,7 @@ const UploadAsset = (props) => {
       updatedOn: moment().format("L"),
       pricePerMonth: caculatePricePerMonth(values.price, pricePer),
       area,
+      notApproved,
     };
   };
 
@@ -362,7 +364,6 @@ const UploadAsset = (props) => {
       ? (pricePerMonth =
           Math.round(price / caculateDaysBetween(enterDate, exitDate)) * 30)
       : (pricePerMonth = price);
-    console.log(pricePerMonth);
     return pricePerMonth;
   };
 
@@ -433,6 +434,7 @@ const UploadAsset = (props) => {
           if (asset.userId._id === user._id) {
             // make sure that the user that update is the owner
             setIsUpdate(true);
+            if (asset.notApproved) setNotApproved(true);
             const newImagesArr = [];
             const newGalleryArr = [];
             setUpdatedAsset(asset);
