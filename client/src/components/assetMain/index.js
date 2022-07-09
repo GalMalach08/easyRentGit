@@ -131,7 +131,14 @@ const Home = () => {
   return (
     <div dir={dir}>
       {/* Filter Box */}
-      <FilterBox filteredSearch={filteredSearch} setModalOpen={setModalOpen} />
+      {loading ? (
+        <Loader />
+      ) : (
+        <FilterBox
+          filteredSearch={filteredSearch}
+          setModalOpen={setModalOpen}
+        />
+      )}
 
       <div className="not_filtered_divs">
         {/* Chat Bot Box */}
@@ -145,7 +152,13 @@ const Home = () => {
         {/* Header */}
       </div>
       <div className="header">
-        {isSublet ? <h1> {t("Sublet.1")}.</h1> : <h1> {t("Rent.1")}.</h1>}
+        {loading ? (
+          <Loader />
+        ) : isSublet ? (
+          <h1> {t("Sublet.1")}.</h1>
+        ) : (
+          <h1> {t("Rent.1")}.</h1>
+        )}
       </div>
 
       {/* Apartments Grid */}

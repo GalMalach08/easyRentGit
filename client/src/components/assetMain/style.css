@@ -26,19 +26,45 @@ h1 {
 }
 .not_filtered_div {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  display:inline-block;
   padding: 10px 10px 5px;
   margin: 20px 10px;
   color: black;
   background-color:#ECFBFF;
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width:30%;
+}
+.filter_btn {
+  color:black;
+  margin:-3px 5px 0px;
 
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 500px) {
   .filtered_div {
     width:100%;
     margin:10px;
   }
+  .filter_btn {
+    color:black;
+    margin:0px 0px 4px;
+  }
+  .not_filtered_div {
+    width:100%;
+  }
+}
+@media screen and (max-width: 900px) {
+
+  .not_filtered_div {
+    width:40%;
+  }
+  .filter_btn {
+    color:black;
+    margin:0px;
+  
+  }
+  
 }
 
 .click_here_span {
@@ -64,7 +90,7 @@ h1 {
   width: 52%;
 }
 .page_button {
-  margin: 10px 45px 64px;
+  margin: 10px 40px 64px;
 }
 .seen_all_header {
   color: black;

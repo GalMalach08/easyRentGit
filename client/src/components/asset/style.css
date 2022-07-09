@@ -43,7 +43,8 @@
 }
 .map_div {
   width:40vw;
-  height:400px
+  height:400px;
+  margin:auto;
 }
 @media screen and (max-width: 1000px) {
 
@@ -58,7 +59,6 @@
   }
   .more_details {
     width: 90vw !important;
-
   }
   
 }
@@ -68,7 +68,7 @@
   justify-content: center;
 }
 .more_details {
-  margin: 25px 10px;
+  margin: 25px  auto;;
   width: 500px;
   border: 2px solid lightgrey;
   padding: 10px;

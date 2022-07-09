@@ -108,21 +108,22 @@ const FilterBox = ({ filteredSearch, setModalOpen }) => {
         </div>
       ) : (
         <div className="not_filtered_div">
-          <h6>
+          <div>
             {dir === "rtl" ? (
-              <span> שלום {user.firstname}, על מנת לצפות בתוצאות מסוננות</span>
+              <h6> שלום {user.firstname}, על מנת לצפות בתוצאות מסוננות</h6>
             ) : (
-              <span>Hello {user.firstname}, to watch filtered results</span>
+              <h6>Hello {user.firstname}, to watch filtered results</h6>
             )}
-            <Button
-              size="sm"
-              style={{ color: "black", margin: "-5px 10px" }}
-              variant="outline-secondary"
-              onClick={() => setModalOpen(true)}
-            >
-              {dir === "rtl" ? "לחץ כאן" : "click here"}
-            </Button>
-          </h6>
+          </div>
+
+          <Button
+            size="sm"
+            className="filter_btn"
+            variant="outline-secondary"
+            onClick={() => setModalOpen(true)}
+          >
+            {dir === "rtl" ? "לחץ כאן" : "click here"}
+          </Button>
         </div>
       )}
     </div>

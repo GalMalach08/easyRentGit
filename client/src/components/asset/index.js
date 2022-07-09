@@ -134,7 +134,7 @@ const Asset = () => {
         <Grid container dir={dir}>
           {asset && (
             <Grow in={true} timeout={700} key={asset.id}>
-              <Grid item xs={12} className={classes.root}>
+              <Grid item xs={12}>
                 <AssetCard asset={asset} assetPage={true} />
                 {/* More details  */}
                 <div className="more_details" dir={dir}>

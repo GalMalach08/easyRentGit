@@ -97,11 +97,12 @@ const AssetCard = ({ asset, assetPage }) => {
           className="contain"
           style={{
             cursor: assetPage ? "auto" : "cursor",
-            width: assetPage ? "600px" : "",
+            width: assetPage ? "" : "",
             border: asset.notApproved
               ? " 2px solid red"
               : " 2px solid lightgrey",
             minHeight: "750px",
+            margin: assetPage && "30px auto",
           }}
         >
           {/* Image Carusel */}
@@ -119,7 +120,7 @@ const AssetCard = ({ asset, assetPage }) => {
                 </ListItemAvatar>
                 <ListItemText>
                   <div className="asset_price">
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap" }}>
                       <h3>₪{numberWithCommas(asset.price)}</h3>
                       <h3>
                         {dir === "rtl"

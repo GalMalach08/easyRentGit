@@ -96,7 +96,7 @@ div.contain h3 {
 
 .share_icon {
   margin-top: 18px;
-  margin-left: 12px;
+  margin-left: 5px;
   cursor: pointer;
 }
 .share_icon2 {
@@ -109,5 +109,5 @@ div.contain h3 {
   justify-content: space-between;
 }
 .asset_icons {
-  margin-top: 12px;
+  display: flex;
 }

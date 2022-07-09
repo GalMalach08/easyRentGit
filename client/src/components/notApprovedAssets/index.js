@@ -49,7 +49,7 @@ const NotApprovedAssets = (props) => {
         <Grid container>
           {assets.map((asset) => (
             <Grow in={true} timeout={700} key={assets.id}>
-              <Grid item xs={11} lg={6} className={classes.root}>
+              <Grid item xs={11} lg={6}>
                 <AssetCard asset={asset} />
               </Grid>
             </Grow>
