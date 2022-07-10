@@ -918,7 +918,7 @@ const UploadAsset = (props) => {
                           ? false
                           : true
                       }
-                      className="my-5 mx-auto"
+                      className="approve_btn"
                       // style={{ width: `${updatedAsset ? "44%" : "95%"}` }}
                       variant="contained"
                       color="primary"
@@ -935,7 +935,7 @@ const UploadAsset = (props) => {
                     </Button>
                     {updatedAsset && (
                       <Button
-                        className="my-5 mx-auto"
+                        className="delete_btn"
                         variant="contained"
                         color="secondary"
                         onClick={() => checkIfSure("delete")}
