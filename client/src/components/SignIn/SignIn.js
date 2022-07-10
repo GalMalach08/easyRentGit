@@ -272,7 +272,7 @@ const SignIn = (props) => {
                 {" "}
                 {t("login.1")}
               </Button>
-              {/* <GoogleLogin
+              <GoogleLogin
                 render={(renderProps) => (
                   <>
                     <button
@@ -292,7 +292,7 @@ const SignIn = (props) => {
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
-              /> */}
+              />
 
               <Grid container>
                 <Grid item>
