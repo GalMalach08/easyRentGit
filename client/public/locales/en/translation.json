@@ -340,6 +340,9 @@
     "lastname":{
         "1":"Last name"
     },
+    "userAlreadyVerfied":{
+        "1":"The user is already veridied"
+    },
     "lastnameError":{
         "1":"Last name is mandatory"
     },

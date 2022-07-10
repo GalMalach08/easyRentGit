@@ -22,7 +22,7 @@ const Varification = () => {
             navigate("/");
 
             if (message) {
-              toastify("SUCCESS", message);
+              toastify("SUCCESS", `${t("userAlreadyVerfied.1")}`);
             } else {
               toastify("SUCCESS", `${t("emailHasVerified.1")}`);
             }
