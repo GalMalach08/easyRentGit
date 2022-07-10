@@ -438,7 +438,7 @@ const ShareModal = ({
                 label={
                   dir === "rtl"
                     ? "חדר בדירת שותפים"
-                    : "Roon in shared apartment"
+                    : "Room in shared apartment"
                 }
                 disabled={isCheckboxDisabled}
               />
