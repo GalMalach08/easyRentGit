@@ -338,7 +338,7 @@
     },
     
     "lastname":{
-        "1":"Fast name"
+        "1":"Last name"
     },
     "lastnameError":{
         "1":"Last name is mandatory"
