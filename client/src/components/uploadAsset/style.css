@@ -21,7 +21,11 @@
 .ab {
   position: relative;
 }
-
+.btns_group {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .middle {
   transition: 0.5s ease;
   z-index: 1;

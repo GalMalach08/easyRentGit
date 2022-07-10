@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAssetById,
   approveAssetById,
-  deleteAssetByid,
+  deleteNotApprovedAsset,
 } from "../../store/actions/assets.thunk";
 // Components
 import WrappedMap from "../../utils/GoogleMap";
@@ -102,7 +102,7 @@ const Asset = () => {
   // Delete asset from the database
   const deleteAsset = async () => {
     setLoading(true);
-    dispatch(deleteAssetByid(asset._id))
+    dispatch(deleteNotApprovedAsset(asset._id))
       .unwrap()
       .then(() => {
         setModalMessage(`${t("deletedSuccess.1")}`);

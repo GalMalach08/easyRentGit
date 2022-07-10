@@ -134,10 +134,11 @@ export const approveAssetById = createAsyncThunk(
 );
 
 // Delete not approved asset
-export const deleteAssetByid = createAsyncThunk(
-  "assets/deleteAssetByid",
+export const deleteNotApprovedAsset = createAsyncThunk(
+  "assets/deleteNotApprovedAsset",
   async (id) => {
     try {
+      console.log("delte not");
       const response = await fetch(`/asset/notapproved`, {
         method: "DELETE",
         headers: {
@@ -159,6 +160,8 @@ export const deleteApprovedAsset = createAsyncThunk(
   "assets/deleteApprovedAsset",
   async (id) => {
     try {
+      console.log("delte yes");
+
       const response = await fetch(`/asset/`, {
         method: "DELETE",
         headers: {

@@ -82,6 +82,7 @@
 
 .not_relevant {
   margin-bottom: 30px;
+  text-align: center;
   font-weight: bold;
   cursor: pointer;
 

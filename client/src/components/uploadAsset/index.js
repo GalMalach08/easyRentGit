@@ -8,6 +8,7 @@ import {
   updateAsset,
   deleteApprovedAsset,
   getAssetById,
+  deleteNotApprovedAsset,
 } from "../../store/actions/assets.thunk";
 // Component
 import AssetUploadedModal from "./AssetUploadedModal";
@@ -85,7 +86,7 @@ const UploadAsset = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [areYouSureModal, setAreYouSureModal] = useState(false);
   const [functionToExcute, setFunctionToExcute] = useState("");
-  const [notApproved, setNotApproved] = useState(false);
+  const [notApproved, setNotApproved] = useState(true);
   const [modalMessage, setModalMessage] = useState("");
   const galleryRef = useRef();
   const addressRef = useRef();
@@ -213,7 +214,6 @@ const UploadAsset = (props) => {
   });
 
   const checkisHebrew = (value) => {
-    console.log(value);
     var ltrChars =
         "A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02B8\u0300-\u0590\u0800-\u1FFF" +
         "\u2C00-\uFB1C\uFDFE-\uFE6F\uFEFD-\uFFFF",
@@ -399,14 +399,25 @@ const UploadAsset = (props) => {
 
   // Delete asset
   const deleteAsset = async () => {
-    const deletedAssetId = location.state.asset._id;
-    dispatch(deleteApprovedAsset(deletedAssetId))
-      .unwrap()
-      .then(({ success }) => {
-        if (success) {
-          setDeletedmodalOpen(true);
-        }
-      });
+    const asset = location.state.asset;
+    const deletedAssetId = asset._id;
+    if (asset.notApproved) {
+      dispatch(deleteNotApprovedAsset(deletedAssetId))
+        .unwrap()
+        .then(({ success }) => {
+          if (success) {
+            setDeletedmodalOpen(true);
+          }
+        });
+    } else {
+      dispatch(deleteApprovedAsset(deletedAssetId))
+        .unwrap()
+        .then(({ success }) => {
+          if (success) {
+            setDeletedmodalOpen(true);
+          }
+        });
+    }
   };
 
   const checkIfSure = (whatType, values) => {
@@ -433,8 +444,9 @@ const UploadAsset = (props) => {
         .then(({ asset }) => {
           if (asset.userId._id === user._id) {
             // make sure that the user that update is the owner
+            console.log(asset);
             setIsUpdate(true);
-            if (asset.notApproved) setNotApproved(true);
+            if (!asset.notApproved) setNotApproved(false);
             const newImagesArr = [];
             const newGalleryArr = [];
             setUpdatedAsset(asset);
@@ -889,48 +901,49 @@ const UploadAsset = (props) => {
                       {message}
                     </Alert>
                   </Collapse>
-                  <Button
-                    disabled={
-                      area !== "0" &&
-                      props.values.price &&
-                      !props.errors.price &&
-                      props.values.owner &&
-                      props.values.address &&
-                      !props.errors.address &&
-                      props.values.englishAddress &&
-                      !props.errors.englishAddress &&
-                      props.values.phoneNumber &&
-                      imagesArr.length !== 0 &&
-                      !buttonDisabled
-                        ? false
-                        : true
-                    }
-                    className="m-3"
-                    style={{ width: `${updatedAsset ? "44%" : "95%"}` }}
-                    variant="contained"
-                    color="primary"
-                    onClick={() =>
-                      checkIfSure(
-                        updatedAsset ? "update" : "upload",
-                        props.values
-                      )
-                    }
-                  >
-                    {updatedAsset
-                      ? `${t("updateProperty.1")}`
-                      : `${t("uploadProperty.1")}`}
-                  </Button>
-                  {updatedAsset && (
+                  <div className="btns_group">
                     <Button
-                      className="m-3"
-                      style={{ width: "44%" }}
+                      disabled={
+                        area !== "0" &&
+                        props.values.price &&
+                        !props.errors.price &&
+                        props.values.owner &&
+                        props.values.address &&
+                        !props.errors.address &&
+                        props.values.englishAddress &&
+                        !props.errors.englishAddress &&
+                        props.values.phoneNumber &&
+                        imagesArr.length !== 0 &&
+                        !buttonDisabled
+                          ? false
+                          : true
+                      }
+                      className="my-5 mx-auto"
+                      // style={{ width: `${updatedAsset ? "44%" : "95%"}` }}
                       variant="contained"
-                      color="secondary"
-                      onClick={() => checkIfSure("delete")}
+                      color="primary"
+                      onClick={() =>
+                        checkIfSure(
+                          updatedAsset ? "update" : "upload",
+                          props.values
+                        )
+                      }
                     >
-                      {t("deleteProperty.1")}
+                      {updatedAsset
+                        ? `${t("updateProperty.1")}`
+                        : `${t("uploadProperty.1")}`}
                     </Button>
-                  )}
+                    {updatedAsset && (
+                      <Button
+                        className="my-5 mx-auto"
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => checkIfSure("delete")}
+                      >
+                        {t("deleteProperty.1")}
+                      </Button>
+                    )}
+                  </div>
                 </form>
               )}
             </Formik>
