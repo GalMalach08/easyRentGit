@@ -390,6 +390,9 @@
     },
     "englishErr":{
         "1":"Please enter the value in english"
+    },
+    "wrongEmail":{
+        "1":"Please enter valid email"
     }
 
 

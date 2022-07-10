@@ -115,7 +115,7 @@ const SignUp = () => {
     lastname: Yup.string().required(`${t("lastnameError.1")}`),
     email: Yup.string()
       .required(`${t("ownerEmailTypeError.1")}`)
-      .email("כתובת האימייל אינה תקינה"),
+      .email(`${t("wrongEmail.1")}`),
     password: Yup.string()
       .required(`${t("passwordError.1")}`)
       .min(6, `${t("passwordMinError.1")}`),
