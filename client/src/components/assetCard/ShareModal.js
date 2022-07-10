@@ -16,7 +16,7 @@ import {
 import "./style.css";
 
 // Share modal - allowed to share asset by whatsapp facebook and twitter
-const ShareModal = ({ modalOpen, setModalOpen }) => {
+const ShareModal = ({ modalOpen, setModalOpen, assetId }) => {
   const dir = useSelector((state) => state.users.language.dir);
 
   return (
@@ -33,21 +33,21 @@ const ShareModal = ({ modalOpen, setModalOpen }) => {
             {dir === "rtl" ? <p>שתף את הנכס</p> : <p>Share the asset</p>}
             <div className="share_icons_div">
               <FacebookShareButton
-                url={`https://lesublet.com/asset/610a5488b69afec97ce74ae2?p=0`}
+                url={`https://easyrent2023.herokuapp.com`}
                 quote="fuck it"
                 className="share_icon"
               >
                 <FacebookIcon size={32} round />
               </FacebookShareButton>
               <FacebookMessengerShareButton
-                url={`https://lesublet.com/asset/610a5488b69afec97ce74ae2?p=0`}
+                url={`https://easyrent2023.herokuapp.com`}
                 appId="521270401588372"
                 className="share_icon"
               >
                 <FacebookMessengerIcon size={32} round />
               </FacebookMessengerShareButton>
               <WhatsappShareButton
-                url={`https://lesublet.com/asset/610a5488b69afec97ce74ae2?p=0`}
+                url={`https://easyrent2023.herokuapp.com`}
                 title="אח שלי קבל את זאת"
                 separator=" "
                 className="share_icon"

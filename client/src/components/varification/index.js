@@ -19,7 +19,7 @@ const Varification = () => {
         .unwrap()
         .then(({ verified, message }) => {
           if (verified) {
-            navigate("/5");
+            navigate("/");
 
             if (message) {
               toastify("SUCCESS", message);

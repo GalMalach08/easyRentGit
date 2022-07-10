@@ -42,7 +42,7 @@ const ChatBotComp = ({ handleChatbot }) => {
                   message:
                     dir === "rtl"
                       ? `שלום ${user.firstname}, כאן שלומי ואני העוזר הדיגטלי של EasyRent 😎  כאן תוכל לסמן את ההעדפות שלך לדירה ונדאג לשלוח לך מייל כשאר יעלו דירות רלוונטיות, אך לפני כן עליך לאמת את המשתמש דרך המייל שאיתו נרשמת`
-                      : `Hello ${user.firstname}, my name is Shlomi and I am EasyRent's digital assistant😎,here you can mark your preferences for the apartment and we will make sure to send you an email when the rest of the relevant apartments will go up,but before you have to verify your acoount, email has sent to your email`,
+                      : `Hello ${user.firstname}, my name is Shlomi and I am EasyRent's digital assistant😎,here you can mark your preferences for the apartment and we will make sure to send you an email when the rest of the relevant apartments will go up,but before you have to verify your acoount, email has sent to your address`,
                 },
               ]
             : [
