@@ -7,8 +7,8 @@ Easyrent is a responsive, end to end application that allows you to:
 
 - Use a filtered search to see only the apartments that are relevant to you
 
-- Chat with a chatbot and mark your preferences for the apartment
-The app will know how to identify new apartments that came up on the app and send an email if they matched your preferences
+- Chat with a chatbot and mark your preferences for the apartment.
+The app will identify when new apartments come up on the app, and send an email to you if they matched your preferences
 
 - Apartment owner? upload a new apartment to the app and increase your chances of renting your apartment
 
