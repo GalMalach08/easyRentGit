@@ -17,8 +17,8 @@ The app will identify when new apartments come up on the app, and send an email 
 - Link to a running version on heroku : https://easyrent2023.herokuapp.com/
 
 ### Tech Stack
-**Client** : React.js
-**Server** : Node.js
+**Client** : React.js,
+**Server** : Node.js,
 **Database** : MongoDB
 
 ### Features
@@ -30,12 +30,12 @@ The app will identify when new apartments come up on the app, and send an email 
 - 
 ### Installation
 1. #### Click here for the deploying version https://easyrent2023.herokuapp.com/
-2. Clone the repository
-- $ git clone https://github.com/idanberger22/StayBNB-frontend.git
-- Open the repository folder using your favorite text editor
-- Repository folder > right click > open with
-
-$ text editor > open terminal > npm start
-Sit back and relax while the application is loading on port 3030
+2.  #### Clone the repository
+- $ git clone https://github.com/GalMalach08/easyRentGit.git
+- Open the repository folder using your favorite text editor/cmd
+- Run the command "npm install" in the **root directory** and in the **client directory**
+- Run the command "npm run dev" from the root directory to run the app
+- Sit back and relax while the application is loading
+- 
 ### Screenshots
 
