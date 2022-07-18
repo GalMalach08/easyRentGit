@@ -1,9 +1,25 @@
-# easyRent
-Search for a place to stay in during any dates available, by typing the general location/name of the stay in the top filter available from almost every page of the application.
-In the "explore" page, users may furher filter their desired stay by price range, type of room and amenities available like kitchen or WIFI.
-In the "host your home" page, any user may upload a stay for other users to reserve.
-In the "host dashboard" page, any user who own a stay may view his/her guests reservations as well as interesting statistics like total income or average stay rating.
-When a guest reserve a stay, the host gets a real time notification.
-In order to enjoy the full experience, please sign up or simply click on the "demo user" button in the login section.
-Link to a running version on heroku : https://staybnb-app.herokuapp.com/#/home
-Link to the backend repository : https://github.com/yukellner/Airbnb-backend.git
+# EasyRent
+Easyrent is a responsive, end to end application that allows you to:
+
+Log in by email or by google
+
+Find apartments for rent and for sublet in Tel Aviv
+
+Use a filtered search to see only the apartments that are relevant to you
+
+Chat with a chatbot and mark your preferences for the apartment
+The app will know how to identify new apartments that came up on the app and send an email if they matched your preferences
+
+Apartment owner? upload a new apartment to the app and increase your chances of renting your apartment
+
+The app is available in Hebrew and English - just click on the preferred language in the top menu
+
+Link to a running version on heroku : https://easyrent2023.herokuapp.com/
+
+# Tech Stack
+Client: React.js
+Server: Node.js
+Database: MongoDB
+
+# Screenshots
+
