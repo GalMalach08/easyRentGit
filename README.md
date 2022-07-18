@@ -38,4 +38,5 @@ The app will identify when new apartments come up on the app, and send an email 
 - Sit back and relax while the application is loading
 
 ### Screenshots
+![Easyrent-google log in](https://user-images.githubusercontent.com/75367465/179487121-fc2271d8-5a15-40e0-adda-63b70a8d5995.jpeg)
 
