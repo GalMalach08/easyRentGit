@@ -27,7 +27,7 @@ The app will identify when new apartments come up on the app, and send an email 
 - A chatBot that keeps the user's preferences for an apartment (location, number of rooms and price). The app will identify the relevant apartments and will update the user by email.
 - Every apartment that gets uploaded on the app must pass a manager's approval and only then it will be displayed in a user's page
 - User verification by email - an unverified user actions in the application are restricted
-- 
+
 ### Installation
 1. #### Click here for the deploying version https://easyrent2023.herokuapp.com/
 2.  #### Clone the repository
