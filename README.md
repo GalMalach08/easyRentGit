@@ -41,8 +41,11 @@ The app will identify when new apartments come up on the app, and send an email 
 - **Log in page**
 
 ![Easyrent-log in](https://user-images.githubusercontent.com/75367465/179487339-f5d5b5ea-ac4c-4da5-ad76-093b1215c7af.jpeg)
-
-![eaEasyrent-home page](https://user-images.githubusercontent.com/75367465/179487371-66db76a9-1457-472a-9e68-e21d6530e919.jpeg)
+- **Google Log in page**
 
 ![Easyrent-google log in](https://user-images.githubusercontent.com/75367465/179487121-fc2271d8-5a15-40e0-adda-63b70a8d5995.jpeg)
+
+- **Home page**
+![eaEasyrent-home page](https://user-images.githubusercontent.com/75367465/179487371-66db76a9-1457-472a-9e68-e21d6530e919.jpeg)
+
 
