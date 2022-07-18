@@ -16,10 +16,15 @@ The app is available in Hebrew and English - just click on the preferred languag
 
 Link to a running version on heroku : https://easyrent2023.herokuapp.com/
 
-# Tech Stack
+## Tech Stack
 Client: React.js
 Server: Node.js
 Database: MongoDB
 
-# Screenshots
+## Features
 
+## How to Use?
+
+## Screenshots
+Order Lists:
+Item 1Item 2Item 3Item 4Item 5
