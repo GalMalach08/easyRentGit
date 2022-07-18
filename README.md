@@ -31,7 +31,7 @@ The app will identify when new apartments come up on the app, and send an email 
 ### Installation
 1. #### Click here for the deploying version https://easyrent2023.herokuapp.com/
 2.  #### Clone the repository
-- $ git clone https://github.com/GalMalach08/easyRentGit.git
+- git clone https://github.com/GalMalach08/easyRentGit.git
 - Open the repository folder using your favorite text editor/cmd
 - Run the command "npm install" in the **root directory** and in the **client directory**
 - Run the command "npm run dev" from the root directory to run the app
