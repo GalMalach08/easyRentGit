@@ -31,7 +31,7 @@ const AreYouSureModal = ({
         <Modal.Header>
           <Modal.Title
             style={{
-              fontWeight: "700",
+              fontWeight: "600",
               margin: "auto",
             }}
           >
