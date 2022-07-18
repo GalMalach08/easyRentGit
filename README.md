@@ -17,9 +17,9 @@ The app will identify when new apartments come up on the app, and send an email 
 - Link to a running version on heroku : https://easyrent2023.herokuapp.com/
 
 ### Tech Stack
-Client: React.js
-Server: Node.js
-Database: MongoDB
+[^1]** Client** : React.js
+[^2]** Server** : Node.js
+[^3]** Database** : MongoDB
 
 ### Features
 
