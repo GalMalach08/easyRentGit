@@ -17,14 +17,26 @@ The app will identify when new apartments come up on the app, and send an email 
 - Link to a running version on heroku : https://easyrent2023.herokuapp.com/
 
 ### Tech Stack
-[^1]** Client** : React.js
-[^2]** Server** : Node.js
-[^3]** Database** : MongoDB
+**Client** : React.js
+**Server** : Node.js
+**Database** : MongoDB
 
 ### Features
+- All the forms are controlled by formik- open source form library for React 
+- Connect with Google's api to allow quick connection through Google and view each apartment on the map
+- A chatBot that keeps the user's preferences for an apartment (location, number of rooms and price). The app will identify the relevant apartments and will update the user by email.
+- Every apartment that gets uploaded on the app must pass a manager's approval and only then it will be displayed in a user's page
+- User verification by email - an unverified user actions in the application are restricted
+- 
+### Installation?
+#### To use the app:
+1. Click here for the deploying version https://easyrent2023.herokuapp.com/
+2. Clone the repository
+- $ git clone https://github.com/idanberger22/StayBNB-frontend.git
+- Open the repository folder using your favorite text editor
+- Repository folder > right click > open with
 
-### How to Use?
-
+$ text editor > open terminal > npm start
+Sit back and relax while the application is loading on port 3030
 ### Screenshots
-Order Lists:
-Item 1Item 2Item 3Item 4Item 5
+
