@@ -36,6 +36,6 @@ The app will identify when new apartments come up on the app, and send an email 
 - Run the command "npm install" in the **root directory** and in the **client directory**
 - Run the command "npm run dev" from the root directory to run the app
 - Sit back and relax while the application is loading
-- 
+
 ### Screenshots
 
