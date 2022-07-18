@@ -28,9 +28,8 @@ The app will identify when new apartments come up on the app, and send an email 
 - Every apartment that gets uploaded on the app must pass a manager's approval and only then it will be displayed in a user's page
 - User verification by email - an unverified user actions in the application are restricted
 - 
-### Installation?
-#### To use the app:
-1. Click here for the deploying version https://easyrent2023.herokuapp.com/
+### Installation
+1. #### Click here for the deploying version https://easyrent2023.herokuapp.com/
 2. Clone the repository
 - $ git clone https://github.com/idanberger22/StayBNB-frontend.git
 - Open the repository folder using your favorite text editor
