@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./style.css";
+
 const ChatBotBox = ({ setIsBot }) => {
   const user = useSelector((state) => state.users.data);
   const isVerified = useSelector((state) => state.users.data.isVerified);

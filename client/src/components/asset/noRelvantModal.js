@@ -62,6 +62,7 @@ const NotRelvantModal = ({
         show={notRelevantModal}
         onHide={() => setNotRelevantModal(false)}
       >
+        {/* Modal Header */}
         <Modal.Header>
           <Modal.Title style={{ textAlign: "center", width: "100%" }}>
             <h4>
@@ -71,6 +72,8 @@ const NotRelvantModal = ({
             </h4>
           </Modal.Title>{" "}
         </Modal.Header>
+
+        {/* Modal Body */}
         <Modal.Body style={{ textAlign: "center" }}>
           <TextareaAutosize
             rowsMin={3}

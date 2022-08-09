@@ -112,6 +112,7 @@ const ChangePasswordModal = ({
         onHide={() => setChangedPasswordModal(false)}
         dir={dir}
       >
+        {/* Modal Header */}
         <Modal.Header>
           {" "}
           <Modal.Title style={{ textAlign: "center", width: "100%" }}>
@@ -125,6 +126,8 @@ const ChangePasswordModal = ({
             </h6>
           </Modal.Title>{" "}
         </Modal.Header>
+
+        {/* Modal Body */}
         <Modal.Body>
           <Formik
             initialValues={{
@@ -238,6 +241,7 @@ const ChangePasswordModal = ({
         </Modal.Body>
       </Modal>
 
+      {/* Modal that displays success message */}
       <Modal
         size="lg"
         centered

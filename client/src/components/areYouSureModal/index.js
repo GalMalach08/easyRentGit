@@ -28,6 +28,7 @@ const AreYouSureModal = ({
         onHide={() => setModalOpen(false)}
         style={{ margin: "auto", textAlign: "center" }}
       >
+        {/* Modal Header */}
         <Modal.Header>
           <Modal.Title
             style={{
@@ -44,6 +45,8 @@ const AreYouSureModal = ({
             <h5>{message}</h5>
           </Modal.Title>
         </Modal.Header>
+
+        {/* Modal Body */}
         <Modal.Body>
           <Button
             className="my-3"

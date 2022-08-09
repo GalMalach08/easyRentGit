@@ -3,8 +3,8 @@ const UserPref = require("../db/models/user_prefrences_schema");
 const { sendRelevantAssetEmail } = require("./sendEmail");
 const jwt = require("jsonwebtoken");
 
+// Sort what we want to return back and save sensative info from returning back to the client
 const getUserProps = (props) => {
-  // function that can sort what we want to return back and save sensative info from returning back
   return {
     _id: props.id,
     email: props.email,
@@ -19,6 +19,7 @@ const getUserProps = (props) => {
   };
 };
 
+// Check the user's preferences table and find users with the appropriate preferences, than send email
 const checkUsersPrefrences = async (asset) => {
   const usersPref = await UserPref.find();
   usersPref.forEach(async (pref) => {

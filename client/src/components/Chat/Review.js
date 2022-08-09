@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 // Translator
 import { useTranslation } from "react-i18next";
+
 const Review = ({ steps }) => {
   const [preferences, setPreferences] = useState({
     price: "",

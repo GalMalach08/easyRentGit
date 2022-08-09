@@ -24,7 +24,9 @@ const sendResetPasswordEmail = async (
   try {
     const isEnglish = preferredLang === "he" ? false : true;
 
-    const password = Math.random().toString(36).slice(2);
+    const password = Math.random()
+      .toString(36)
+      .slice(2);
 
     let mailGenerator = new Mailgen({
       theme: "salted",
@@ -32,7 +34,8 @@ const sendResetPasswordEmail = async (
       product: {
         name: "EasyRent",
         link: `https://easyrent2023.herokuapp.com`,
-        logo: "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
+        logo:
+          "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
         logoHeight: "100px",
       },
     });
@@ -92,7 +95,8 @@ const sendRelevantAssetEmail = async (
       product: {
         name: "EasyRent",
         link: `https://easyrent2023.herokuapp.com`,
-        logo: "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
+        logo:
+          "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
         logoHeight: "100px",
       },
     });
@@ -152,7 +156,8 @@ const sendAssetApprovedEmail = async (
       product: {
         name: "EasyRent",
         link: `https://easyrent2023.herokuapp.com`,
-        logo: "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
+        logo:
+          "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
         logoHeight: "100px",
       },
     });
@@ -200,7 +205,7 @@ const sendAssetApprovedEmail = async (
   }
 };
 
-// Send when the asset is approved
+// Send to verify user
 const sendVerificationMail = async (userEmail, name, token, preferredLang) => {
   try {
     const isEnglish = preferredLang === "he" ? false : true;
@@ -210,7 +215,8 @@ const sendVerificationMail = async (userEmail, name, token, preferredLang) => {
       product: {
         name: "EasyRent",
         link: `https://easyrent2023.herokuapp.com`,
-        logo: "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
+        logo:
+          "https://media-exp1.licdn.com/dms/image/C4D0BAQFZSpiPmia0_g/company-logo_200_200/0/1602490826294?e=2159024400&v=beta&t=YXwKoDpJDGFfGr6IPdPQnrQNebphuur9EL9L4uS-Ybk",
         logoHeight: "100px",
       },
     });
